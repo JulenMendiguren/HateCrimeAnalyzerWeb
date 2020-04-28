@@ -1,0 +1,13 @@
+{
+  "HEADER": {
+    "colectives": "Colectivos",
+    "users": "Gestionar Usuarios",
+    "login": "Iniciar Sesión"
+  },
+  "LOGIN": {
+    "title": "Iniciar Sesión",
+    "input_email": "Correo electrónico",
+    "input_password": "Contraseña",
+    "button_login": "Iniciar sesión"
+  }
+}

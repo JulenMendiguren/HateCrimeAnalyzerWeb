@@ -1,0 +1,13 @@
+{
+  "HEADER": {
+    "colectives": "Colectives",
+    "users": "Manage Users",
+    "login": "Log In"
+  },
+  "LOGIN": {
+    "title": "Log In",
+    "input_email": "Email",
+    "input_password": "Password",
+    "button_login": "Log in"
+  }
+}

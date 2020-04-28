@@ -1,0 +1,31 @@
+<div class="form">
+  <mat-card class="card">
+    <mat-card-title>{{ "LOGIN.title" | translate }}</mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <mat-form-field
+          ><input
+            matInput
+            placeholder="{{ 'LOGIN.input_email' | translate }}"
+          />
+        </mat-form-field>
+        <mat-form-field
+          ><input
+            matInput
+            placeholder="{{ 'LOGIN.input_password' | translate }}"
+          />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        (click)="login()"
+        class="button"
+        mat-raised-button
+        color="primary"
+      >
+        {{ "LOGIN.button_login" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

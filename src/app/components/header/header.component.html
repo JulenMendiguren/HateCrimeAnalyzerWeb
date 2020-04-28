@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <ul>
+    <a mat-button routerLink="colectives">{{
+      "HEADER.colectives" | translate
+    }}</a>
+
+    <a mat-button routerLink="users">{{ "HEADER.users" | translate }}</a>
+  </ul>
+
+  <span class="spacer"></span>
+  <ul>
+    <a mat-button routerLink="login">{{ "HEADER.login" | translate }}</a>
+  </ul>
+  <ul>
+    <mat-form-field>
+      <mat-select
+        class="lang-select"
+        [(value)]="selectedLangValue"
+        (selectionChange)="onLangSelected()"
+      >
+        <mat-option *ngFor="let lang of langs" [value]="lang.value">
+          {{ lang.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ul>
+</mat-toolbar>
