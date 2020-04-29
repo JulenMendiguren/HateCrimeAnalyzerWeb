@@ -7,12 +7,16 @@
           ><input
             matInput
             placeholder="{{ 'LOGIN.input_email' | translate }}"
+            [(ngModel)]="loginUser.email"
+            type="email"
           />
         </mat-form-field>
         <mat-form-field
           ><input
             matInput
             placeholder="{{ 'LOGIN.input_password' | translate }}"
+            [(ngModel)]="loginUser.password"
+            type="password"
           />
         </mat-form-field>
       </div>

@@ -17,6 +17,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthService } from './services/auth.service';
+import { ReportsComponent } from './components/reports/reports.component';
+import { QuestComponent } from './components/quest/quest.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -29,6 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     ColectivesComponent,
     UsersComponent,
+    ReportsComponent,
+    QuestComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

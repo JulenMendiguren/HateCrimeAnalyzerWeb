@@ -2,7 +2,9 @@
   "HEADER": {
     "colectives": "Colectives",
     "users": "Manage Users",
-    "login": "Log In"
+    "login": "Log In",
+    "quest": "Questionnaires",
+    "reports": "User Reports"
   },
   "LOGIN": {
     "title": "Log In",

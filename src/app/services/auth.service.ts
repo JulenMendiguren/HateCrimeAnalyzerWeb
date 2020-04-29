@@ -8,6 +8,10 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   logInUser(user) {
-    this.http.post<any>('http://' + ip, user);
+    return this.http.post<any>('http://' + ip + '/api/user/auth', user);
+  }
+
+  isLogged() {
+    return !!localStorage.getItem('JWT');
   }
 }
