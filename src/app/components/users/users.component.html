@@ -1,6 +1,6 @@
 <div class="wrap">
   <mat-card class="card">
-    <mat-card-title>{{ "USERS.title" | translate }}</mat-card-title>
+    <mat-card-title>{{ "USERS.title.manage" | translate }}</mat-card-title>
     <mat-card-content>
       <mat-table matSort [dataSource]="users">
         <!-- Name -->
@@ -149,6 +149,61 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table>
+      <mat-divider></mat-divider>
     </mat-card-content>
+    <mat-card-title>{{ "USERS.title.create" | translate }}</mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <mat-form-field
+          ><input
+            matInput
+            placeholder="{{ 'USERS.input.name' | translate }}"
+            [(ngModel)]="newUser.name"
+          />
+        </mat-form-field>
+        <mat-form-field
+          ><input
+            matInput
+            placeholder="{{ 'USERS.input.email' | translate }}"
+            [(ngModel)]="newUser.email"
+            type="email"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select
+            [(ngModel)]="newUser.role"
+            placeholder="{{ 'USERS.input.role' | translate }}"
+          >
+            <mat-option value="colaborator">{{
+              "USERS.roles.colaborator" | translate
+            }}</mat-option>
+            <mat-option value="researcher">{{
+              "USERS.roles.researcher" | translate
+            }}</mat-option>
+            <mat-option value="admin">{{
+              "USERS.roles.admin" | translate
+            }}</mat-option></mat-select
+          >
+        </mat-form-field>
+        <mat-form-field
+          ><input
+            matInput
+            placeholder="{{ 'USERS.input.password' | translate }}"
+            [(ngModel)]="newUser.password"
+            type="password"
+          />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="createUser()"
+        [disabled]="editingUser"
+      >
+        {{ "USERS.button.create" | translate }}
+      </button>
+    </mat-card-actions>
   </mat-card>
 </div>

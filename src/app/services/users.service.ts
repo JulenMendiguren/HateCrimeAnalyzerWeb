@@ -17,4 +17,7 @@ export class UsersService {
   updateUser(user) {
     return this.http.post<any>('http://' + ip + '/api/user/update/', user);
   }
+  createUser(user) {
+    return this.http.post<any>('http://' + ip + '/api/user/one/', user);
+  }
 }

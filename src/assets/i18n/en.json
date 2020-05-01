@@ -17,7 +17,10 @@
     }
   },
   "USERS": {
-    "title": "Manage Users",
+    "title": {
+      "manage": "Manage Users",
+      "create": "Create New User"
+    },
     "roles": {
       "colaborator": "Colaborator",
       "researcher": "Researcher",
@@ -34,7 +37,14 @@
     },
     "button": {
       "cancel": "Cancel",
-      "update": "Update user"
+      "update": "Update user",
+      "create": "Create user"
+    },
+    "input": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "password": "Password"
     }
   }
 }

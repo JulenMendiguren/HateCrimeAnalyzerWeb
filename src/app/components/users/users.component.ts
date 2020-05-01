@@ -9,9 +9,10 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UsersComponent implements OnInit {
   users: User[];
-  displayedColumns = ['name', 'email', 'role', 'actions'];
-
   editingUser: User;
+  newUser = { name: '', email: '', role: '', password: '' };
+
+  displayedColumns = ['name', 'email', 'role', 'actions'];
 
   constructor(private usersService: UsersService) {}
 
@@ -65,6 +66,19 @@ export class UsersComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+      }
+    );
+  }
+  createUser() {
+    this.usersService.createUser(this.newUser).subscribe(
+      (res) => {
+        console.log(res);
+        this.newUser = { name: '', email: '', role: '', password: '' };
+        this.loadUsers();
+      },
+      (err) => {
+        console.log(err);
+        this.loadUsers();
       }
     );
   }

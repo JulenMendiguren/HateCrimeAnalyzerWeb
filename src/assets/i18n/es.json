@@ -17,7 +17,11 @@
     }
   },
   "USERS": {
-    "title": "Gestionar Usuarios",
+    "title": {
+      "manage": "Gestionar Usuarios",
+      "create": "Crear un nuevo usuario"
+    },
+
     "roles": {
       "colaborator": "Colaborador",
       "researcher": "Investigador",
@@ -34,7 +38,14 @@
     },
     "button": {
       "cancel": "Cancelar",
-      "update": "Actualizar usuario"
+      "update": "Actualizar usuario",
+      "create": "Crear usuario"
+    },
+    "input": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "role": "Rol",
+      "password": "Contraseña"
     }
   }
 }
