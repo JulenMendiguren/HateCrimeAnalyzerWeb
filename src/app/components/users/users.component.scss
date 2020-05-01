@@ -1,0 +1,25 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  width: 100%;
+}
+
+.card {
+  min-width: 50%;
+  max-width: 75%;
+  width: 100%;
+}
+
+mat-card-title {
+  text-align: center;
+}

@@ -1,0 +1,97 @@
+<mat-table
+  #table
+  [dataSource]="dataSource"
+  matSort
+  [@animateStagger]="{value:'50'}"
+>
+  <ng-container matColumnDef="sno">
+    <mat-header-cell *matHeaderCellDef>SNo.</mat-header-cell>
+    <mat-cell *matCellDef="let user;let i = index;"
+      >{{(paginator.pageIndex * paginator.pageSize)+i + 1}}</mat-cell
+    >
+  </ng-container>
+  <ng-container matColumnDef="Name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <ng-container *ngIf="!editUsr.Id || !user.Id || user.Id!==editUsr.Id">
+        <p class="text-truncate">{{user.Name || 'N/A'}}</p>
+      </ng-container>
+      <ng-container *ngIf="editUsr.Id && user.Id && user.Id===editUsr.Id">
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Name Name"
+            [disabled]="editdisabled"
+            name="name"
+            [(ngModel)]="user.Name"
+          />
+        </mat-form-field>
+      </ng-container>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="isAct">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <ng-container *ngIf="!editUsr.Id || !user.Id || user.Id!==editUsr.Id">
+        <p class="text-truncate">
+          {{user.IsActive?'Active':'Inactive'}}
+        </p>
+      </ng-container>
+      <ng-container *ngIf="editUsr.Id && user.Id && user.Id===editUsr.Id">
+        <mat-form-field appearance="outline">
+          <mat-select
+            placeholder="Select"
+            [disabled]="editdisabled"
+            name="isActive"
+            [(ngModel)]="user.IsActive"
+          >
+            <mat-option [value]="true">Active</mat-option>
+            <mat-option [value]="false">Inactive</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </mat-cell>
+  </ng-container>
+  <!-- ACTION -->
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <span *ngIf="pagePerm && pagePerm.indexOf('u')!==-1">
+        <ng-container *ngIf="!editUsr.Id || !user.Id || user.Id!==editUsr.Id">
+          <mat-icon matTooltip="edit" (click)="editROw(user)">edit</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="editUsr.Id && user.Id && user.Id===editUsr.Id">
+          <button
+            mat-raised-button
+            color="accent"
+            matTooltip="Update"
+            class="mr-10 mb-6"
+            [disabled]="editdisabled"
+            (click)="updateEdit()"
+          >
+            Update
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            matTooltip="Cancel"
+            [disabled]="editdisabled"
+            (click)="cancelEdit()"
+          >
+            Cancel
+          </button>
+        </ng-container>
+      </span>
+      <span
+        *ngIf="!pagePerm || (pagePerm && pagePerm.indexOf('v')===-1 && pagePerm && pagePerm.indexOf('u')===-1)"
+        >N/A</span
+      >
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row
+    *matHeaderRowDef="displayedColumns; sticky:true"
+  ></mat-header-row>
+
+  <mat-row *matRowDef="let user; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -1,1 +1,154 @@
-<p>users works!</p>
+<div class="wrap">
+  <mat-card class="card">
+    <mat-card-title>{{ "USERS.title" | translate }}</mat-card-title>
+    <mat-card-content>
+      <mat-table matSort [dataSource]="users">
+        <!-- Name -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "USERS.column.name" | translate
+          }}</mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <!-- If the user being edited is this one => false -->
+            <ng-container
+              *ngIf="
+                !editingUser || editingUser._id !== user._id;
+                then nameNotEditing;
+                else nameEditing
+              "
+            >
+            </ng-container>
+
+            <ng-template #nameNotEditing
+              ><p class="text-truncate">{{ user.name }}</p></ng-template
+            >
+            <ng-template #nameEditing
+              ><mat-form-field>
+                <input
+                  matInput
+                  placeholder="{{ 'USERS.column.name' | translate }}"
+                  [(ngModel)]="editingUser.name"
+                />
+              </mat-form-field>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Email -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "USERS.column.email" | translate
+          }}</mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <ng-container
+              *ngIf="
+                !editingUser || editingUser._id !== user._id;
+                then emailNotEditing;
+                else emailEditing
+              "
+            >
+            </ng-container>
+
+            <ng-template #emailNotEditing
+              ><p class="text-truncate">{{ user.email }}</p></ng-template
+            >
+            <ng-template #emailEditing
+              ><mat-form-field>
+                <input
+                  matInput
+                  placeholder="{{ 'USERS.column.email' | translate }}"
+                  [(ngModel)]="editingUser.email"
+                />
+              </mat-form-field>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Role -->
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "USERS.column.role" | translate
+          }}</mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <ng-container
+              *ngIf="
+                !editingUser || editingUser._id !== user._id;
+                then roleNotEditing;
+                else roleEditing
+              "
+            >
+            </ng-container>
+
+            <ng-template #roleNotEditing
+              ><p class="text-truncate">
+                {{ "USERS.roles." + [user.role] | translate }}
+              </p></ng-template
+            >
+            <ng-template #roleEditing
+              ><mat-form-field>
+                <mat-label>{{ "USERS.column.role" | translate }}</mat-label>
+                <mat-select [(ngModel)]="editingUser.role">
+                  <mat-option value="colaborator">{{
+                    "USERS.roles.colaborator" | translate
+                  }}</mat-option>
+                  <mat-option value="researcher">{{
+                    "USERS.roles.researcher" | translate
+                  }}</mat-option>
+                  <mat-option value="admin">{{
+                    "USERS.roles.admin" | translate
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <ng-container
+              *ngIf="
+                !editingUser || editingUser._id !== user._id;
+                then actionNotEditing;
+                else actionEditing
+              "
+            >
+            </ng-container>
+            <ng-template #actionNotEditing>
+              <button
+                mat-icon-button
+                matTooltip="{{ 'USERS.tooltip.edit' | translate }}"
+                color="primary"
+                (click)="startEditingUser(user)"
+                [disabled]="editingUser"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="{{ 'USERS.tooltip.delete' | translate }}"
+                color="primary"
+                (click)="deleteUser(user._id)"
+                [disabled]="editingUser"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-template>
+            <ng-template #actionEditing>
+              <button mat-raised-button color="warn" (click)="cancelEditing()">
+                {{ "USERS.button.cancel" | translate }}
+              </button>
+              <button mat-raised-button color="primary" (click)="updateUser()">
+                {{ "USERS.button.update" | translate }}
+              </button>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>

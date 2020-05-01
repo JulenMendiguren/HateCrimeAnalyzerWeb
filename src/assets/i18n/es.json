@@ -8,8 +8,33 @@
   },
   "LOGIN": {
     "title": "Iniciar Sesión",
-    "input_email": "Correo electrónico",
-    "input_password": "Contraseña",
-    "button_login": "Iniciar sesión"
+    "input": {
+      "email": "Correo electrónico",
+      "password": "Contraseña"
+    },
+    "button": {
+      "login": "Iniciar sesión"
+    }
+  },
+  "USERS": {
+    "title": "Gestionar Usuarios",
+    "roles": {
+      "colaborator": "Colaborador",
+      "researcher": "Investigador",
+      "admin": "Administrador"
+    },
+    "column": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "role": "Rol"
+    },
+    "tooltip": {
+      "edit": "Editar usuario",
+      "delete": "Borrar usuario"
+    },
+    "button": {
+      "cancel": "Cancelar",
+      "update": "Actualizar usuario"
+    }
   }
 }

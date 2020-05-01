@@ -6,7 +6,7 @@
         <mat-form-field
           ><input
             matInput
-            placeholder="{{ 'LOGIN.input_email' | translate }}"
+            placeholder="{{ 'LOGIN.input.email' | translate }}"
             [(ngModel)]="loginUser.email"
             type="email"
           />
@@ -14,7 +14,7 @@
         <mat-form-field
           ><input
             matInput
-            placeholder="{{ 'LOGIN.input_password' | translate }}"
+            placeholder="{{ 'LOGIN.input.password' | translate }}"
             [(ngModel)]="loginUser.password"
             type="password"
           />
@@ -28,7 +28,7 @@
         mat-raised-button
         color="primary"
       >
-        {{ "LOGIN.button_login" | translate }}
+        {{ "LOGIN.button.login" | translate }}
       </button>
     </mat-card-actions>
   </mat-card>

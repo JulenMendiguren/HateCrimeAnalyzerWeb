@@ -8,8 +8,33 @@
   },
   "LOGIN": {
     "title": "Log In",
-    "input_email": "Email",
-    "input_password": "Password",
-    "button_login": "Log in"
+    "input": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "button": {
+      "login": "Log in"
+    }
+  },
+  "USERS": {
+    "title": "Manage Users",
+    "roles": {
+      "colaborator": "Colaborator",
+      "researcher": "Researcher",
+      "admin": "Administrator"
+    },
+    "column": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role"
+    },
+    "tooltip": {
+      "edit": "Edit user",
+      "delete": "Delete user"
+    },
+    "button": {
+      "cancel": "Cancel",
+      "update": "Update user"
+    }
   }
 }
