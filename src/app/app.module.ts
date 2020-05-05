@@ -10,6 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { ColectivesComponent } from './components/colectives/colectives.component';
 import { UsersComponent } from './components/users/users.component';
 import { MatInputModule } from '@angular/material/input';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/Icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -48,6 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatToolbarModule,
     MatDividerModule,
     MatButtonModule,
+    MatSnackBarModule,
+    MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
     MatTableModule,
@@ -67,7 +74,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [AuthService, UsersService],
+  providers: [
+    AuthService,
+    UsersService,
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

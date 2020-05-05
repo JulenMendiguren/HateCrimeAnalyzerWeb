@@ -46,6 +46,33 @@
       "email": "Correo electrónico",
       "role": "Rol",
       "password": "Contraseña"
+    },
+    "snackbar": {
+      "deleted": "El usuario ha sido eliminado.",
+      "created": "Se ha creado un nuevo usuario.",
+      "updated": "Se ha modificado el usuario satisfactoriamente.",
+      "error": "ERROR: Ha ocurrido un error inesperado."
+    }
+  },
+  "COLECTIVES": {
+    "title": {
+      "manage": "Colectivos",
+      "create": "Crear un nuevo colectivo"
+    },
+    "tooltip": {
+      "edit": "Editar colectivo",
+      "delete": "Borrar colectivo"
+    },
+    "button": {
+      "cancel": "Cancelar",
+      "update": "Actualizar colectivo",
+      "create": "Crear colectivo"
+    },
+    "snackbar": {
+      "deleted": "El colectivo ha sido eliminado.",
+      "created": "Se ha creado un nuevo colectivo.",
+      "updated": "Se ha modificado el colectivo satisfactoriamente.",
+      "error": "ERROR: Ha ocurrido un error inesperado."
     }
   }
 }

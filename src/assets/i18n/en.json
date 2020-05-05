@@ -45,6 +45,33 @@
       "email": "Email",
       "role": "Role",
       "password": "Password"
+    },
+    "snackbar": {
+      "deleted": "The user has been deleted.",
+      "created": "A new user has been created.",
+      "updated": "The user has been modified.",
+      "error": "ERROR: An unexpected error has occurred."
+    }
+  },
+  "COLECTIVES": {
+    "title": {
+      "manage": "Colectives",
+      "create": "Create New Colective"
+    },
+    "tooltip": {
+      "edit": "Edit colective",
+      "delete": "Delete colective"
+    },
+    "button": {
+      "cancel": "Cancel",
+      "update": "Update colective",
+      "create": "Create colective"
+    },
+    "snackbar": {
+      "deleted": "The colective has been deleted.",
+      "created": "A new colective has been created.",
+      "updated": "The colective has been modified.",
+      "error": "ERROR: An unexpected error has occurred."
     }
   }
 }
