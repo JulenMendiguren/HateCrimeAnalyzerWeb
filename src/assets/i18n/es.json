@@ -5,8 +5,8 @@
     "login": "Iniciar Sesión",
     "logout": "Cerrar Sesión",
     "quest": "Cuestionarios",
-    "user": "Usuario",
-    "report": "Reporte",
+    "userq": "Usuario",
+    "reportq": "Reporte",
     "incidents": "Incidentes Reportados"
   },
   "LOGIN": {
@@ -77,5 +77,8 @@
       "updated": "Se ha modificado el colectivo satisfactoriamente.",
       "error": "ERROR: Ha ocurrido un error inesperado."
     }
+  },
+  "USERQ": {
+    "title": "Cuestionario de usuario"
   }
 }

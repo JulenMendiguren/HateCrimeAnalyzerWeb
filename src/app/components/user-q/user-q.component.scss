@@ -1,0 +1,25 @@
+@import "~@angular/material/theming";
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  width: 100%;
+}
+
+.card {
+  min-width: 50%;
+  max-width: 75%;
+  @include mat-elevation(10);
+}
+
+mat-card-title {
+  text-align: center;
+}

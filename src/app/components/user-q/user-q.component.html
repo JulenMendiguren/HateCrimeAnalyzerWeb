@@ -1,1 +1,29 @@
-<p>user-q works!</p>
+<div class="wrap">
+  <mat-card class="card">
+    <mat-card-title>{{ "USERQ.title" | translate }}</mat-card-title>
+    <mat-card-content *ngIf="questionnaire && colectives">
+      <mat-accordion multi="true">
+        <div class="expansion-panel" *ngFor="let colective of colectives">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ colective.text_es }}</mat-panel-title>
+              <!-- <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile
+                    colspan="tile.cols"
+                    rowspan="tile.rows"
+                    style.background="lightblue">
+
+                </mat-grid-tile>
+              </mat-grid-list> -->
+            </mat-expansion-panel-header>
+            <ng-container *ngFor="let question of questionnaire.questions">
+              <ng-container *ngIf="question.tag === colective._id">
+                <p>{{ question.text_es }}</p>
+              </ng-container>
+            </ng-container>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

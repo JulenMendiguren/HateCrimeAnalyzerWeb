@@ -18,8 +18,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/Icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
@@ -65,12 +67,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatToolbarModule,
     MatDividerModule,
     MatButtonModule,
+    MatExpansionModule,
     MatSnackBarModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
     MatTableModule,
+    MatGridListModule,
     MatCardModule,
     MatSelectModule,
     MatTooltipModule,

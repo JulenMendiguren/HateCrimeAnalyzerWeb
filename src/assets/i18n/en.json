@@ -5,8 +5,8 @@
     "login": "Login",
     "logout": "Logout",
     "quest": "Questionnaires",
-    "user": "User",
-    "report": "Report",
+    "userq": "User",
+    "reportq": "Report",
     "incidents": "Reported Incidents"
   },
   "LOGIN": {
@@ -76,5 +76,8 @@
       "updated": "The colective has been modified.",
       "error": "ERROR: An unexpected error has occurred."
     }
+  },
+  "USERQ": {
+    "title": "User Questionnaire"
   }
 }
