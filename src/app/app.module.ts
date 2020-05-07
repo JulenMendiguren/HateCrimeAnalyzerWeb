@@ -19,18 +19,29 @@ import { MatIconModule } from '@angular/material/Icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from './services/auth.service';
-import { ReportsComponent } from './components/reports/reports.component';
-import { QuestComponent } from './components/quest/quest.component';
+
 import { UsersService } from './services/users.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { MinColaboratorGuard } from './services/guards/min-colaborator.guard';
+import { MinResearcherGuard } from './services/guards/min-researcher.guard';
+import { MinAdminGuard } from './services/guards/min-admin.guard';
+import { UserQComponent } from './components/user-q/user-q.component';
+import { ReportQComponent } from './components/report-q/report-q.component';
+import { IncidentsComponent } from './components/incidents/incidents.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -43,8 +54,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     ColectivesComponent,
     UsersComponent,
-    ReportsComponent,
-    QuestComponent,
+    UserQComponent,
+    ReportQComponent,
+    IncidentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +66,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDividerModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatMenuModule,
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
@@ -77,7 +90,15 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     AuthService,
     UsersService,
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+    MinColaboratorGuard,
+    MinResearcherGuard,
+    MinAdminGuard,
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3500 } },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

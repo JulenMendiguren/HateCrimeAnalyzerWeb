@@ -3,8 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { UsersComponent } from './components/users/users.component';
 import { ColectivesComponent } from './components/colectives/colectives.component';
-import { QuestComponent } from './components/quest/quest.component';
-import { ReportsComponent } from './components/reports/reports.component';
+import { MinAdminGuard } from './services/guards/min-admin.guard';
+import { MinResearcherGuard } from './services/guards/min-researcher.guard';
+import { MinColaboratorGuard } from './services/guards/min-colaborator.guard';
+import { ReportQComponent } from './components/report-q/report-q.component';
+import { UserQComponent } from './components/user-q/user-q.component';
+import { IncidentsComponent } from './components/incidents/incidents.component';
 
 const routes: Routes = [
   {
@@ -15,11 +19,13 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [MinAdminGuard],
     pathMatch: 'full',
   },
   {
     path: 'colectives',
     component: ColectivesComponent,
+    canActivate: [MinResearcherGuard],
     pathMatch: 'full',
   },
   {
@@ -28,13 +34,21 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'quest',
-    component: QuestComponent,
+    path: 'questionnaire/report',
+    component: ReportQComponent,
+    canActivate: [MinResearcherGuard],
     pathMatch: 'full',
   },
   {
-    path: 'reports',
-    component: ReportsComponent,
+    path: 'questionnaire/user',
+    component: UserQComponent,
+    canActivate: [MinResearcherGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'incidents',
+    component: IncidentsComponent,
+    canActivate: [MinColaboratorGuard],
     pathMatch: 'full',
   },
 ];

@@ -3,8 +3,11 @@
     "colectives": "Colectivos",
     "users": "Gestionar Usuarios",
     "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
     "quest": "Cuestionarios",
-    "reports": "Reportes de usuario"
+    "user": "Usuario",
+    "report": "Reporte",
+    "incidents": "Incidentes Reportados"
   },
   "LOGIN": {
     "title": "Iniciar Sesión",

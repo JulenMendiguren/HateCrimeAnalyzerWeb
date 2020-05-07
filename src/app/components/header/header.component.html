@@ -3,15 +3,40 @@
     <a mat-button routerLink="colectives">{{
       "HEADER.colectives" | translate
     }}</a>
-    <a mat-button routerLink="quest">{{ "HEADER.quest" | translate }}</a>
-    <a mat-button routerLink="reports">{{ "HEADER.reports" | translate }}</a>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+      {{ "HEADER.quest" | translate }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="questionnaire/user">
+        {{ "HEADER.user" | translate }}
+      </button>
+      <button mat-menu-item routerLink="questionnaire/report">
+        {{ "HEADER.report" | translate }}
+      </button>
+    </mat-menu>
+
+    <!-- <a mat-button routerLink="quest">{{ "HEADER.quest" | translate }}</a> -->
+    <a mat-button routerLink="incidents">{{
+      "HEADER.incidents" | translate
+    }}</a>
     <a mat-button routerLink="users">{{ "HEADER.users" | translate }}</a>
   </ul>
 
   <span class="spacer"></span>
-  <ul>
-    <a mat-button routerLink="login">{{ "HEADER.login" | translate }}</a>
-  </ul>
+  <ng-container *ngIf="isLogged(); then logout; else login"></ng-container>
+  <ng-template #login>
+    <ul>
+      <a mat-button routerLink="login">{{ "HEADER.login" | translate }}</a>
+    </ul>
+  </ng-template>
+  <ng-template #logout>
+    <ul>
+      <button mat-button (click)="logoutUser()">
+        {{ "HEADER.logout" | translate }}
+      </button>
+    </ul>
+  </ng-template>
   <ul>
     <mat-form-field appearance="none">
       <mat-select
