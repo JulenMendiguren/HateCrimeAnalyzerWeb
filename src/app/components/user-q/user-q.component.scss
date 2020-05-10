@@ -23,3 +23,16 @@
 mat-card-title {
   text-align: center;
 }
+
+.question-extras {
+  display: flex;
+}
+
+.question-options {
+  // background-color: #4f628e;
+  width: 50%;
+}
+.question-answers {
+  // background-color: #ab8878;
+  flex-grow: 1;
+}

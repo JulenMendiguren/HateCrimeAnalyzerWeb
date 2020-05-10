@@ -4,6 +4,8 @@ import { Questionnaire } from 'src/app/models/Questionnaire';
 import { Colective } from 'src/app/models/Colective';
 import { ColectivesService } from 'src/app/services/colectives.service';
 import { Question } from 'src/app/models/question';
+import { LanguageService } from 'src/app/services/language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-q',
@@ -13,7 +15,9 @@ import { Question } from 'src/app/models/question';
 export class UserQComponent implements OnInit {
   constructor(
     private questionnaireService: QuestionnaireService,
-    private colectivesService: ColectivesService
+    private colectivesService: ColectivesService,
+    private languageService: LanguageService,
+    private translateService: TranslateService
   ) {}
 
   questionnaire: Questionnaire;
@@ -23,6 +27,20 @@ export class UserQComponent implements OnInit {
     this.loadColectives();
     this.loadQuestionnaire();
   }
+
+  getLang() {
+    return this.languageService.selected;
+  }
+
+  getRequiredAnswerString(id, index) {
+    const q = this.questionnaire.questions.find((q) => q._id === id);
+    return q['possibleAnswers_' + this.getLang()][index];
+  }
+
+  getSizeString(size) {
+    return this.translateService.instant('USERQ.options.size_' + size);
+  }
+
   loadQuestionnaire() {
     this.questionnaireService.getLastUserQ().subscribe(
       (res) => {

@@ -78,6 +78,23 @@
     }
   },
   "USERQ": {
-    "title": "User Questionnaire"
+    "title": "User Questionnaire",
+    "question_text": "Question text",
+    "question_type": "Question type",
+    "question_options": "Options",
+    "possible_answers": "Possible answers",
+    "options": {
+      "required": "Required question",
+      "required_answer": "Required answer",
+      "size": "Text size",
+      "size_small": "Small",
+      "size_big": "Big",
+      "min_value": "Minimum allowed value",
+      "max_value": "Maximum allowed value",
+      "min_length": "Minimum allowed length",
+      "max_length": "Maximum allowed length",
+      "slider": "Slider",
+      "date_time_format": "Date and time format"
+    }
   }
 }
