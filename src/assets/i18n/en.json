@@ -79,6 +79,7 @@
   },
   "USERQ": {
     "title": "User Questionnaire",
+    "subquestion": "Subquestion",
     "question_text": "Question text",
     "question_type": "Question type",
     "question_options": "Options",
@@ -95,6 +96,19 @@
       "max_length": "Maximum allowed length",
       "slider": "Slider",
       "date_time_format": "Date and time format"
+    },
+    "button": {
+      "add_subquestion": "Add Subquestion",
+      "edit_question": "Edit Question",
+      "delete": "Delete",
+      "add": "Add New Question"
+    }
+  },
+  "QUESTION_DIALOG": {
+    "title": {
+      "new_question": "Create New Question",
+      "new_subquestion": "Create New Subquestion",
+      "edit_question": "Edit Question"
     }
   }
 }

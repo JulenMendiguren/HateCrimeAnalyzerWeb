@@ -6,6 +6,8 @@ import { ColectivesService } from 'src/app/services/colectives.service';
 import { Question } from 'src/app/models/question';
 import { LanguageService } from 'src/app/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { QuestionDialogComponent } from '../dialogs/question-dialog/question-dialog.component';
 
 @Component({
   selector: 'app-user-q',
@@ -17,7 +19,8 @@ export class UserQComponent implements OnInit {
     private questionnaireService: QuestionnaireService,
     private colectivesService: ColectivesService,
     private languageService: LanguageService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private dialog: MatDialog
   ) {}
 
   questionnaire: Questionnaire;
@@ -63,5 +66,12 @@ export class UserQComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  addQuestion() {
+    const dialogRef = this.dialog.open(QuestionDialogComponent, {
+      width: '50%',
+      data: { mode: 'new' },
+    });
   }
 }

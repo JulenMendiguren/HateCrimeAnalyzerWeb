@@ -36,3 +36,30 @@ mat-card-title {
   // background-color: #ab8878;
   flex-grow: 1;
 }
+.question {
+  margin-top: 10px;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: lightgray;
+  border: lightgreen;
+  border-width: medium;
+  border-style: solid;
+}
+
+.subquestion {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 40px;
+  margin-top: 10px;
+  background-color: lightgray;
+  border: lightgreen;
+  border-width: medium;
+  border-style: solid;
+}
+.question-buttons {
+  text-align: center;
+}
+button {
+  margin: 5px;
+}

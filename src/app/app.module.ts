@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
@@ -44,6 +45,7 @@ import { MinAdminGuard } from './services/guards/min-admin.guard';
 import { UserQComponent } from './components/user-q/user-q.component';
 import { ReportQComponent } from './components/report-q/report-q.component';
 import { IncidentsComponent } from './components/incidents/incidents.component';
+import { QuestionDialogComponent } from './components/dialogs/question-dialog/question-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -59,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserQComponent,
     ReportQComponent,
     IncidentsComponent,
+    QuestionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDividerModule,
     MatButtonModule,
     MatExpansionModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatMenuModule,
     MatDialogModule,
