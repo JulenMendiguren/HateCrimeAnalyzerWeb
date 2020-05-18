@@ -1,6 +1,8 @@
-.mat-form-field {
-  display: block;
+mat-form-field {
+  display: flex;
+  flex-direction: column;
 }
+
 .question-extras {
   display: flex;
 }
@@ -10,6 +12,11 @@
   width: 30%;
 }
 .question-answers {
+  margin-left: 15px;
   background-color: #ab8878;
   flex-grow: 1;
+}
+.answer-container {
+  display: flex;
+  flex-direction: row;
 }

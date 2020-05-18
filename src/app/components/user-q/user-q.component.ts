@@ -70,8 +70,9 @@ export class UserQComponent implements OnInit {
 
   addQuestion() {
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
-      width: '50%',
-      data: { mode: 'new' },
+      width: '70%',
+      // Cambiar por col correspondiente
+      data: { mode: 'new', tag: 'all' },
     });
   }
 }
