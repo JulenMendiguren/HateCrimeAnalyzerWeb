@@ -79,7 +79,7 @@
 
 
     </div>
-    <div class="question-answers">
+    <div class="question-answers" *ngIf="showPossibleAnswers()">
       <p><strong>Possible answers:</strong></p>
       <div formArrayName="possibleAnswers" *ngFor="let ans of getPossibleAnswersControls(); let i = index;">
         <div class="answer-container" [formGroupName]="i">
@@ -99,13 +99,15 @@
             <mat-label>Français</mat-label>
             <input matInput [formControl]="getPossibleAnswersControls()[i]['controls'].possibleAnswers_fr">
           </mat-form-field>
-          <button mat-icon-button color="warn" (click)="deletePossibleAnswers(i)">
+          <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" mat-icon-button
+            type="button" color="warn" (click)="deletePossibleAnswers(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
 
       </div>
-      <button type="button" mat-raised-button (click)="addPossibleAnswers()">add</button>
+      <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" type="button" color="primary"
+        mat-raised-button (click)="addPossibleAnswers()">add</button>
     </div>
   </div>
   <div mat-dialog-actions>

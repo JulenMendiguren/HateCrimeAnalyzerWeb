@@ -93,7 +93,8 @@
               </div>
             </ng-container>
           </ng-container>
-          <mat-action-row style="text-align: center;"><button (click)="addQuestion()" mat-raised-button color="accent">
+          <mat-action-row style="text-align: center;"><button (click)="addQuestion('all')" mat-raised-button
+              color="accent">
               Add
             </button></mat-action-row>
         </mat-expansion-panel>
@@ -178,6 +179,10 @@
                 <mat-divider></mat-divider>
               </ng-container>
             </ng-container>
+            <mat-action-row style="text-align: center;"><button (click)="addQuestion(colective._id)" mat-raised-button
+                color="accent">
+                Add
+              </button></mat-action-row>
           </mat-expansion-panel>
         </div>
       </mat-accordion>

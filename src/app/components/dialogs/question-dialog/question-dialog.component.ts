@@ -33,16 +33,11 @@ export class QuestionDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     this.initializeFormGroup();
-    this.qForm.valueChanges.subscribe((val) => console.log(val));
   }
 
   logQuestion() {
     console.log('full question', this.qForm.value);
     console.log('possibleAnswers', this.qForm.controls.possibleAnswers.value);
-    console.log(
-      'possibleAnswers[2]',
-      this.qForm.controls.possibleAnswers['controls'][2].value
-    );
   }
 
   initializeFormGroup() {
@@ -58,8 +53,8 @@ export class QuestionDialogComponent implements OnInit {
 
   // Clears and sets options and possible answers
   initializeOptionsGroup() {
-    this.clearPossibleAnswers();
     const type = this.qForm.get('type').value;
+
     let options = {
       required: new FormControl({
         value: false,
@@ -78,6 +73,64 @@ export class QuestionDialogComponent implements OnInit {
         options['slider'] = false;
     }
     this.qForm.setControl('options', this.formBuilder.group(options));
+    this.setTypePossibleAnswers(type);
+  }
+
+  setTypePossibleAnswers(type: string) {
+    this.clearPossibleAnswers();
+    if (type === 'yesno') {
+      this.addPossibleAnswers();
+      this.addPossibleAnswers();
+      const pa = this.qForm.controls.possibleAnswers['controls'];
+
+      pa[0]['controls']['possibleAnswers_eu'].setValue('Bai');
+      pa[0]['controls']['possibleAnswers_es'].setValue('Sí');
+      pa[0]['controls']['possibleAnswers_en'].setValue('Yes');
+      pa[0]['controls']['possibleAnswers_fr'].setValue('Oui');
+
+      pa[1]['controls']['possibleAnswers_eu'].setValue('Ez');
+      pa[1]['controls']['possibleAnswers_es'].setValue('No');
+      pa[1]['controls']['possibleAnswers_en'].setValue('No');
+      pa[1]['controls']['possibleAnswers_fr'].setValue('Ne pas');
+    } else if (type === 'likert') {
+      this.addPossibleAnswers();
+      this.addPossibleAnswers();
+      this.addPossibleAnswers();
+      this.addPossibleAnswers();
+      this.addPossibleAnswers();
+
+      const pa = this.qForm.controls.possibleAnswers['controls'];
+
+      pa[0]['controls']['possibleAnswers_eu'].setValue('Muy de acuerdo EU');
+      pa[0]['controls']['possibleAnswers_es'].setValue('Muy de acuerdo');
+      pa[0]['controls']['possibleAnswers_en'].setValue('Strongly agree');
+      pa[0]['controls']['possibleAnswers_fr'].setValue('Muy de acuerdo FR');
+
+      pa[1]['controls']['possibleAnswers_eu'].setValue('De acuerdo EU');
+      pa[1]['controls']['possibleAnswers_es'].setValue('De acuerdo');
+      pa[1]['controls']['possibleAnswers_en'].setValue('Agree');
+      pa[1]['controls']['possibleAnswers_fr'].setValue('De acuerdo FR');
+
+      pa[2]['controls']['possibleAnswers_eu'].setValue('Neutral EU');
+      pa[2]['controls']['possibleAnswers_es'].setValue('Neutral');
+      pa[2]['controls']['possibleAnswers_en'].setValue('Neutral');
+      pa[2]['controls']['possibleAnswers_fr'].setValue('Neutral FR');
+
+      pa[3]['controls']['possibleAnswers_eu'].setValue('En desacuerdo EU');
+      pa[3]['controls']['possibleAnswers_es'].setValue('En desacuerdo');
+      pa[3]['controls']['possibleAnswers_en'].setValue('Disagree');
+      pa[3]['controls']['possibleAnswers_fr'].setValue('En desacuerdo FR');
+
+      pa[4]['controls']['possibleAnswers_eu'].setValue('Muy en desacuerdo EU');
+      pa[4]['controls']['possibleAnswers_es'].setValue('Muy en desacuerdo');
+      pa[4]['controls']['possibleAnswers_en'].setValue('Strongly disagree');
+      pa[4]['controls']['possibleAnswers_fr'].setValue('Muy en desacuerdo FR');
+    } else if (type === 'multiselect') {
+      this.addPossibleAnswers();
+    } else if (type === 'radio') {
+      this.addPossibleAnswers();
+    }
+    this.cd.detectChanges();
   }
 
   addPossibleAnswers() {
@@ -86,10 +139,7 @@ export class QuestionDialogComponent implements OnInit {
   }
 
   clearPossibleAnswers() {
-    this.qForm.setControl(
-      'possibleAnswers',
-      this.formBuilder.array([this.createNewPossibleAnswers()])
-    );
+    this.qForm.setControl('possibleAnswers', this.formBuilder.array([]));
   }
 
   createNewPossibleAnswers() {
@@ -138,8 +188,20 @@ export class QuestionDialogComponent implements OnInit {
     return pa.controls;
   }
 
+  // Deletes a row of possibleAnswers
   deletePossibleAnswers(i) {
     this.getPossibleAnswersControls().splice(i, 1);
+  }
+
+  // True if possibleAnswers section will be shown
+  showPossibleAnswers() {
+    const type = this.qForm.value.type;
+    return (
+      type === 'likert' ||
+      type === 'yesno' ||
+      type === 'multiselect' ||
+      type === 'radio'
+    );
   }
 
   onSubmit() {
@@ -148,6 +210,7 @@ export class QuestionDialogComponent implements OnInit {
     this.questionService.createQuestion(q).subscribe(
       (res) => {
         console.log('Created question ', res);
+        this.dialogRef.close(res);
       },
       (err) => {
         console.log(err);
@@ -163,13 +226,22 @@ export class QuestionDialogComponent implements OnInit {
     let possibleAnswers_es = [];
     let possibleAnswers_en = [];
     let possibleAnswers_fr = [];
-    //Check if enabled?
-    this.getPossibleAnswersControls().forEach((ctrl) => {
-      possibleAnswers_eu.push(ctrl['controls']['possibleAnswers_eu'].value);
-      possibleAnswers_en.push(ctrl['controls']['possibleAnswers_en'].value);
-      possibleAnswers_es.push(ctrl['controls']['possibleAnswers_es'].value);
-      possibleAnswers_fr.push(ctrl['controls']['possibleAnswers_fr'].value);
-    });
+
+    const type = q.type;
+
+    if (
+      type === 'likert' ||
+      type === 'yesno' ||
+      type === 'multiselect' ||
+      type === 'radio'
+    ) {
+      this.getPossibleAnswersControls().forEach((ctrl) => {
+        possibleAnswers_eu.push(ctrl['controls']['possibleAnswers_eu'].value);
+        possibleAnswers_en.push(ctrl['controls']['possibleAnswers_en'].value);
+        possibleAnswers_es.push(ctrl['controls']['possibleAnswers_es'].value);
+        possibleAnswers_fr.push(ctrl['controls']['possibleAnswers_fr'].value);
+      });
+    }
 
     q.possibleAnswers_eu = possibleAnswers_eu;
     q.possibleAnswers_es = possibleAnswers_es;

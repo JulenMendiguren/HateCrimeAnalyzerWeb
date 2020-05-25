@@ -68,11 +68,37 @@ export class UserQComponent implements OnInit {
     );
   }
 
-  addQuestion() {
+  addQuestion(col) {
+    let numQuestionsPassed = 0;
+    let pos;
+    const allColArray = ['all'];
+
+    this.colectives.forEach((c) => {
+      allColArray.push(c._id);
+    });
+
+    // Loops through all the colectives and questions to find the
+    allColArray.forEach((colId) => {
+      this.questionnaire.questions.forEach((q) => {
+        if (q.tag === colId) {
+          numQuestionsPassed++;
+        }
+        if (colId === col) {
+          pos = numQuestionsPassed;
+        }
+      });
+    });
+
+    console.log('pos: ', pos);
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
       width: '70%',
-      // Cambiar por col correspondiente
-      data: { mode: 'new', tag: 'all' },
+      data: { mode: 'new', tag: col, pos },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.questionnaire.questions.splice(pos, 0, result);
+      }
     });
   }
 }
