@@ -85,19 +85,23 @@
         <div class="answer-container" [formGroupName]="i">
           <mat-form-field>
             <mat-label>Euskara</mat-label>
-            <input matInput [formControl]="getPossibleAnswersControls()[i]['controls'].possibleAnswers_eu">
+            <input matInput
+              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_eu">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Español</mat-label>
-            <input matInput [formControl]="getPossibleAnswersControls()[i]['controls'].possibleAnswers_es">
+            <input matInput
+              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_es">
           </mat-form-field>
           <mat-form-field>
             <mat-label>English</mat-label>
-            <input matInput [formControl]="getPossibleAnswersControls()[i]['controls'].possibleAnswers_en">
+            <input matInput
+              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_en">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Français</mat-label>
-            <input matInput [formControl]="getPossibleAnswersControls()[i]['controls'].possibleAnswers_fr">
+            <input matInput
+              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_fr">
           </mat-form-field>
           <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" mat-icon-button
             type="button" color="warn" (click)="deletePossibleAnswers(i)">
@@ -112,7 +116,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button type="button" (click)="logQuestion()">Log Question</button>
-    <button [disabled]="qForm.invalid" mat-button type="submit">Save Question</button>
+    <button [disabled]="checkIfInvalid()" mat-button type="submit">Save Question</button>
   </div>
 
 </form>

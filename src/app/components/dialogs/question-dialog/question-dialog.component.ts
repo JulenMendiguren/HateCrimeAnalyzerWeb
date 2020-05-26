@@ -76,6 +76,7 @@ export class QuestionDialogComponent implements OnInit {
     this.setTypePossibleAnswers(type);
   }
 
+  // A bit messy... Sets the default possibleAnswers for certain types
   setTypePossibleAnswers(type: string) {
     this.clearPossibleAnswers();
     if (type === 'yesno') {
@@ -205,6 +206,7 @@ export class QuestionDialogComponent implements OnInit {
   }
 
   onSubmit() {
+    this.qForm.controls.possibleAnswers.updateValueAndValidity();
     const q: Question = this.createQuestion();
     console.log('Sending question... ', q);
     this.questionService.createQuestion(q).subscribe(
@@ -220,6 +222,7 @@ export class QuestionDialogComponent implements OnInit {
 
   createQuestion(): Question {
     const q: Question = this.qForm.value;
+    console.log('qForm Value: ', this.qForm.value);
     q.tag = this.data.tag;
 
     let possibleAnswers_eu = [];
@@ -235,11 +238,11 @@ export class QuestionDialogComponent implements OnInit {
       type === 'multiselect' ||
       type === 'radio'
     ) {
-      this.getPossibleAnswersControls().forEach((ctrl) => {
-        possibleAnswers_eu.push(ctrl['controls']['possibleAnswers_eu'].value);
-        possibleAnswers_en.push(ctrl['controls']['possibleAnswers_en'].value);
-        possibleAnswers_es.push(ctrl['controls']['possibleAnswers_es'].value);
-        possibleAnswers_fr.push(ctrl['controls']['possibleAnswers_fr'].value);
+      this.qForm.value.possibleAnswers.forEach((ansRow) => {
+        possibleAnswers_eu.push(ansRow.possibleAnswers_eu);
+        possibleAnswers_en.push(ansRow.possibleAnswers_en);
+        possibleAnswers_es.push(ansRow.possibleAnswers_es);
+        possibleAnswers_fr.push(ansRow.possibleAnswers_fr);
       });
     }
 
@@ -248,5 +251,11 @@ export class QuestionDialogComponent implements OnInit {
     q.possibleAnswers_en = possibleAnswers_en;
     q.possibleAnswers_fr = possibleAnswers_fr;
     return q;
+  }
+
+  checkIfInvalid(): boolean {
+    this.qForm.controls.possibleAnswers.updateValueAndValidity();
+
+    return this.qForm.invalid;
   }
 }
