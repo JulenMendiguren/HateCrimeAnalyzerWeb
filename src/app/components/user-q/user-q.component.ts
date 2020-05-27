@@ -59,6 +59,13 @@ export class UserQComponent implements OnInit {
     this.colectivesService.getAllColectives().subscribe(
       (res) => {
         this.colectives = res;
+        this.colectives.splice(0, 0, {
+          _id: 'all',
+          text_eu: 'All EU',
+          text_es: 'General',
+          text_en: 'All',
+          text_fr: 'All FR',
+        });
         console.log(this.colectives);
       },
       (err) => {
@@ -68,10 +75,42 @@ export class UserQComponent implements OnInit {
     );
   }
 
+  addSubquestion(question, pos) {
+    console.log(question, pos);
+    pos = pos + 1;
+
+    const dialogRef = this.dialog.open(QuestionDialogComponent, {
+      width: '70%',
+      data: {
+        mode: 'subquestion',
+        parentQuestion: question,
+        tag: question.tag,
+        pos,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.questionnaire.questions.splice(pos, 0, result);
+      }
+    });
+  }
+
+  // Deletes question and all of its subquestions
+  deleteQuestion(question) {
+    this.questionnaire.questions = this.questionnaire.questions.filter(
+      (q) => q._id !== question._id
+    );
+    this.questionnaire.questions = this.questionnaire.questions.filter(
+      (q) => q.options.subquestionOf !== question._id
+    );
+  }
+
+  // Opens the dialog to create a new question for this colective
   addQuestion(col) {
     let numQuestionsPassed = 0;
     let pos;
-    const allColArray = ['all'];
+    const allColArray = [];
 
     this.colectives.forEach((c) => {
       allColArray.push(c._id);

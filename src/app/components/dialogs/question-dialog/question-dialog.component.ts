@@ -13,6 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { QuestionService } from 'src/app/services/question.service';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-question-dialog',
@@ -21,11 +22,13 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class QuestionDialogComponent implements OnInit {
   qForm: FormGroup;
+  parentPossibleAnswers;
 
   constructor(
     public dialogRef: MatDialogRef<QuestionDialogComponent>,
     private cd: ChangeDetectorRef,
     private questionService: QuestionService,
+    private languageService: LanguageService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data
   ) {}
@@ -33,11 +36,6 @@ export class QuestionDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     this.initializeFormGroup();
-  }
-
-  logQuestion() {
-    console.log('full question', this.qForm.value);
-    console.log('possibleAnswers', this.qForm.controls.possibleAnswers.value);
   }
 
   initializeFormGroup() {
@@ -61,6 +59,11 @@ export class QuestionDialogComponent implements OnInit {
         disabled: this.data.mode === 'subquestion',
       }),
     };
+
+    if (this.data.mode === 'subquestion') {
+      options = this.subquestionOptions(options);
+    }
+
     switch (type) {
       case 'textbox':
         options['size'] = 'small';
@@ -74,6 +77,32 @@ export class QuestionDialogComponent implements OnInit {
     }
     this.qForm.setControl('options', this.formBuilder.group(options));
     this.setTypePossibleAnswers(type);
+  }
+
+  // Options to add to FormGroup if its a subquestion
+  subquestionOptions(options) {
+    options['subquestionOf'] = this.data.parentQuestion._id;
+    let parentType = this.data.parentQuestion.type;
+
+    if (
+      parentType === 'likert' ||
+      parentType === 'yesno' ||
+      parentType === 'multiselect' ||
+      parentType === 'radio'
+    ) {
+      options['requiredAnswerIndex'] = '';
+    }
+
+    this.parentPossibleAnswers = this.data.parentQuestion[
+      'possibleAnswers_' + this.languageService.selected
+    ];
+
+    return options;
+  }
+
+  logQuestion() {
+    console.log('full question', this.qForm.getRawValue());
+    console.log('possibleAnswers', this.qForm.controls.possibleAnswers.value);
   }
 
   // A bit messy... Sets the default possibleAnswers for certain types
@@ -131,6 +160,7 @@ export class QuestionDialogComponent implements OnInit {
     } else if (type === 'radio') {
       this.addPossibleAnswers();
     }
+    this.qForm.controls.possibleAnswers.updateValueAndValidity();
     this.cd.detectChanges();
   }
 
@@ -221,8 +251,8 @@ export class QuestionDialogComponent implements OnInit {
   }
 
   createQuestion(): Question {
-    const q: Question = this.qForm.value;
-    console.log('qForm Value: ', this.qForm.value);
+    const q: Question = this.qForm.getRawValue();
+    console.log('qForm Value: ', this.qForm.getRawValue());
     q.tag = this.data.tag;
 
     let possibleAnswers_eu = [];
@@ -238,7 +268,7 @@ export class QuestionDialogComponent implements OnInit {
       type === 'multiselect' ||
       type === 'radio'
     ) {
-      this.qForm.value.possibleAnswers.forEach((ansRow) => {
+      this.qForm.getRawValue().possibleAnswers.forEach((ansRow) => {
         possibleAnswers_eu.push(ansRow.possibleAnswers_eu);
         possibleAnswers_en.push(ansRow.possibleAnswers_en);
         possibleAnswers_es.push(ansRow.possibleAnswers_es);

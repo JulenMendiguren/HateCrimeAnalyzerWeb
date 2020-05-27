@@ -1,6 +1,9 @@
 <h1 mat-dialog-title *ngIf="data.mode === 'new'">
   {{ "QUESTION_DIALOG.title.new_question" | translate }}
 </h1>
+<h1 mat-dialog-title *ngIf="data.mode === 'subquestion'">
+  {{ "QUESTION_DIALOG.title.new_subquestion" | translate }}
+</h1>
 <form mat-dialog-content [formGroup]="qForm" (ngSubmit)="onSubmit()">
   <div class="question-text">
     <p>Question text:</p>
@@ -26,6 +29,7 @@
 
       <p><strong>Question type:</strong></p>
 
+
       <mat-form-field>
         <mat-label>Type</mat-label>
         <mat-select formControlName="type" (selectionChange)="initializeOptionsGroup()">
@@ -40,8 +44,20 @@
         </mat-select>
       </mat-form-field>
       <br>
+
       <p>Options:</p>
       <div [formGroup]="qForm.get('options')">
+
+        <mat-form-field *ngIf="qForm.get('options').get('requiredAnswerIndex')">
+          <mat-label>Required answer of parent question</mat-label>
+          <mat-select formControlName="requiredAnswerIndex">
+            <mat-option value="">Ninguna</mat-option>
+            <ng-container *ngFor="let ans of parentPossibleAnswers; let i = index">
+              <mat-option value="{{i}}">{{ans}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
         <mat-slide-toggle color="primary" formControlName="required">
           Required</mat-slide-toggle>
 

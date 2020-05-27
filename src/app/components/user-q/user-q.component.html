@@ -3,101 +3,7 @@
     <mat-card-title>{{ "USERQ.title" | translate }}</mat-card-title>
     <mat-card-content *ngIf="questionnaire && colectives">
       <mat-accordion multi="true">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title style="font-weight: bolder;">All</mat-panel-title>
-          </mat-expansion-panel-header>
 
-          <ng-container *ngFor="let question of questionnaire.questions">
-            <ng-container *ngIf="question.tag === 'all'">
-              <div [ngClass]="{
-                  subquestion: question.options.subquestionOf,
-                  question: !question.options.subquestionOf
-                }">
-                <h4 *ngIf="question.options.subquestionOf">
-                  <strong>{{ "USERQ.subquestion" | translate }}</strong>
-                </h4>
-                <p>
-                  <strong>{{ "USERQ.question_text" | translate }}:</strong>
-                  <br />{{ question["text_" + getLang()] }}
-                </p>
-
-                <div class="question-extras">
-                  <div class="question-options">
-                    <p>
-                      <strong>{{ "USERQ.question_type" | translate }}: </strong>
-                      {{ question.type }}
-                    </p>
-                    <p>
-                      <strong>{{ "USERQ.question_options" | translate }}:</strong>
-                    </p>
-                    <!-- Required -->
-                    <ng-container *ngIf="question.options.required == true">{{ "USERQ.options.required" | translate }}
-                      <br /></ng-container>
-                    <!-- required answer -->
-                    <ng-container *ngIf="question.options.requiredAnswerIndex">
-                      {{ "USERQ.options.required_answer" | translate }}:
-                      {{
-                        getRequiredAnswerString(
-                          question.options.subquestionOf,
-                          question.options.requiredAnswerIndex
-                        )
-                      }}
-                      <br /></ng-container>
-                    <!-- size -->
-                    <ng-container *ngIf="question.options.size">{{ "USERQ.options.size" | translate }}:
-                      {{ getSizeString(question.options.size) }} <br /></ng-container>
-
-                    <!-- min value -->
-                    <ng-container *ngIf="question.options.minValue">{{ "USERQ.options.min_value" | translate }}:
-                      {{ question.options.minValue }} <br /></ng-container>
-
-                    <!-- max value -->
-                    <ng-container *ngIf="question.options.maxValue">{{ "USERQ.options.max_value" | translate }}:
-                      {{ question.options.maxValue }} <br /></ng-container>
-
-                    <!-- min length -->
-                    <ng-container *ngIf="question.options.minLength">{{ "USERQ.options.min_length" | translate }}:
-                      {{ question.options.minLength }} <br /></ng-container>
-
-                    <!-- max length -->
-                    <ng-container *ngIf="question.options.maxLength">{{ "USERQ.options.max_length" | translate }}:
-                      {{ question.options.maxLength }} <br /></ng-container>
-
-                    <!-- Slider -->
-                    <ng-container *ngIf="question.options.slider">
-                      {{ question.options.slider }} <br /></ng-container>
-                  </div>
-                  <div class="question-answers" *ngIf="question.possibleAnswers_eu.length > 0">
-                    <p>
-                      <strong>{{ "USERQ.possible_answers" | translate }}:</strong>
-                    </p>
-                    <ng-container *ngFor="
-                        let ans of question['possibleAnswers_' + getLang()]
-                      ">
-                      - {{ ans }} <br />
-                    </ng-container>
-                  </div>
-                </div>
-                <div class="question-buttons">
-                  <button mat-raised-button color="primary" *ngIf="!question.options.subquestionOf">
-                    {{ "USERQ.button.add_subquestion" | translate }}
-                  </button>
-                  <button mat-raised-button color="primary">
-                    {{ "USERQ.button.edit_question" | translate }}
-                  </button>
-                  <button mat-raised-button color="warn">
-                    {{ "USERQ.button.delete" | translate }}
-                  </button>
-                </div>
-              </div>
-            </ng-container>
-          </ng-container>
-          <mat-action-row style="text-align: center;"><button (click)="addQuestion('all')" mat-raised-button
-              color="accent">
-              Add
-            </button></mat-action-row>
-        </mat-expansion-panel>
         <div class="expansion-panel" *ngFor="let colective of colectives">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -106,7 +12,7 @@
               }}</mat-panel-title>
             </mat-expansion-panel-header>
 
-            <ng-container *ngFor="let question of questionnaire.questions">
+            <ng-container *ngFor="let question of questionnaire.questions; let i = index">
               <ng-container *ngIf="question.tag === colective._id">
                 <div [ngClass]="{
                     subquestion: question.options.subquestionOf,
@@ -174,6 +80,18 @@
                         - {{ ans }} <br />
                       </ng-container>
                     </div>
+                  </div>
+                  <div class="question-buttons">
+                    <button mat-raised-button color="primary" (click)="addSubquestion(question, i)"
+                      *ngIf="!question.options.subquestionOf">
+                      {{ "USERQ.button.add_subquestion" | translate }}
+                    </button>
+                    <button mat-raised-button color="primary">
+                      {{ "USERQ.button.edit_question" | translate }}
+                    </button>
+                    <button mat-raised-button color="warn" (click)="deleteQuestion(question)">
+                      {{ "USERQ.button.delete" | translate }}
+                    </button>
                   </div>
                 </div>
                 <mat-divider></mat-divider>
