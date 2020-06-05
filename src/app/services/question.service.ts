@@ -12,4 +12,8 @@ export class QuestionService {
   createQuestion(question: Question) {
     return this.http.post<any>('http://' + ip + '/api/question/one/', question);
   }
+  editQuestion(question: Question, id: String) {
+    const payload = { _id: id, question };
+    return this.http.post<any>('http://' + ip + '/api/question/edit/', payload);
+  }
 }

@@ -102,7 +102,12 @@
       "add_subquestion": "Añadir Subpregunta",
       "edit_question": "Editar Pregunta",
       "delete": "Borrar",
-      "add": "Añadir Nueva Pregunta"
+      "add": "Añadir Nueva Pregunta",
+      "save": "Guardar Cuestionario"
+    },
+    "snackbar": {
+      "error": "ERROR: Ha ocurrido un error inesperado.",
+      "saved": "El cuestionario se ha guardado en la base de datos."
     }
   },
   "QUESTION_DIALOG": {

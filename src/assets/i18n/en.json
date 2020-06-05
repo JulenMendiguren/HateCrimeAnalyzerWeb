@@ -101,7 +101,12 @@
       "add_subquestion": "Add Subquestion",
       "edit_question": "Edit Question",
       "delete": "Delete",
-      "add": "Add New Question"
+      "add": "Add New Question",
+      "save": "Save Questionnaire"
+    },
+    "snackbar": {
+      "error": "ERROR: An unexpected error has occurred.",
+      "saved": "The questionnaire has been saved in the database."
     }
   },
   "QUESTION_DIALOG": {

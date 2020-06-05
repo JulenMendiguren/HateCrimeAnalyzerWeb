@@ -8,6 +8,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../dialogs/question-dialog/question-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-q',
@@ -20,7 +21,8 @@ export class UserQComponent implements OnInit {
     private colectivesService: ColectivesService,
     private languageService: LanguageService,
     private translateService: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   questionnaire: Questionnaire;
@@ -106,6 +108,33 @@ export class UserQComponent implements OnInit {
     );
   }
 
+  editQuestion(question) {
+    const data = {
+      editingQuestion: question,
+      tag: question.tag,
+    };
+    if (question.options.subquestionOf) {
+      data['mode'] = 'edit_subquestion';
+      const parentQuestion = this.questionnaire.questions.find(
+        (q) => q._id === question.options.subquestionOf
+      );
+      data['parentQuestion'] = parentQuestion;
+    } else {
+      data['mode'] = 'edit_question';
+    }
+    const dialogRef = this.dialog.open(QuestionDialogComponent, {
+      width: '70%',
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const index = this.questionnaire.questions.indexOf(question);
+        this.questionnaire.questions[index] = result;
+      }
+    });
+  }
+
   // Opens the dialog to create a new question for this colective
   addQuestion(col) {
     let numQuestionsPassed = 0;
@@ -128,10 +157,9 @@ export class UserQComponent implements OnInit {
       });
     });
 
-    console.log('pos: ', pos);
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
       width: '70%',
-      data: { mode: 'new', tag: col, pos },
+      data: { mode: 'new', tag: col },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -139,5 +167,27 @@ export class UserQComponent implements OnInit {
         this.questionnaire.questions.splice(pos, 0, result);
       }
     });
+  }
+
+  createQuestionnaire() {
+    const newQ: Questionnaire = {
+      category: 'user',
+      questions: this.questionnaire.questions,
+    };
+    console.log('Save questionnaire clicked');
+    this.questionnaireService.createNewUserQ(newQ).subscribe(
+      (res) => {
+        console.log('Correcto!', res);
+        this.snackBar.open(
+          this.translateService.instant('USERQ.snackbar.saved')
+        );
+      },
+      (err) => {
+        this.snackBar.open(
+          this.translateService.instant('USERQ.snackbar.error')
+        );
+        console.log(err);
+      }
+    );
   }
 }

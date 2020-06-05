@@ -14,6 +14,7 @@ import {
 } from '@angular/forms';
 import { QuestionService } from 'src/app/services/question.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-question-dialog',
@@ -22,7 +23,8 @@ import { LanguageService } from 'src/app/services/language.service';
 })
 export class QuestionDialogComponent implements OnInit {
   qForm: FormGroup;
-  parentPossibleAnswers;
+  parentPossibleAnswers = [];
+  editingQLoaded = false;
 
   constructor(
     public dialogRef: MatDialogRef<QuestionDialogComponent>,
@@ -46,21 +48,36 @@ export class QuestionDialogComponent implements OnInit {
       text_fr: new FormControl('', Validators.required),
       type: new FormControl('textbox', Validators.required),
     });
+
     this.initializeOptionsGroup();
   }
 
   // Clears and sets options and possible answers
   initializeOptionsGroup() {
+    if (
+      this.data.mode === 'edit_question' ||
+      this.data.mode === 'edit_subquestion'
+    ) {
+      if (!this.editingQLoaded) {
+        this.qForm.get('type').setValue(this.data.editingQuestion.type);
+      }
+    }
+
     const type = this.qForm.get('type').value;
 
     let options = {
       required: new FormControl({
         value: false,
-        disabled: this.data.mode === 'subquestion',
+        disabled:
+          this.data.mode === 'subquestion' ||
+          this.data.mode === 'edit_subquestion',
       }),
     };
 
-    if (this.data.mode === 'subquestion') {
+    if (
+      this.data.mode === 'subquestion' ||
+      this.data.mode === 'edit_subquestion'
+    ) {
       options = this.subquestionOptions(options);
     }
 
@@ -77,6 +94,52 @@ export class QuestionDialogComponent implements OnInit {
     }
     this.qForm.setControl('options', this.formBuilder.group(options));
     this.setTypePossibleAnswers(type);
+
+    if (
+      this.data.mode === 'edit_question' ||
+      this.data.mode === 'edit_subquestion'
+    ) {
+      if (!this.editingQLoaded) {
+        this.fillFormGroupToEdit();
+        this.editingQLoaded = true;
+      }
+    }
+  }
+
+  // Fills the form group with the question data so it can be edited
+  fillFormGroupToEdit() {
+    this.qForm.patchValue(this.data.editingQuestion);
+
+    // parentPossibleAnswers not working porperly
+    if (this.data.editingQuestion.options.requiredAnswerIndex) {
+      this.qForm.get('options').get('requiredAnswerIndex').setValue('');
+    }
+
+    const pa = this.qForm.controls.possibleAnswers['controls'];
+
+    for (
+      let i = 0;
+      i < this.data.editingQuestion.possibleAnswers_eu.length;
+      i++
+    ) {
+      if (i >= pa.length) {
+        this.addPossibleAnswers();
+      }
+
+      pa[i]['controls']['possibleAnswers_eu'].setValue(
+        this.data.editingQuestion.possibleAnswers_eu[i]
+      );
+      pa[i]['controls']['possibleAnswers_es'].setValue(
+        this.data.editingQuestion.possibleAnswers_es[i]
+      );
+      pa[i]['controls']['possibleAnswers_en'].setValue(
+        this.data.editingQuestion.possibleAnswers_en[i]
+      );
+      pa[i]['controls']['possibleAnswers_fr'].setValue(
+        this.data.editingQuestion.possibleAnswers_fr[i]
+      );
+      this.qForm.controls.possibleAnswers.updateValueAndValidity();
+    }
   }
 
   // Options to add to FormGroup if its a subquestion
@@ -92,6 +155,8 @@ export class QuestionDialogComponent implements OnInit {
     ) {
       options['requiredAnswerIndex'] = '';
     }
+
+    this.parentPossibleAnswers = [];
 
     this.parentPossibleAnswers = this.data.parentQuestion[
       'possibleAnswers_' + this.languageService.selected
@@ -239,15 +304,33 @@ export class QuestionDialogComponent implements OnInit {
     this.qForm.controls.possibleAnswers.updateValueAndValidity();
     const q: Question = this.createQuestion();
     console.log('Sending question... ', q);
-    this.questionService.createQuestion(q).subscribe(
-      (res) => {
-        console.log('Created question ', res);
-        this.dialogRef.close(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+
+    if (
+      this.data.mode === 'edit_question' ||
+      this.data.mode === 'edit_subquestion'
+    ) {
+      this.questionService
+        .editQuestion(q, this.data.editingQuestion._id)
+        .subscribe(
+          (res) => {
+            console.log('Edited question ', res);
+            this.dialogRef.close(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } else {
+      this.questionService.createQuestion(q).subscribe(
+        (res) => {
+          console.log('Created question ', res);
+          this.dialogRef.close(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   createQuestion(): Question {

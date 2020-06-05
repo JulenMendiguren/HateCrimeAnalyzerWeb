@@ -86,9 +86,10 @@
                       *ngIf="!question.options.subquestionOf">
                       {{ "USERQ.button.add_subquestion" | translate }}
                     </button>
-                    <button mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" (click)="editQuestion(question)">
                       {{ "USERQ.button.edit_question" | translate }}
                     </button>
+
                     <button mat-raised-button color="warn" (click)="deleteQuestion(question)">
                       {{ "USERQ.button.delete" | translate }}
                     </button>
@@ -105,5 +106,9 @@
         </div>
       </mat-accordion>
     </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary"
+        (click)="createQuestionnaire()">{{ "USERQ.button.save" | translate }}</button>
+    </mat-card-actions>
   </mat-card>
 </div>
