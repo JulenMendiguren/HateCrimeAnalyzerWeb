@@ -190,4 +190,16 @@ export class UserQComponent implements OnInit {
       }
     );
   }
+
+  // Hardcoded, better solution?
+  showQuestionButtons(question) {
+    if (
+      question._id === '5e9f0b944f646009fdb1734c' ||
+      question._id === '5e9f0b944f646009fdb1734b'
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

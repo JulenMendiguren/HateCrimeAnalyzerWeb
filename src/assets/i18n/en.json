@@ -113,7 +113,27 @@
     "title": {
       "new_question": "Create New Question",
       "new_subquestion": "Create New Subquestion",
-      "edit_question": "Edit Question"
+      "edit_question": "Edit Question",
+      "edit_subquestion": "Edit Subquestion"
+    },
+    "question_text": "Question text",
+    "question_type": "Question type",
+    "type": "Type",
+    "options": "Options",
+    "required_answer": "Required answer of parent question",
+    "none": "None",
+    "required": "Required",
+    "size": "Text size",
+    "size_small": "Small",
+    "size_big": "Big",
+    "min_value": "Minimum allowed value",
+    "max_value": "Maximum allowed value",
+    "min_length": "Minimum allowed length",
+    "max_length": "Maximum allowed length",
+    "slider": "Slider",
+    "possible_answers": "Possible answers",
+    "button": {
+      "add": "add"
     }
   }
 }

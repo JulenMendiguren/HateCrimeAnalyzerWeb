@@ -90,7 +90,7 @@
       "required_answer": "Respuesta requerida",
       "size": "Tamaño del texto",
       "size_small": "Pequeño",
-      "size_big": "Big",
+      "size_big": "Grande",
       "min_value": "Valor mínimo permitido",
       "max_value": "Valor máximo permitido",
       "min_length": "Longitud mínimo permitida",
@@ -114,7 +114,27 @@
     "title": {
       "new_question": "Crear Nueva Pregunta",
       "new_subquestion": "Crear Nueva Subpregunta",
-      "edit_question": "Editar Pregunta"
+      "edit_question": "Editar Pregunta",
+      "edit_subquestion": "Editar Subpregunta"
+    },
+    "question_text": "Texto de la pregunta",
+    "question_type": "Tipo de la pregunta",
+    "type": "Tipo",
+    "options": "Opciones",
+    "required_answer": "Respuesta requerida de la pregunta padre",
+    "none": "Ninguna",
+    "required": "Pregunta requerida",
+    "size": "Tamaño del texto",
+    "size_small": "Pequeño",
+    "size_big": "Grande",
+    "min_value": "Valor mínimo permitido",
+    "max_value": "Valor máximo permitido",
+    "min_length": "Longitud mínima permitida",
+    "max_length": "Longitud máxima permitida",
+    "slider": "Slider",
+    "possible_answers": "Posibles respuestas",
+    "button": {
+      "add": "add"
     }
   }
 }

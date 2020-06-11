@@ -4,9 +4,16 @@
 <h1 mat-dialog-title *ngIf="data.mode === 'subquestion'">
   {{ "QUESTION_DIALOG.title.new_subquestion" | translate }}
 </h1>
+<h1 mat-dialog-title *ngIf="data.mode === 'edit_subquestion'">
+  {{ "QUESTION_DIALOG.title.edit_subquestion" | translate }}
+</h1>
+<h1 mat-dialog-title *ngIf="data.mode === 'edit_question'">
+  {{ "QUESTION_DIALOG.title.edit_question" | translate }}
+</h1>
+
 <form mat-dialog-content [formGroup]="qForm" (ngSubmit)="onSubmit()">
   <div class="question-text">
-    <p>Question text:</p>
+    <p> {{ "QUESTION_DIALOG.question_text" | translate }}:</p>
     <mat-form-field>
       <mat-label>Euskara</mat-label>
       <input matInput formControlName="text_eu" />
@@ -27,17 +34,17 @@
   <div class="question-extras">
     <div class="question-options">
 
-      <p><strong>Question type:</strong></p>
+      <p><strong>{{ "QUESTION_DIALOG.question_type" | translate }}:</strong></p>
 
 
       <mat-form-field>
-        <mat-label>Type</mat-label>
+        <mat-label>{{ "QUESTION_DIALOG.type" | translate }}</mat-label>
         <mat-select formControlName="type" (selectionChange)="initializeOptionsGroup()">
           <mat-option value="textbox" matTooltip="asdasd">Textbox</mat-option>
           <mat-option value="number" matTooltip="asdasd">Number</mat-option>
           <mat-option value="likert" matTooltip="asdasd">Likert</mat-option>
           <mat-option value="datetime" matTooltip="asdasd">DateTime</mat-option>
-          <mat-option value="yesno" matTooltip="asdasd">Yes no</mat-option>
+          <mat-option value="yesno" matTooltip="asdasd">Yes/no</mat-option>
           <mat-option value="radio" matTooltip="asdasd">Radio</mat-option>
           <mat-option value="multiselect" matTooltip="asdasd">Multiselect</mat-option>
           <mat-option value="geolocation" matTooltip="asdasd">Geolocation</mat-option>
@@ -45,13 +52,13 @@
       </mat-form-field>
       <br>
 
-      <p>Options:</p>
+      <p>{{ "QUESTION_DIALOG.options" | translate }}:</p>
       <div [formGroup]="qForm.get('options')">
 
         <mat-form-field *ngIf="qForm.get('options').get('requiredAnswerIndex')">
-          <mat-label>Required answer of parent question</mat-label>
+          <mat-label>{{ "QUESTION_DIALOG.required_answer" | translate }}</mat-label>
           <mat-select formControlName="requiredAnswerIndex">
-            <mat-option value="">Ninguna</mat-option>
+            <mat-option value="">{{ "QUESTION_DIALOG.none" | translate }}</mat-option>
             <ng-container *ngFor="let ans of parentPossibleAnswers; let i = index">
               <mat-option value="{{i}}">{{ans}}</mat-option>
             </ng-container>
@@ -59,36 +66,37 @@
         </mat-form-field>
 
         <mat-slide-toggle color="primary" formControlName="required">
-          Required</mat-slide-toggle>
+          {{ "QUESTION_DIALOG.required" | translate }}</mat-slide-toggle>
 
         <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
-          <mat-label>Size</mat-label>
+          <mat-label>{{ "QUESTION_DIALOG.size" | translate }}</mat-label>
           <mat-select formControlName="size">
-            <mat-option value="small">Small</mat-option>
-            <mat-option value="big">Big</mat-option>
+            <mat-option value="small">{{ "QUESTION_DIALOG.size_small" | translate }}</mat-option>
+            <mat-option value="big">{{ "QUESTION_DIALOG.size_big" | translate }}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field *ngIf="qForm.get('type').value==='number'">
-          <mat-label>Minimum allowed value</mat-label>
+          <mat-label>{{ "QUESTION_DIALOG.min_value" | translate }}</mat-label>
           <input matInput formControlName="minValue" type="number">
         </mat-form-field>
 
         <mat-form-field *ngIf="qForm.get('type').value==='number'">
-          <mat-label>Maximum allowed value</mat-label>
+          <mat-label>{{ "QUESTION_DIALOG.max_value" | translate }}</mat-label>
           <input matInput formControlName="maxValue" type="number">
         </mat-form-field>
 
-        <mat-slide-toggle *ngIf="qForm.get('type').value==='number'" color="primary" formControlName="slider">Slider
+        <mat-slide-toggle *ngIf="qForm.get('type').value==='number'" color="primary" formControlName="slider">
+          {{ "QUESTION_DIALOG.slider" | translate }}
         </mat-slide-toggle>
 
         <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
-          <mat-label>Minimum allowed Length</mat-label>
+          <mat-label>{{ "QUESTION_DIALOG.min_length" | translate }}</mat-label>
           <input matInput formControlName="minLength" type="number">
         </mat-form-field>
 
         <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
-          <mat-label>Maximum allowed Length</mat-label>
+          <mat-label>{{ "QUESTION_DIALOG.max_length" | translate }}</mat-label>
           <input matInput formControlName="maxLength" type="number">
         </mat-form-field>
       </div>
@@ -96,7 +104,7 @@
 
     </div>
     <div class="question-answers" *ngIf="showPossibleAnswers()">
-      <p><strong>Possible answers:</strong></p>
+      <p><strong>{{ "QUESTION_DIALOG.possible_answers" | translate }}:</strong></p>
       <div formArrayName="possibleAnswers" *ngFor="let ans of getPossibleAnswersControls(); let i = index;">
         <div class="answer-container" [formGroupName]="i">
           <mat-form-field>
@@ -127,7 +135,7 @@
 
       </div>
       <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" type="button" color="primary"
-        mat-raised-button (click)="addPossibleAnswers()">add</button>
+        mat-raised-button (click)="addPossibleAnswers()">{{ "QUESTION_DIALOG.button.add" | translate }}</button>
     </div>
   </div>
   <div mat-dialog-actions>

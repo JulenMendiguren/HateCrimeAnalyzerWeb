@@ -81,7 +81,7 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="question-buttons">
+                  <div class="question-buttons" *ngIf="showQuestionButtons(question)">
                     <button mat-raised-button color="primary" (click)="addSubquestion(question, i)"
                       *ngIf="!question.options.subquestionOf">
                       {{ "USERQ.button.add_subquestion" | translate }}
