@@ -24,7 +24,6 @@
       "manage": "Gestionar Usuarios",
       "create": "Crear un nuevo usuario"
     },
-
     "roles": {
       "colaborator": "Colaborador",
       "researcher": "Investigador",
@@ -110,6 +109,38 @@
       "saved": "El cuestionario se ha guardado en la base de datos."
     }
   },
+  "REPORTQ": {
+    "title": "Cuestionario de reporte de incidente",
+    "subquestion": "Subpregunta",
+    "question_text": "Texto de la pregunta",
+    "question_type": "Tipo de pregunta",
+    "question_options": "Opciones",
+    "possible_answers": "Possible answers",
+    "options": {
+      "required": "Pregunta requerida",
+      "required_answer": "Respuesta requerida",
+      "size": "Tamaño del texto",
+      "size_small": "Pequeño",
+      "size_big": "Grande",
+      "min_value": "Valor mínimo permitido",
+      "max_value": "Valor máximo permitido",
+      "min_length": "Longitud mínimo permitida",
+      "max_length": "Longitud máxima permitida",
+      "slider": "Slider",
+      "date_time_format": "Formato de fecha y hora"
+    },
+    "button": {
+      "add_subquestion": "Añadir Subpregunta",
+      "edit_question": "Editar Pregunta",
+      "delete": "Borrar",
+      "add": "Añadir Nueva Pregunta",
+      "save": "Guardar Cuestionario"
+    },
+    "snackbar": {
+      "error": "ERROR: Ha ocurrido un error inesperado.",
+      "saved": "El cuestionario se ha guardado en la base de datos."
+    }
+  },
   "QUESTION_DIALOG": {
     "title": {
       "new_question": "Crear Nueva Pregunta",
@@ -134,7 +165,13 @@
     "slider": "Slider",
     "possible_answers": "Posibles respuestas",
     "button": {
-      "add": "add"
+      "add": "add",
+      "cancel": "Cancelar"
+    },
+    "snackbar": {
+      "edited": "La pregunta ha sido editada.",
+      "created": "Se ha creado una nueva pregunta.",
+      "error": "ERROR: Ha ocurrido un error inesperado."
     }
   }
 }

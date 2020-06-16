@@ -139,8 +139,9 @@
     </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button type="button" (click)="logQuestion()">Log Question</button>
-    <button [disabled]="checkIfInvalid()" mat-button type="submit">Save Question</button>
+    <button mat-button type="button" (click)="cancelDialog()">{{ "QUESTION_DIALOG.button.cancel" | translate }}</button>
+    <button mat-button type="button" color="primary" (click)="logQuestion()">Log Question</button>
+    <button [disabled]="checkIfInvalid()" color="primary" mat-button type="submit">Save Question</button>
   </div>
 
 </form>

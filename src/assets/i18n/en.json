@@ -78,7 +78,39 @@
     }
   },
   "USERQ": {
-    "title": "User Questionnaire",
+    "title": "User questionnaire",
+    "subquestion": "Subquestion",
+    "question_text": "Question text",
+    "question_type": "Question type",
+    "question_options": "Options",
+    "possible_answers": "Possible answers",
+    "options": {
+      "required": "Required question",
+      "required_answer": "Required answer",
+      "size": "Text size",
+      "size_small": "Small",
+      "size_big": "Big",
+      "min_value": "Minimum allowed value",
+      "max_value": "Maximum allowed value",
+      "min_length": "Minimum allowed length",
+      "max_length": "Maximum allowed length",
+      "slider": "Slider",
+      "date_time_format": "Date and time format"
+    },
+    "button": {
+      "add_subquestion": "Add Subquestion",
+      "edit_question": "Edit Question",
+      "delete": "Delete",
+      "add": "Add New Question",
+      "save": "Save Questionnaire"
+    },
+    "snackbar": {
+      "error": "ERROR: An unexpected error has occurred.",
+      "saved": "The questionnaire has been saved in the database."
+    }
+  },
+  "REPORTQ": {
+    "title": "Incident report questionnaire",
     "subquestion": "Subquestion",
     "question_text": "Question text",
     "question_type": "Question type",
@@ -133,7 +165,13 @@
     "slider": "Slider",
     "possible_answers": "Possible answers",
     "button": {
-      "add": "add"
+      "add": "add",
+      "cancel": "Cancel"
+    },
+    "snackbar": {
+      "edited": "The question has been edited.",
+      "created": "A new question has been created.",
+      "error": "ERROR: An unexpected error has occurred."
     }
   }
 }

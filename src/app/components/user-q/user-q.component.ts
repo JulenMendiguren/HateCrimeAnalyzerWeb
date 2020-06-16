@@ -175,7 +175,7 @@ export class UserQComponent implements OnInit {
       questions: this.questionnaire.questions,
     };
     console.log('Save questionnaire clicked');
-    this.questionnaireService.createNewUserQ(newQ).subscribe(
+    this.questionnaireService.createNewQ(newQ).subscribe(
       (res) => {
         console.log('Correcto!', res);
         this.snackBar.open(

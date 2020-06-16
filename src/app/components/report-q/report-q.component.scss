@@ -1,0 +1,68 @@
+@import "~@angular/material/theming";
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  width: 100%;
+}
+
+.card {
+  min-width: 50%;
+  max-width: 75%;
+  @include mat-elevation(10);
+}
+
+mat-card-title {
+  text-align: center;
+}
+mat-card-actions {
+  text-align: center;
+}
+
+.question-extras {
+  display: flex;
+}
+
+.question-options {
+  // background-color: #4f628e;
+  width: 50%;
+}
+.question-answers {
+  // background-color: #ab8878;
+  flex-grow: 1;
+}
+.question {
+  margin-top: 10px;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: lightgray;
+  border: lightgreen;
+  border-width: medium;
+  border-style: solid;
+}
+
+.subquestion {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 40px;
+  margin-top: 10px;
+  background-color: lightgray;
+  border: lightgreen;
+  border-width: medium;
+  border-style: solid;
+}
+.question-buttons {
+  text-align: center;
+}
+button {
+  margin: 5px;
+}

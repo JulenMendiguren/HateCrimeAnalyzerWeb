@@ -14,7 +14,8 @@ import {
 } from '@angular/forms';
 import { QuestionService } from 'src/app/services/question.service';
 import { LanguageService } from 'src/app/services/language.service';
-import { ThrowStmt } from '@angular/compiler';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-question-dialog',
@@ -31,9 +32,13 @@ export class QuestionDialogComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private questionService: QuestionService,
     private languageService: LanguageService,
+    private translateService: TranslateService,
     private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data
-  ) {}
+  ) {
+    dialogRef.disableClose = true;
+  }
 
   ngOnInit(): void {
     console.log(this.data);
@@ -314,9 +319,15 @@ export class QuestionDialogComponent implements OnInit {
         .subscribe(
           (res) => {
             console.log('Edited question ', res);
+            this.snackBar.open(
+              this.translateService.instant('QUESTION_DIALOG.snackbar.edited')
+            );
             this.dialogRef.close(res);
           },
           (err) => {
+            this.snackBar.open(
+              this.translateService.instant('QUESTION_DIALOG.snackbar.error')
+            );
             console.log(err);
           }
         );
@@ -324,9 +335,15 @@ export class QuestionDialogComponent implements OnInit {
       this.questionService.createQuestion(q).subscribe(
         (res) => {
           console.log('Created question ', res);
+          this.snackBar.open(
+            this.translateService.instant('QUESTION_DIALOG.snackbar.created')
+          );
           this.dialogRef.close(res);
         },
         (err) => {
+          this.snackBar.open(
+            this.translateService.instant('QUESTION_DIALOG.snackbar.error')
+          );
           console.log(err);
         }
       );
@@ -370,5 +387,9 @@ export class QuestionDialogComponent implements OnInit {
     this.qForm.controls.possibleAnswers.updateValueAndValidity();
 
     return this.qForm.invalid;
+  }
+
+  cancelDialog() {
+    this.dialogRef.close();
   }
 }

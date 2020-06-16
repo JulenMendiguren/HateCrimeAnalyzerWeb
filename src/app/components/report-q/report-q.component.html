@@ -1,16 +1,115 @@
-<mat-form-field>
-  <mat-label>TEst</mat-label>
-  <input matInput>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>TEst</mat-label>
-  <input matInput>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>TEst</mat-label>
-  <input matInput>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>TEst</mat-label>
-  <input matInput>
-</mat-form-field>
+<div class="wrap">
+  <mat-card class="card">
+    <mat-card-title>{{ "REPORTQ.title" | translate }}</mat-card-title>
+    <mat-card-content *ngIf="questionnaire && colectives">
+      <mat-accordion multi="true">
+
+        <div class="expansion-panel" *ngFor="let colective of colectives">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: bolder;">{{
+                colective["text_" + getLang()]
+              }}</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngFor="let question of questionnaire.questions; let i = index">
+              <ng-container *ngIf="question.tag === colective._id">
+                <div [ngClass]="{
+                    subquestion: question.options.subquestionOf,
+                    question: !question.options.subquestionOf
+                  }">
+                  <p>
+                    <strong>{{ "REPORTQ.question_text" | translate }}:</strong>
+                    <br />{{ question["text_" + getLang()] }}
+                  </p>
+
+                  <div class="question-extras">
+                    <div class="question-options">
+                      <p>
+                        <strong>{{ "REPORTQ.question_type" | translate }}:
+                        </strong>
+                        {{ question.type }}
+                      </p>
+                      <p>
+                        <strong>{{ "REPORTQ.question_options" | translate }}:</strong>
+                      </p>
+                      <!-- Required -->
+                      <ng-container *ngIf="question.options.required == true">
+                        {{ "REPORTQ.options.required" | translate }}
+                        <br /></ng-container>
+                      <!-- required answer -->
+                      <ng-container *ngIf="question.options.requiredAnswerIndex">
+                        {{ "REPORTQ.options.required_answer" | translate }}:
+                        {{
+                          getRequiredAnswerString(
+                            question.options.subquestionOf,
+                            question.options.requiredAnswerIndex
+                          )
+                        }}
+                        <br /></ng-container>
+                      <!-- size -->
+                      <ng-container *ngIf="question.options.size">{{ "REPORTQ.options.size" | translate }}:
+                        {{ getSizeString(question.options.size) }} <br /></ng-container>
+
+                      <!-- min value -->
+                      <ng-container *ngIf="question.options.minValue">{{ "REPORTQ.options.min_value" | translate }}:
+                        {{ question.options.minValue }} <br /></ng-container>
+
+                      <!-- max value -->
+                      <ng-container *ngIf="question.options.maxValue">{{ "REPORTQ.options.max_value" | translate }}:
+                        {{ question.options.maxValue }} <br /></ng-container>
+
+                      <!-- min length -->
+                      <ng-container *ngIf="question.options.minLength">{{ "REPORTQ.options.min_length" | translate }}:
+                        {{ question.options.minLength }} <br /></ng-container>
+
+                      <!-- max length -->
+                      <ng-container *ngIf="question.options.maxLength">{{ "REPORTQ.options.max_length" | translate }}:
+                        {{ question.options.maxLength }} <br /></ng-container>
+
+                      <!-- Slider -->
+                      <ng-container *ngIf="question.options.slider">
+                        {{ question.options.slider }} <br /></ng-container>
+                    </div>
+                    <div class="question-answers" *ngIf="question.possibleAnswers_eu.length > 0">
+                      <p>
+                        <strong>{{ "REPORTQ.possible_answers" | translate }}:</strong>
+                      </p>
+                      <ng-container *ngFor="
+                          let ans of question['possibleAnswers_' + getLang()]
+                        ">
+                        - {{ ans }} <br />
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="question-buttons" *ngIf="showQuestionButtons(question)">
+                    <button mat-raised-button color="primary" (click)="addSubquestion(question, i)"
+                      *ngIf="!question.options.subquestionOf">
+                      {{ "REPORTQ.button.add_subquestion" | translate }}
+                    </button>
+                    <button mat-raised-button color="primary" (click)="editQuestion(question)">
+                      {{ "REPORTQ.button.edit_question" | translate }}
+                    </button>
+
+                    <button mat-raised-button color="warn" (click)="deleteQuestion(question)">
+                      {{ "REPORTQ.button.delete" | translate }}
+                    </button>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+              </ng-container>
+            </ng-container>
+            <mat-action-row style="text-align: center;"><button (click)="addQuestion(colective._id)" mat-raised-button
+                color="accent">
+                Add
+              </button></mat-action-row>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary"
+        (click)="createQuestionnaire()">{{ "REPORTQ.button.save" | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

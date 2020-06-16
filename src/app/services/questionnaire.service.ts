@@ -19,7 +19,7 @@ export class QuestionnaireService {
     );
   }
 
-  createNewUserQ(questionnaire: Questionnaire) {
+  createNewQ(questionnaire: Questionnaire) {
     return this.http.post<any>(
       'http://' + ip + '/api/questionnaire/one',
       questionnaire
