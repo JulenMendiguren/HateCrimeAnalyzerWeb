@@ -54,7 +54,8 @@
       "created": "Se ha creado un nuevo usuario.",
       "updated": "Se ha modificado el usuario satisfactoriamente.",
       "error": "ERROR: Ha ocurrido un error inesperado."
-    }
+    },
+    "confirm_title": "¿Quieres borrar este usuario?"
   },
   "COLECTIVES": {
     "title": {
@@ -75,7 +76,8 @@
       "created": "Se ha creado un nuevo colectivo.",
       "updated": "Se ha modificado el colectivo satisfactoriamente.",
       "error": "ERROR: Ha ocurrido un error inesperado."
-    }
+    },
+    "confirm_title": "¿Quieres borrar este colectivo?"
   },
   "USERQ": {
     "title": "Cuestionario de usuario",
@@ -107,7 +109,8 @@
     "snackbar": {
       "error": "ERROR: Ha ocurrido un error inesperado.",
       "saved": "El cuestionario se ha guardado en la base de datos."
-    }
+    },
+    "confirm_title": "¿Quieres borrar esta pregunta?"
   },
   "REPORTQ": {
     "title": "Cuestionario de reporte de incidente",
@@ -139,7 +142,8 @@
     "snackbar": {
       "error": "ERROR: Ha ocurrido un error inesperado.",
       "saved": "El cuestionario se ha guardado en la base de datos."
-    }
+    },
+    "confirm_title": "¿Quieres borrar esta pregunta?"
   },
   "QUESTION_DIALOG": {
     "title": {

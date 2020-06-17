@@ -46,6 +46,7 @@ import { UserQComponent } from './components/user-q/user-q.component';
 import { ReportQComponent } from './components/report-q/report-q.component';
 import { IncidentsComponent } from './components/incidents/incidents.component';
 import { QuestionDialogComponent } from './components/dialogs/question-dialog/question-dialog.component';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -62,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReportQComponent,
     IncidentsComponent,
     QuestionDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

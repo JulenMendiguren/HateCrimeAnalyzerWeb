@@ -3,6 +3,8 @@ import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -19,6 +21,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private translate: TranslateService
   ) {}
 
@@ -32,19 +35,32 @@ export class UsersComponent implements OnInit {
 
   // Deletes user and reloads the list
   deleteUser(_id) {
-    console.log('Delete user: ' + _id);
-    this.usersService.deteleUserById(_id).subscribe(
-      (res) => {
-        console.log(res);
-        this.snackBar.open(this.translate.instant('USERS.snackbar.deleted'));
-        this.loadUsers();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '30%',
+      data: {
+        title: this.translate.instant('COLECTIVES.confirm_title'),
       },
-      (err) => {
-        console.log(err);
-        this.snackBar.open(this.translate.instant('USERS.snackbar.error'));
-        this.loadUsers();
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Delete user: ' + _id);
+        this.usersService.deteleUserById(_id).subscribe(
+          (res) => {
+            console.log(res);
+            this.snackBar.open(
+              this.translate.instant('USERS.snackbar.deleted')
+            );
+            this.loadUsers();
+          },
+          (err) => {
+            console.log(err);
+            this.snackBar.open(this.translate.instant('USERS.snackbar.error'));
+            this.loadUsers();
+          }
+        );
       }
-    );
+    });
   }
 
   // Stop editing current user

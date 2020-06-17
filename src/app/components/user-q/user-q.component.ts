@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionDialogComponent } from '../dialogs/question-dialog/question-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-user-q',
@@ -100,12 +101,23 @@ export class UserQComponent implements OnInit {
 
   // Deletes question and all of its subquestions
   deleteQuestion(question) {
-    this.questionnaire.questions = this.questionnaire.questions.filter(
-      (q) => q._id !== question._id
-    );
-    this.questionnaire.questions = this.questionnaire.questions.filter(
-      (q) => q.options.subquestionOf !== question._id
-    );
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '30%',
+      data: {
+        title: this.translateService.instant('USERQ.confirm_title'),
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.questionnaire.questions = this.questionnaire.questions.filter(
+          (q) => q._id !== question._id
+        );
+        this.questionnaire.questions = this.questionnaire.questions.filter(
+          (q) => q.options.subquestionOf !== question._id
+        );
+      }
+    });
   }
 
   editQuestion(question) {

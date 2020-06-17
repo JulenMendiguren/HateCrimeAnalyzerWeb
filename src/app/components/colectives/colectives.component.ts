@@ -3,6 +3,8 @@ import { ColectivesService } from 'src/app/services/colectives.service';
 import { Colective } from 'src/app/models/Colective';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-colectives',
@@ -22,6 +24,7 @@ export class ColectivesComponent implements OnInit {
   constructor(
     private colectivesService: ColectivesService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private translate: TranslateService
   ) {}
 
@@ -35,21 +38,34 @@ export class ColectivesComponent implements OnInit {
 
   // Deletes colective and reloads the list
   deleteColective(_id) {
-    console.log('Delete colective: ' + _id);
-    this.colectivesService.deteleColectiveById(_id).subscribe(
-      (res) => {
-        console.log(res);
-        this.snackBar.open(
-          this.translate.instant('COLECTIVES.snackbar.deleted')
-        );
-        this.loadColectives();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '30%',
+      data: {
+        title: this.translate.instant('COLECTIVES.confirm_title'),
       },
-      (err) => {
-        console.log(err);
-        this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
-        this.loadColectives();
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Delete colective: ' + _id);
+        this.colectivesService.deteleColectiveById(_id).subscribe(
+          (res) => {
+            console.log(res);
+            this.snackBar.open(
+              this.translate.instant('COLECTIVES.snackbar.deleted')
+            );
+            this.loadColectives();
+          },
+          (err) => {
+            console.log(err);
+            this.snackBar.open(
+              this.translate.instant('COLECTIVES.snackbar.error')
+            );
+            this.loadColectives();
+          }
+        );
       }
-    );
+    });
   }
 
   // Stop editing current colective
