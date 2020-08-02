@@ -1,0 +1,33 @@
+.wrap {
+  top: 100px;
+  position: relative;
+  background-color: violet;
+}
+.sidebar {
+  left: 15px;
+  width: 30%;
+  position: fixed;
+}
+.map-container {
+  height: 300px;
+  border: lime;
+  border-width: medium;
+  border-style: solid;
+}
+agm-map {
+  height: 300px;
+}
+.filter-container {
+  border: orangered;
+  border-width: medium;
+  border-style: solid;
+}
+.result-container {
+  top: 100px;
+  margin-left: 33%; /* Same as the width of the sidebar */
+  margin-right: 15px;
+  padding: 0px 10px;
+  border: royalblue;
+  border-width: medium;
+  border-style: solid;
+}

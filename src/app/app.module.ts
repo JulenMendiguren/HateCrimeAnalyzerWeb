@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { ColectivesComponent } from './components/colectives/colectives.component';
 import { UsersComponent } from './components/users/users.component';
+import { AgmCoreModule } from '@agm/core';
 import { MatInputModule } from '@angular/material/input';
 import {
   MatSnackBarModule,
@@ -89,6 +90,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDXrqgEtyMJVBaBuxInwZXR4CQDraSK1ZA',
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -39,11 +39,7 @@
   </ng-template>
   <ul>
     <mat-form-field appearance="none">
-      <mat-select
-        class="lang-select"
-        [(value)]="selectedLangValue"
-        (selectionChange)="onLangSelected()"
-      >
+      <mat-select class="lang-select" [(value)]="selectedLangValue" (selectionChange)="onLangSelected()">
         <mat-option *ngFor="let lang of langs" [value]="lang.value">
           {{ lang.text }}
         </mat-option>
