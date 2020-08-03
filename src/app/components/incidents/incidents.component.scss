@@ -1,30 +1,39 @@
+@import "~@angular/material/theming";
 .wrap {
   top: 100px;
+  height: 100%;
   position: relative;
-  background-color: violet;
 }
 .sidebar {
+  height: 85%;
   left: 15px;
-  width: 30%;
+  width: 35%;
   position: fixed;
+  border: royalblue;
+  border-width: medium;
+  border-style: solid;
 }
 .map-container {
-  height: 300px;
+  height: 60%;
   border: lime;
   border-width: medium;
   border-style: solid;
 }
+.card {
+  @include mat-elevation(10);
+}
 agm-map {
-  height: 300px;
+  height: 100%;
 }
 .filter-container {
+  padding: 15px;
   border: orangered;
   border-width: medium;
   border-style: solid;
 }
 .result-container {
   top: 100px;
-  margin-left: 33%; /* Same as the width of the sidebar */
+  margin-left: 37%; /* Same as the width of the sidebar */
   margin-right: 15px;
   padding: 0px 10px;
   border: royalblue;

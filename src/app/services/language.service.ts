@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DateAdapter } from '@angular/material/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LanguageService {
   selected = '';
-  constructor(private translate: TranslateService) {}
+  constructor(
+    private translate: TranslateService,
+    private dateAdapter: DateAdapter<any>
+  ) {}
 
   setInitialLanguage() {
-    let language = this.translate.getBrowserLang();
+    const language = this.translate.getBrowserLang();
     this.translate.setDefaultLang(language);
+    this.dateAdapter.setLocale(language);
     this.selected = language;
   }
 
@@ -18,6 +23,7 @@ export class LanguageService {
   setLanguage(lng) {
     this.translate.use(lng);
     this.selected = lng;
+    this.dateAdapter.setLocale(lng);
   }
 
   // Avaliable languages

@@ -5,7 +5,42 @@
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
       </agm-map>
     </div>
-    <div class="filter-container">vxcv</div>
+
+    <div class="filter-container">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>Filtrar incidentes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Versión del cuestionario</mat-label>
+            <mat-select [(ngModel)]="filterValues.version" value="all">
+              <mat-option value="all">Todas las versiones</mat-option>
+              <mat-option *ngFor="let version of reportVersions" value="{{version._id}}">{{version.createdAt}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha inicio</mat-label>
+            <input [(ngModel)]="filterValues.startDate" matInput [matDatepicker]="pickerStart">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha fin</mat-label>
+            <input [(ngModel)]="filterValues.endDate" matInput [matDatepicker]="pickerEnd">
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+          </mat-form-field>
+
+          <button mat-raised-button (click)="logFilterValues()">Values</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
   </div>
   <div class="result-container">Est ei erat mucius quaeque. Ei his quas phaedrum, efficiantur mediocritatem ne sed, hinc
     oratio blandit ei sed. Blandit gloriatur eam et. Brute noluisse per et, verear disputando neglegentur at quo. Sea

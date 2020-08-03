@@ -10,7 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { ColectivesComponent } from './components/colectives/colectives.component';
 import { UsersComponent } from './components/users/users.component';
 import { AgmCoreModule } from '@agm/core';
+import { DatePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS,
+} from '@angular/material-moment-adapter';
 import {
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -22,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
@@ -48,6 +55,12 @@ import { ReportQComponent } from './components/report-q/report-q.component';
 import { IncidentsComponent } from './components/incidents/incidents.component';
 import { QuestionDialogComponent } from './components/dialogs/question-dialog/question-dialog.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import {
+  MatNativeDateModule,
+  MAT_DATE_LOCALE,
+  DateAdapter,
+  MAT_DATE_FORMATS,
+} from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -75,6 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     MatExpansionModule,
     MatSlideToggleModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatSnackBarModule,
     MatMenuModule,
     MatDialogModule,
@@ -103,11 +118,19 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     AuthService,
+    DatePipe,
     UsersService,
     MinColaboratorGuard,
     MinResearcherGuard,
     MinAdminGuard,
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3500 } },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
