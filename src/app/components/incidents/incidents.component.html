@@ -1,9 +1,7 @@
 <div class="wrap">
   <div class=sidebar>
     <div class="map-container">
-      <agm-map [latitude]="lat" [longitude]="lng">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      </agm-map>
+      <div id="map"></div>
     </div>
 
     <div class="filter-container">
@@ -35,6 +33,14 @@
             <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
             <mat-datepicker #pickerEnd></mat-datepicker>
           </mat-form-field>
+
+
+          <mat-slide-toggle [(ngModel)]="filterValues.place.enabled" (change)="placeToggleChanged($event)">Lugar
+            de incidencia</mat-slide-toggle>
+          <p *ngIf="filterValues.place.enabled && filterValues.place.radius">
+            Radio de {{filterValues.place.radius}}m.
+          </p>
+          <br>
 
           <button mat-raised-button (click)="logFilterValues()">Values</button>
         </mat-card-content>

@@ -9,8 +9,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { ColectivesComponent } from './components/colectives/colectives.component';
 import { UsersComponent } from './components/users/users.component';
-import { AgmCoreModule } from '@agm/core';
 import { DatePipe } from '@angular/common';
+
 import { MatInputModule } from '@angular/material/input';
 import {
   MomentDateAdapter,
@@ -44,7 +44,6 @@ import {
 } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from './services/auth.service';
-
 import { UsersService } from './services/users.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { MinColaboratorGuard } from './services/guards/min-colaborator.guard';
@@ -105,9 +104,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDXrqgEtyMJVBaBuxInwZXR4CQDraSK1ZA',
-    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -140,3 +136,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+// AIzaSyDXrqgEtyMJVBaBuxInwZXR4CQDraSK1ZA

@@ -19,12 +19,13 @@
   border-width: medium;
   border-style: solid;
 }
+#map {
+  height: 100%;
+}
 .card {
   @include mat-elevation(10);
 }
-agm-map {
-  height: 100%;
-}
+
 .filter-container {
   padding: 15px;
   border: orangered;
