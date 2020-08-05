@@ -23,6 +23,8 @@ export class IncidentsComponent implements OnInit {
   };
   map;
   circle;
+  markers = [];
+  incidents = [];
 
   constructor(
     public datepipe: DatePipe,
@@ -108,6 +110,24 @@ export class IncidentsComponent implements OnInit {
     }
   }
 
+  placeIncidentMarkers() {
+    this.markers.forEach((m) => m.setMap(null));
+    this.markers = [];
+
+    this.incidents.forEach((incident) => {
+      const latLngString = incident.answers[1].answer.split(',');
+      const lat = parseFloat(latLngString[0]);
+      const lng = parseFloat(latLngString[1]);
+
+      this.markers.push(
+        new google.maps.Marker({
+          position: { lat, lng },
+          map: this.map,
+        })
+      );
+    });
+  }
+
   // ---------------
   // API stuff
   // ---------------
@@ -123,6 +143,20 @@ export class IncidentsComponent implements OnInit {
           );
         });
         console.log(this.reportVersions);
+      },
+      (err) => {
+        // this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
+        console.log(err);
+      }
+    );
+  }
+
+  getFilteredIncidents() {
+    this.incidentsService.getFilteredAnswers(this.filterValues).subscribe(
+      (res) => {
+        console.log(res);
+        this.incidents = res;
+        this.placeIncidentMarkers();
       },
       (err) => {
         // this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));

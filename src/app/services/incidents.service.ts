@@ -13,4 +13,8 @@ export class IncidentsService {
       'http://' + ip + '/api/questionnaire/versions/report'
     );
   }
+
+  getFilteredAnswers(filter) {
+    return this.http.post('http://' + ip + '/api/answer/filter', filter);
+  }
 }
