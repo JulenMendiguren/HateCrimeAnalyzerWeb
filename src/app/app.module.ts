@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -91,6 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatSnackBarModule,
     MatMenuModule,
+    MatPaginatorModule,
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,

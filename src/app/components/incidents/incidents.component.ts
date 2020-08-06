@@ -24,7 +24,9 @@ export class IncidentsComponent implements OnInit {
   map;
   circle;
   markers = [];
-  incidents = [];
+  incidents: any = [];
+
+  selectedIncident: number = 0;
 
   constructor(
     public datepipe: DatePipe,
@@ -36,9 +38,20 @@ export class IncidentsComponent implements OnInit {
     this.addClickListener();
     this.loadReportVersions();
   }
+  setSelectedIncidentObserver() {}
 
   logFilterValues() {
     console.log(this.filterValues);
+  }
+
+  getStringifiedJSON(): string {
+    return JSON.stringify(this.incidents[this.selectedIncident], undefined, 4);
+  }
+
+  onPageChange(e) {
+    console.log(e);
+    this.selectedIncident = e.pageIndex;
+    this.setMarkerColors();
   }
 
   initMap(): void {
@@ -110,8 +123,20 @@ export class IncidentsComponent implements OnInit {
     }
   }
 
+  setMarkerColors() {
+    const green = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+    const red = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+    const idOfSelected = this.incidents[this.selectedIncident]._id;
+
+    this.markers.forEach((m) => {
+      const color = m._id == idOfSelected ? green : red;
+      m.marker.setOptions({ icon: { url: color } });
+    });
+  }
+
   placeIncidentMarkers() {
-    this.markers.forEach((m) => m.setMap(null));
+    this.markers.forEach((m) => m.marker.setMap(null));
     this.markers = [];
 
     this.incidents.forEach((incident) => {
@@ -119,12 +144,25 @@ export class IncidentsComponent implements OnInit {
       const lat = parseFloat(latLngString[0]);
       const lng = parseFloat(latLngString[1]);
 
-      this.markers.push(
-        new google.maps.Marker({
-          position: { lat, lng },
-          map: this.map,
-        })
-      );
+      const marker = new google.maps.Marker({
+        position: { lat, lng },
+        map: this.map,
+        icon: {
+          url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+        },
+      });
+
+      marker.addListener('click', () => {
+        this.selectedIncident = this.incidents.findIndex(
+          (i) => i._id == incident._id
+        );
+        this.setMarkerColors();
+      });
+
+      this.markers.push({
+        marker,
+        _id: incident._id,
+      });
     });
   }
 
@@ -157,6 +195,7 @@ export class IncidentsComponent implements OnInit {
         console.log(res);
         this.incidents = res;
         this.placeIncidentMarkers();
+        this.setMarkerColors();
       },
       (err) => {
         // this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
