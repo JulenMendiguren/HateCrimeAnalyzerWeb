@@ -50,18 +50,83 @@
 
   </div>
   <div class="result-container">
-    <mat-card>
+    <mat-card class="card">
       <mat-card-title>
         Incidentes reportados
       </mat-card-title>
-      <mat-card-content>
-        <textarea>{{ getStringifiedJSON() }}</textarea>
-        {{ selectedIncident}}
-      </mat-card-content>
-    </mat-card>
-    <mat-paginator [pageIndex]="selectedIncident" hidePageSize="true" [length]="incidents.length" pageSize="1"
-      (page)="onPageChange($event)">
 
-    </mat-paginator>
+      <mat-card-content>
+        <ng-container *ngIf="incidents.length > 0">
+          <h2>Colectivos a los que pertenece el usuario</h2>
+          <ul>
+            <ng-container *ngFor="let col of incidents[selectedIncident].userCol">
+              <ng-container *ngIf="col != 'all'">
+                <li>{{getColectiveString(col)}}</li>
+              </ng-container>
+            </ng-container>
+          </ul>
+
+          <h2>Momento en el que fue registrado el incidente</h2>
+          <p>{{getDateString(incidents[selectedIncident].createdAt)}}</p>
+
+          <h2>Cuestionario del incidente</h2>
+          <div class="questionnaire">
+            <ng-container *ngFor="let ans of incidents[selectedIncident].answers">
+              <ng-container *ngIf="ans.answer">
+                <p><strong>{{getQuestionString(ans._id, true)}}</strong></p>
+                <ng-container [ngSwitch]="ans.questionType">
+                  <p *ngSwitchCase="'datetime'">{{getDateString(ans.answer)}}</p>
+                  <p *ngSwitchCase="'likert'">{{getClosedAnswerString(ans.answer, ans._id, true)}}</p>
+                  <p *ngSwitchCase="'yesno'">{{getClosedAnswerString(ans.answer, ans._id, true)}}</p>
+                  <p *ngSwitchCase="'radio'">{{getClosedAnswerString(ans.answer, ans._id, true)}}</p>
+                  <p *ngSwitchCase="'multiselect'">{{getClosedAnswerString(ans.answer, ans._id, true)}}</p>
+                  <ng-container *ngSwitchCase="'colective'">
+                    <ul>
+                      <ng-container *ngFor="let col of ans.answer">
+                        <ng-container *ngIf="col != 'all'">
+                          <li>{{getColectiveString(col)}}</li>
+                        </ng-container>
+                      </ng-container>
+                    </ul>
+                  </ng-container>
+                  <p *ngSwitchDefault>{{ans.answer}}</p>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+
+            <h2>Cuestionario del usuario</h2>
+            <ng-container *ngFor="let ans of incidents[selectedIncident].userAnswers">
+              <ng-container *ngIf="ans.answer">
+                <p><strong>{{getQuestionString(ans._id, false)}}</strong></p>
+                <ng-container [ngSwitch]="ans.questionType">
+                  <p *ngSwitchCase="'datetime'">{{getDateString(ans.answer)}}</p>
+                  <p *ngSwitchCase="'likert'">{{getClosedAnswerString(ans.answer, ans._id, false)}}</p>
+                  <p *ngSwitchCase="'yesno'">{{getClosedAnswerString(ans.answer, ans._id, false)}}</p>
+                  <p *ngSwitchCase="'radio'">{{getClosedAnswerString(ans.answer, ans._id, false)}}</p>
+                  <p *ngSwitchCase="'multiselect'">{{getClosedAnswerString(ans.answer, ans._id, false)}}</p>
+                  <ng-container *ngSwitchCase="'colective'">
+                    <ul>
+                      <ng-container *ngFor="let col of ans.answer">
+                        <ng-container *ngIf="col != 'all'">
+                          <li>{{getColectiveString(col)}}</li>
+                        </ng-container>
+                      </ng-container>
+                    </ul>
+                  </ng-container>
+                  <p *ngSwitchDefault>{{ans.answer}}</p>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+
+          </div>
+
+        </ng-container>
+      </mat-card-content>
+
+      <mat-paginator [pageIndex]="selectedIncident" hidePageSize="true" [length]="incidents.length" pageSize="1"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+
+    </mat-card>
   </div>
 </div>

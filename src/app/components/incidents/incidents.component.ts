@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IncidentsService } from 'src/app/services/incidents.service';
 import { DatePipe } from '@angular/common';
-import { ThrowStmt } from '@angular/compiler';
+import { Colective } from 'src/app/models/Colective';
+import { TranslateService } from '@ngx-translate/core';
+import { ColectivesService } from 'src/app/services/colectives.service';
+import { LanguageService } from 'src/app/services/language.service';
 declare const google: any;
 
 @Component({
@@ -10,6 +13,7 @@ declare const google: any;
   styleUrls: ['./incidents.component.scss'],
 })
 export class IncidentsComponent implements OnInit {
+  colectives: Colective[];
   reportVersions;
   filterValues = {
     version: 'all',
@@ -30,22 +34,59 @@ export class IncidentsComponent implements OnInit {
 
   constructor(
     public datepipe: DatePipe,
-    private incidentsService: IncidentsService
+    private incidentsService: IncidentsService,
+    private languageService: LanguageService,
+    private colectivesService: ColectivesService
   ) {}
 
   ngOnInit(): void {
     this.initMap();
     this.addClickListener();
     this.loadReportVersions();
+    this.loadColectives();
+    console.log(this.colectives);
   }
-  setSelectedIncidentObserver() {}
 
   logFilterValues() {
     console.log(this.filterValues);
   }
 
-  getStringifiedJSON(): string {
-    return JSON.stringify(this.incidents[this.selectedIncident], undefined, 4);
+  getColectiveString(_id): string {
+    const col = this.colectives.find((col) => col._id === _id);
+    return col['text_' + this.languageService.selected];
+  }
+
+  getDateString(date): string {
+    return this.datepipe.transform(date, 'yyyy/MM/dd, HH:mm');
+  }
+
+  getQuestionString(_id, isReport: boolean): string {
+    const incident = this.incidents[this.selectedIncident];
+    let questionString = 'ERROR: Question text not found.';
+
+    if (isReport) {
+      const q = incident.questionnaire.questions.find((q) => q._id === _id);
+      questionString = q['text_' + this.languageService.selected];
+    } else {
+      const q = incident.userQuestionnaire.questions.find((q) => q._id === _id);
+      questionString = q['text_' + this.languageService.selected];
+    }
+    return questionString;
+  }
+
+  getClosedAnswerString(answerIndex: number, _id, isReport: boolean): string {
+    const incident = this.incidents[this.selectedIncident];
+    let answerString = 'ERROR: Question answer not found.';
+    if (isReport) {
+      const q = incident.questionnaire.questions.find((q) => q._id === _id);
+      answerString =
+        q['possibleAnswers_' + this.languageService.selected][answerIndex];
+    } else {
+      const q = incident.userQuestionnaire.questions.find((q) => q._id === _id);
+      answerString =
+        q['possibleAnswers_' + this.languageService.selected][answerIndex];
+    }
+    return answerString;
   }
 
   onPageChange(e) {
@@ -130,7 +171,7 @@ export class IncidentsComponent implements OnInit {
     const idOfSelected = this.incidents[this.selectedIncident]._id;
 
     this.markers.forEach((m) => {
-      const color = m._id == idOfSelected ? green : red;
+      const color = m._id === idOfSelected ? green : red;
       m.marker.setOptions({ icon: { url: color } });
     });
   }
@@ -175,10 +216,7 @@ export class IncidentsComponent implements OnInit {
       (res) => {
         this.reportVersions = res;
         this.reportVersions.forEach((v) => {
-          v.createdAt = this.datepipe.transform(
-            v.createdAt,
-            'yyyy/MM/dd, HH:mm'
-          );
+          v.createdAt = this.getDateString(v.createdAt);
         });
         console.log(this.reportVersions);
       },
@@ -194,11 +232,26 @@ export class IncidentsComponent implements OnInit {
       (res) => {
         console.log(res);
         this.incidents = res;
-        this.placeIncidentMarkers();
-        this.setMarkerColors();
+        if (this.incidents.length > 0) {
+          this.placeIncidentMarkers();
+          this.setMarkerColors();
+        }
       },
       (err) => {
         // this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
+        console.log(err);
+      }
+    );
+  }
+
+  loadColectives() {
+    this.colectivesService.getAllColectives().subscribe(
+      (res) => {
+        this.colectives = res;
+        console.log(this.colectives);
+      },
+      (err) => {
+        //this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
         console.log(err);
       }
     );
