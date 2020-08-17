@@ -9,7 +9,7 @@
         <mat-card-header>
           <mat-card-title>Filtrar incidentes</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="filter-card-content">
 
           <mat-form-field appearance="fill">
             <mat-label>Versión del cuestionario</mat-label>
@@ -40,9 +40,6 @@
           <p *ngIf="filterValues.place.enabled && filterValues.place.radius">
             Radio de {{filterValues.place.radius}}m.
           </p>
-          <br>
-
-          <button mat-raised-button (click)="logFilterValues()">Values</button>
           <button mat-raised-button color="primary" (click)="getFilteredIncidents()">Ok!</button>
         </mat-card-content>
       </mat-card>

@@ -6,16 +6,16 @@
 }
 .sidebar {
   height: 85%;
-  left: 15px;
+  margin-left: 3%;
   width: 35%;
   position: fixed;
-  border: royalblue;
-  border-width: medium;
-  border-style: solid;
+  // border: royalblue;
+  // border-width: medium;
+  // border-style: solid;
 }
 .map-container {
   height: 55%;
-  border: lime;
+  border: blue;
   border-width: medium;
   border-style: solid;
 }
@@ -26,18 +26,26 @@
   @include mat-elevation(10);
 }
 
+.filter-card-content {
+  display: flex;
+  width: 70%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
 .filter-container {
-  padding: 15px;
-  border: orangered;
-  border-width: medium;
-  border-style: solid;
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+  // border: orangered;
+  // border-width: medium;
+  // border-style: solid;
 }
 .result-container {
   top: 100px;
-  margin-left: 37%; /* Same as the width of the sidebar */
-  margin-right: 15px;
+  margin-left: 40%; /* Same as the width of the sidebar */
+  margin-right: 2%;
   padding: 0px 10px;
-  border: royalblue;
-  border-width: medium;
-  border-style: solid;
 }

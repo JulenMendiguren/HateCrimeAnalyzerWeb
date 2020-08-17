@@ -5,6 +5,7 @@ import { Colective } from 'src/app/models/Colective';
 import { TranslateService } from '@ngx-translate/core';
 import { ColectivesService } from 'src/app/services/colectives.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { Incident } from 'src/app/models/Incident';
 declare const google: any;
 
 @Component({
@@ -28,7 +29,7 @@ export class IncidentsComponent implements OnInit {
   map;
   circle;
   markers = [];
-  incidents: any = [];
+  incidents: Incident[] = [];
 
   selectedIncident: number = 0;
 
@@ -181,7 +182,8 @@ export class IncidentsComponent implements OnInit {
     this.markers = [];
 
     this.incidents.forEach((incident) => {
-      const latLngString = incident.answers[1].answer.split(',');
+      const ans = incident.answers[1];
+      const latLngString = ans.answer.split(',');
       const lat = parseFloat(latLngString[0]);
       const lng = parseFloat(latLngString[1]);
 
@@ -231,7 +233,7 @@ export class IncidentsComponent implements OnInit {
     this.incidentsService.getFilteredAnswers(this.filterValues).subscribe(
       (res) => {
         console.log(res);
-        this.incidents = res;
+        this.incidents = res as Incident[];
         if (this.incidents.length > 0) {
           this.placeIncidentMarkers();
           this.setMarkerColors();

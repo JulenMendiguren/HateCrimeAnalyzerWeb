@@ -9,25 +9,19 @@
           </th>
           <td mat-cell *matCellDef="let colective">
             <!-- If the colective being edited is this one => false -->
-            <ng-container
-              *ngIf="
+            <ng-container *ngIf="
                 !editingColective || editingColective._id !== colective._id;
                 then euNotEditing;
                 else euEditing
-              "
-            >
+              ">
             </ng-container>
 
-            <ng-template #euNotEditing
-              ><p class="text-truncate">{{ colective.text_eu }}</p></ng-template
-            >
-            <ng-template #euEditing
-              ><mat-form-field>
-                <textarea
-                  matInput
-                  placeholder="Euskara"
-                  [(ngModel)]="editingColective.text_eu"
-                ></textarea>
+            <ng-template #euNotEditing>
+              <p class="text-truncate">{{ colective.text_eu }}</p>
+            </ng-template>
+            <ng-template #euEditing>
+              <mat-form-field>
+                <textarea matInput placeholder="Euskara" [(ngModel)]="editingColective.text_eu"></textarea>
               </mat-form-field>
             </ng-template>
           </td>
@@ -39,25 +33,19 @@
           </th>
           <td mat-cell *matCellDef="let colective">
             <!-- If the colective being edited is this one => false -->
-            <ng-container
-              *ngIf="
+            <ng-container *ngIf="
                 !editingColective || editingColective._id !== colective._id;
                 then esNotEditing;
                 else esEditing
-              "
-            >
+              ">
             </ng-container>
 
-            <ng-template #esNotEditing
-              ><p class="text-truncate">{{ colective.text_es }}</p></ng-template
-            >
-            <ng-template #esEditing
-              ><mat-form-field>
-                <textarea
-                  matInput
-                  placeholder="Español"
-                  [(ngModel)]="editingColective.text_es"
-                ></textarea>
+            <ng-template #esNotEditing>
+              <p class="text-truncate">{{ colective.text_es }}</p>
+            </ng-template>
+            <ng-template #esEditing>
+              <mat-form-field>
+                <textarea matInput placeholder="Español" [(ngModel)]="editingColective.text_es"></textarea>
               </mat-form-field>
             </ng-template>
           </td>
@@ -69,25 +57,19 @@
           </th>
           <td mat-cell *matCellDef="let colective">
             <!-- If the colective being edited is this one => false -->
-            <ng-container
-              *ngIf="
+            <ng-container *ngIf="
                 !editingColective || editingColective._id !== colective._id;
                 then enNotEditing;
                 else enEditing
-              "
-            >
+              ">
             </ng-container>
 
-            <ng-template #enNotEditing
-              ><p class="text-truncate">{{ colective.text_en }}</p></ng-template
-            >
-            <ng-template #enEditing
-              ><mat-form-field>
-                <textarea
-                  matInput
-                  placeholder="English"
-                  [(ngModel)]="editingColective.text_en"
-                ></textarea>
+            <ng-template #enNotEditing>
+              <p class="text-truncate">{{ colective.text_en }}</p>
+            </ng-template>
+            <ng-template #enEditing>
+              <mat-form-field>
+                <textarea matInput placeholder="English" [(ngModel)]="editingColective.text_en"></textarea>
               </mat-form-field>
             </ng-template>
           </td>
@@ -99,25 +81,19 @@
           </th>
           <td mat-cell *matCellDef="let colective">
             <!-- If the colective being edited is this one => false -->
-            <ng-container
-              *ngIf="
+            <ng-container *ngIf="
                 !editingColective || editingColective._id !== colective._id;
                 then frNotEditing;
                 else frEditing
-              "
-            >
+              ">
             </ng-container>
 
-            <ng-template #frNotEditing
-              ><p class="text-truncate">{{ colective.text_fr }}</p></ng-template
-            >
-            <ng-template #frEditing
-              ><mat-form-field>
-                <textarea
-                  matInput
-                  placeholder="Français"
-                  [(ngModel)]="editingColective.text_fr"
-                >
+            <ng-template #frNotEditing>
+              <p class="text-truncate">{{ colective.text_fr }}</p>
+            </ng-template>
+            <ng-template #frEditing>
+              <mat-form-field>
+                <textarea matInput placeholder="Français" [(ngModel)]="editingColective.text_fr">
                 </textarea>
               </mat-form-field>
             </ng-template>
@@ -128,31 +104,19 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let colective">
-            <ng-container
-              *ngIf="
+            <ng-container *ngIf="
                 !editingColective || editingColective._id !== colective._id;
                 then actionNotEditing;
                 else actionEditing
-              "
-            >
+              ">
             </ng-container>
             <ng-template #actionNotEditing>
-              <button
-                mat-icon-button
-                matTooltip="{{ 'COLECTIVES.tooltip.edit' | translate }}"
-                color="primary"
-                (click)="startEditingColective(colective)"
-                [disabled]="editingColective"
-              >
+              <button mat-icon-button matTooltip="{{ 'COLECTIVES.tooltip.edit' | translate }}" color="primary"
+                (click)="startEditingColective(colective)" [disabled]="editingColective">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button
-                mat-icon-button
-                matTooltip="{{ 'COLECTIVES.tooltip.delete' | translate }}"
-                color="primary"
-                (click)="deleteColective(colective._id)"
-                [disabled]="editingColective"
-              >
+              <button mat-icon-button matTooltip="{{ 'COLECTIVES.tooltip.delete' | translate }}" color="primary"
+                (click)="deleteColective(colective._id)" [disabled]="editingColective">
                 <mat-icon>delete</mat-icon>
               </button>
             </ng-template>
@@ -160,11 +124,7 @@
               <button mat-raised-button color="warn" (click)="cancelEditing()">
                 {{ "COLECTIVES.button.cancel" | translate }}
               </button>
-              <button
-                mat-raised-button
-                color="primary"
-                (click)="updateColective()"
-              >
+              <button mat-raised-button color="primary" (click)="updateColective()">
                 {{ "COLECTIVES.button.update" | translate }}
               </button>
             </ng-template>
@@ -177,49 +137,28 @@
     </mat-card-content>
     <mat-card-title>{{ "COLECTIVES.title.create" | translate }}</mat-card-title>
     <mat-card-content>
-      <div class="container">
+      <div class="new-colective">
         <mat-form-field>
-          <textarea
-            matInput
-            placeholder="Euskara"
-            [(ngModel)]="newColective.text_eu"
-          ></textarea>
+          <textarea matInput placeholder="Euskara" [(ngModel)]="newColective.text_eu"></textarea>
         </mat-form-field>
 
         <mat-form-field>
-          <textarea
-            matInput
-            placeholder="Español"
-            [(ngModel)]="newColective.text_es"
-          ></textarea>
+          <textarea matInput placeholder="Español" [(ngModel)]="newColective.text_es"></textarea>
         </mat-form-field>
 
         <mat-form-field>
-          <textarea
-            matInput
-            placeholder="English"
-            [(ngModel)]="newColective.text_en"
-          ></textarea>
+          <textarea matInput placeholder="English" [(ngModel)]="newColective.text_en"></textarea>
         </mat-form-field>
 
         <mat-form-field>
-          <textarea
-            matInput
-            placeholder="Français"
-            [(ngModel)]="newColective.text_fr"
-          ></textarea>
+          <textarea matInput placeholder="Français" [(ngModel)]="newColective.text_fr"></textarea>
         </mat-form-field>
+        <button mat-raised-button color="primary" (click)="createColective()" class="button"
+          [disabled]="editingColective">
+          {{ "COLECTIVES.button.create" | translate }}
+        </button>
       </div>
     </mat-card-content>
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="createColective()"
-        [disabled]="editingColective"
-      >
-        {{ "COLECTIVES.button.create" | translate }}
-      </button>
-    </mat-card-actions>
+
   </mat-card>
 </div>
