@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   loginUser = { email: '', password: '' };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     this.authService.logInUser(this.loginUser).subscribe(
       (res) => {
         localStorage.setItem('JWT', res.jwt);
+        this.router.navigate(['/incidents']);
       },
       (err) => console.log(err)
     );

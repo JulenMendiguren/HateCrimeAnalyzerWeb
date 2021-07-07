@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
   <ul>
-    <a mat-button routerLink="colectives">{{
-      "HEADER.colectives" | translate
-    }}</a>
+    <a mat-button routerLink="incidents">{{
+      "HEADER.incidents" | translate
+      }}</a>
 
     <button mat-button [matMenuTriggerFor]="menu">
       {{ "HEADER.quest" | translate }}
@@ -16,10 +16,13 @@
       </button>
     </mat-menu>
 
+    <a mat-button routerLink="colectives">{{
+      "HEADER.colectives" | translate
+      }}</a>
+
+
     <!-- <a mat-button routerLink="quest">{{ "HEADER.quest" | translate }}</a> -->
-    <a mat-button routerLink="incidents">{{
-      "HEADER.incidents" | translate
-    }}</a>
+
     <a mat-button routerLink="users">{{ "HEADER.users" | translate }}</a>
   </ul>
 
