@@ -9,7 +9,7 @@
             <mat-expansion-panel-header>
               <mat-panel-title style="font-weight: bolder;">{{
                 colective["text_" + getLang()]
-              }}</mat-panel-title>
+                }}</mat-panel-title>
             </mat-expansion-panel-header>
 
             <ng-container *ngFor="let question of questionnaire.questions; let i = index">
@@ -35,17 +35,19 @@
                       </p>
                       <!-- Required -->
                       <ng-container *ngIf="question.options.required == true">{{ "USERQ.options.required" | translate }}
-                        <br /></ng-container>
+                        <br />
+                      </ng-container>
                       <!-- required answer -->
                       <ng-container *ngIf="question.options.requiredAnswerIndex">
                         {{ "USERQ.options.required_answer" | translate }}:
                         {{
-                          getRequiredAnswerString(
-                            question.options.subquestionOf,
-                            question.options.requiredAnswerIndex
-                          )
+                        getRequiredAnswerString(
+                        question.options.subquestionOf,
+                        question.options.requiredAnswerIndex
+                        )
                         }}
-                        <br /></ng-container>
+                        <br />
+                      </ng-container>
                       <!-- size -->
                       <ng-container *ngIf="question.options.size">{{ "USERQ.options.size" | translate }}:
                         {{ getSizeString(question.options.size) }} <br /></ng-container>
@@ -107,8 +109,8 @@
       </mat-accordion>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary"
-        (click)="createQuestionnaire()">{{ "USERQ.button.save" | translate }}</button>
+      <button mat-raised-button color="primary" (click)="createQuestionnaire()">{{ "USERQ.button.save" | translate
+        }}</button>
     </mat-card-actions>
   </mat-card>
 </div>
