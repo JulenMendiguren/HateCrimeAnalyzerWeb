@@ -27,6 +27,13 @@ export class AuthService {
     const decoded = jwt_decode(token);
     return decoded.role;
   }
+
+  getName(): string {
+    const token = localStorage.getItem('JWT');
+    const decoded = jwt_decode(token);
+    return decoded.name;
+  }
+
   getToken() {
     return localStorage.getItem('JWT');
   }

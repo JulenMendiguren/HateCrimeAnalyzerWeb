@@ -11,137 +11,138 @@
   {{ "QUESTION_DIALOG.title.edit_question" | translate }}
 </h1>
 
-<form mat-dialog-content [formGroup]="qForm" (ngSubmit)="onSubmit()">
-  <div class="question-text">
-    <p> {{ "QUESTION_DIALOG.question_text" | translate }}:</p>
-    <mat-form-field>
-      <mat-label>Euskara</mat-label>
-      <input matInput formControlName="text_eu" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Español</mat-label>
-      <input matInput formControlName="text_es" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>English</mat-label>
-      <input matInput formControlName="text_en" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Français</mat-label>
-      <input matInput formControlName="text_fr" />
-    </mat-form-field>
-  </div>
-  <div class="question-extras">
-    <div class="question-options">
-
-      <p><strong>{{ "QUESTION_DIALOG.question_type" | translate }}:</strong></p>
-
-
+<form [formGroup]="qForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="question-text">
+      <p> {{ "QUESTION_DIALOG.question_text" | translate }}:</p>
       <mat-form-field>
-        <mat-label>{{ "QUESTION_DIALOG.type" | translate }}</mat-label>
-        <mat-select formControlName="type" (selectionChange)="initializeOptionsGroup()">
-          <mat-option value="textbox" matTooltip="asdasd">Textbox</mat-option>
-          <mat-option value="number" matTooltip="asdasd">Number</mat-option>
-          <mat-option value="likert" matTooltip="asdasd">Likert</mat-option>
-          <mat-option value="datetime" matTooltip="asdasd">DateTime</mat-option>
-          <mat-option value="yesno" matTooltip="asdasd">Yes/no</mat-option>
-          <mat-option value="radio" matTooltip="asdasd">Radio</mat-option>
-          <mat-option value="multiselect" matTooltip="asdasd">Multiselect</mat-option>
-          <mat-option value="geolocation" matTooltip="asdasd">Geolocation</mat-option>
-        </mat-select>
+        <mat-label>Euskara</mat-label>
+        <input matInput formControlName="text_eu" />
       </mat-form-field>
-      <br>
-
-      <p>{{ "QUESTION_DIALOG.options" | translate }}:</p>
-      <div [formGroup]="qForm.get('options')">
-
-        <mat-form-field *ngIf="qForm.get('options').get('requiredAnswerIndex')">
-          <mat-label>{{ "QUESTION_DIALOG.required_answer" | translate }}</mat-label>
-          <mat-select formControlName="requiredAnswerIndex">
-            <mat-option value="">{{ "QUESTION_DIALOG.none" | translate }}</mat-option>
-            <ng-container *ngFor="let ans of parentPossibleAnswers; let i = index">
-              <mat-option value="{{i}}">{{ans}}</mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-slide-toggle color="primary" formControlName="required">
-          {{ "QUESTION_DIALOG.required" | translate }}</mat-slide-toggle>
-
-        <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
-          <mat-label>{{ "QUESTION_DIALOG.size" | translate }}</mat-label>
-          <mat-select formControlName="size">
-            <mat-option value="small">{{ "QUESTION_DIALOG.size_small" | translate }}</mat-option>
-            <mat-option value="big">{{ "QUESTION_DIALOG.size_big" | translate }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field *ngIf="qForm.get('type').value==='number'">
-          <mat-label>{{ "QUESTION_DIALOG.min_value" | translate }}</mat-label>
-          <input matInput formControlName="minValue" type="number">
-        </mat-form-field>
-
-        <mat-form-field *ngIf="qForm.get('type').value==='number'">
-          <mat-label>{{ "QUESTION_DIALOG.max_value" | translate }}</mat-label>
-          <input matInput formControlName="maxValue" type="number">
-        </mat-form-field>
-
-        <mat-slide-toggle *ngIf="qForm.get('type').value==='number'" color="primary" formControlName="slider">
-          {{ "QUESTION_DIALOG.slider" | translate }}
-        </mat-slide-toggle>
-
-        <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
-          <mat-label>{{ "QUESTION_DIALOG.min_length" | translate }}</mat-label>
-          <input matInput formControlName="minLength" type="number">
-        </mat-form-field>
-
-        <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
-          <mat-label>{{ "QUESTION_DIALOG.max_length" | translate }}</mat-label>
-          <input matInput formControlName="maxLength" type="number">
-        </mat-form-field>
-      </div>
-
-
+      <mat-form-field>
+        <mat-label>Español</mat-label>
+        <input matInput formControlName="text_es" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>English</mat-label>
+        <input matInput formControlName="text_en" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Français</mat-label>
+        <input matInput formControlName="text_fr" />
+      </mat-form-field>
     </div>
-    <div class="question-answers" *ngIf="showPossibleAnswers()">
-      <p><strong>{{ "QUESTION_DIALOG.possible_answers" | translate }}:</strong></p>
-      <div formArrayName="possibleAnswers" *ngFor="let ans of getPossibleAnswersControls(); let i = index;">
-        <div class="answer-container" [formGroupName]="i">
-          <mat-form-field>
-            <mat-label>Euskara</mat-label>
-            <input matInput
-              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_eu">
+    <div class="question-extras">
+      <div class="question-options">
+
+        <p><strong>{{ "QUESTION_DIALOG.question_type" | translate }}:</strong></p>
+
+
+        <mat-form-field>
+          <mat-label>{{ "QUESTION_DIALOG.type" | translate }}</mat-label>
+          <mat-select formControlName="type" (selectionChange)="initializeOptionsGroup()">
+            <mat-option value="textbox" matTooltip="asdasd">Textbox</mat-option>
+            <mat-option value="number" matTooltip="asdasd">Number</mat-option>
+            <mat-option value="likert" matTooltip="asdasd">Likert</mat-option>
+            <mat-option value="datetime" matTooltip="asdasd">DateTime</mat-option>
+            <mat-option value="yesno" matTooltip="asdasd">Yes/no</mat-option>
+            <mat-option value="radio" matTooltip="asdasd">Radio</mat-option>
+            <mat-option value="multiselect" matTooltip="asdasd">Multiselect</mat-option>
+            <mat-option value="geolocation" matTooltip="asdasd">Geolocation</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+
+        <p>{{ "QUESTION_DIALOG.options" | translate }}:</p>
+        <div [formGroup]="qForm.get('options')">
+
+          <mat-form-field *ngIf="qForm.get('options').get('requiredAnswerIndex')">
+            <mat-label>{{ "QUESTION_DIALOG.required_answer" | translate }}</mat-label>
+            <mat-select formControlName="requiredAnswerIndex">
+              <mat-option value="">{{ "QUESTION_DIALOG.none" | translate }}</mat-option>
+              <ng-container *ngFor="let ans of parentPossibleAnswers; let i = index">
+                <mat-option value="{{i}}">{{ans}}</mat-option>
+              </ng-container>
+            </mat-select>
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Español</mat-label>
-            <input matInput
-              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_es">
+
+          <mat-slide-toggle color="primary" formControlName="required">
+            {{ "QUESTION_DIALOG.required" | translate }}</mat-slide-toggle>
+
+          <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
+            <mat-label>{{ "QUESTION_DIALOG.size" | translate }}</mat-label>
+            <mat-select formControlName="size">
+              <mat-option value="small">{{ "QUESTION_DIALOG.size_small" | translate }}</mat-option>
+              <mat-option value="big">{{ "QUESTION_DIALOG.size_big" | translate }}</mat-option>
+            </mat-select>
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>English</mat-label>
-            <input matInput
-              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_en">
+
+          <mat-form-field *ngIf="qForm.get('type').value==='number'">
+            <mat-label>{{ "QUESTION_DIALOG.min_value" | translate }}</mat-label>
+            <input matInput formControlName="minValue" type="number">
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Français</mat-label>
-            <input matInput
-              [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_fr">
+
+          <mat-form-field *ngIf="qForm.get('type').value==='number'">
+            <mat-label>{{ "QUESTION_DIALOG.max_value" | translate }}</mat-label>
+            <input matInput formControlName="maxValue" type="number">
           </mat-form-field>
-          <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" mat-icon-button
-            type="button" color="warn" (click)="deletePossibleAnswers(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
+
+          <mat-slide-toggle *ngIf="qForm.get('type').value==='number'" color="primary" formControlName="slider">
+            {{ "QUESTION_DIALOG.slider" | translate }}
+          </mat-slide-toggle>
+
+          <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
+            <mat-label>{{ "QUESTION_DIALOG.min_length" | translate }}</mat-label>
+            <input matInput formControlName="minLength" type="number">
+          </mat-form-field>
+
+          <mat-form-field *ngIf="qForm.get('type').value==='textbox'">
+            <mat-label>{{ "QUESTION_DIALOG.max_length" | translate }}</mat-label>
+            <input matInput formControlName="maxLength" type="number">
+          </mat-form-field>
         </div>
 
+
       </div>
-      <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" type="button" color="primary"
-        mat-raised-button (click)="addPossibleAnswers()">{{ "QUESTION_DIALOG.button.add" | translate }}</button>
+      <div class="question-answers" *ngIf="showPossibleAnswers()">
+        <p><strong>{{ "QUESTION_DIALOG.possible_answers" | translate }}:</strong></p>
+        <div formArrayName="possibleAnswers" *ngFor="let ans of getPossibleAnswersControls(); let i = index;">
+          <div class="answer-container" [formGroupName]="i">
+            <mat-form-field>
+              <mat-label>Euskara</mat-label>
+              <input matInput
+                [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_eu">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Español</mat-label>
+              <input matInput
+                [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_es">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>English</mat-label>
+              <input matInput
+                [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_en">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Français</mat-label>
+              <input matInput
+                [formControl]="this.qForm.get('possibleAnswers')['controls'][i]['controls'].possibleAnswers_fr">
+            </mat-form-field>
+            <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" mat-icon-button
+              type="button" color="warn" (click)="deletePossibleAnswers(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+        </div>
+        <button [disabled]="qForm.value.type === 'yesno' || qForm.value.type === 'likert'" type="button" color="primary"
+          mat-raised-button (click)="addPossibleAnswers()">{{ "QUESTION_DIALOG.button.add" | translate }}</button>
+      </div>
     </div>
   </div>
   <div mat-dialog-actions>
     <button mat-button type="button" (click)="cancelDialog()">{{ "QUESTION_DIALOG.button.cancel" | translate }}</button>
-    <button mat-button type="button" color="primary" (click)="logQuestion()">Log Question</button>
+    <!-- <button mat-button type="button" color="primary" (click)="logQuestion()">Log Question</button> -->
     <button [disabled]="checkIfInvalid()" color="primary" mat-button type="submit">Save Question</button>
   </div>
-
 </form>

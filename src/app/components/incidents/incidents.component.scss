@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";
+
 .wrap {
   top: 10%;
   height: 90%;
@@ -16,7 +17,7 @@
 }
 .map-container {
   height: 55%;
-  border: #795548;
+  // border: #795548;
   border-width: medium;
   border-style: solid;
 }

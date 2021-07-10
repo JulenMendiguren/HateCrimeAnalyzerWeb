@@ -3,33 +3,19 @@
     <mat-card-title>{{ "LOGIN.title" | translate }}</mat-card-title>
     <mat-card-content>
       <div class="container">
-        <mat-form-field
-          ><input
-            matInput
-            placeholder="{{ 'LOGIN.input.email' | translate }}"
-            [(ngModel)]="loginUser.email"
-            type="email"
-          />
+        <mat-form-field><input matInput placeholder="{{ 'LOGIN.input.email' | translate }}"
+            [(ngModel)]="loginUser.email" type="email" />
         </mat-form-field>
-        <mat-form-field
-          ><input
-            matInput
-            placeholder="{{ 'LOGIN.input.password' | translate }}"
-            [(ngModel)]="loginUser.password"
-            type="password"
-          />
+        <mat-form-field><input matInput placeholder="{{ 'LOGIN.input.password' | translate }}"
+            [(ngModel)]="loginUser.password" type="password" />
         </mat-form-field>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        (click)="login()"
-        class="button"
-        mat-raised-button
-        color="primary"
-      >
+      <button (click)="login()" class="button" mat-raised-button color="primary">
         {{ "LOGIN.button.login" | translate }}
       </button>
     </mat-card-actions>
+    <div *ngIf="failedLogin" style="color: red;">ERROR: Usuario o contraseña incorrecta</div>
   </mat-card>
 </div>

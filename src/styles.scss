@@ -1,3 +1,6 @@
+@use 'app/components/incidents/incidents-theme' as incidents;
+@use 'app/components/report-q/report-q-theme' as reportq;
+@use 'app/components/user-q/user-q-theme' as userq;
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
@@ -28,6 +31,9 @@ $HateCrimeWeb-theme: mat-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($HateCrimeWeb-theme);
+@include incidents.theme($HateCrimeWeb-theme);
+@include reportq.theme($HateCrimeWeb-theme);
+@include userq.theme($HateCrimeWeb-theme);
 
 html,
 body {

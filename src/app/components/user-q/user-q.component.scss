@@ -40,29 +40,28 @@ mat-card-actions {
   flex-grow: 1;
 }
 .question {
-  margin-top: 10px;
-
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: lightgray;
+  margin: 10px;
+  border-radius: 25px;
+  padding: 20px;
   // border: lightgreen;
   // border-width: medium;
   // border-style: solid;
 }
 
 .subquestion {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-left: 40px;
-  margin-top: 10px;
-  background-color: lightgray;
+  padding: 20px;
+  border-radius: 25px;
+  margin: 10px 80px;
+  // margin-left: 80px;
   // border: lightgreen;
   // border-width: medium;
   // border-style: solid;
 }
 .question-buttons {
-  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
 }
 button {
-  margin: 5px;
+  margin: 0 15px;
 }

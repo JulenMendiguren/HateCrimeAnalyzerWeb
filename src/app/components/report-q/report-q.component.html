@@ -9,7 +9,7 @@
             <mat-expansion-panel-header>
               <mat-panel-title style="font-weight: bolder;">{{
                 colective["text_" + getLang()]
-              }}</mat-panel-title>
+                }}</mat-panel-title>
             </mat-expansion-panel-header>
 
             <ng-container *ngFor="let question of questionnaire.questions; let i = index">
@@ -36,17 +36,19 @@
                       <!-- Required -->
                       <ng-container *ngIf="question.options.required == true">
                         {{ "REPORTQ.options.required" | translate }}
-                        <br /></ng-container>
+                        <br />
+                      </ng-container>
                       <!-- required answer -->
                       <ng-container *ngIf="question.options.requiredAnswerIndex">
                         {{ "REPORTQ.options.required_answer" | translate }}:
                         {{
-                          getRequiredAnswerString(
-                            question.options.subquestionOf,
-                            question.options.requiredAnswerIndex
-                          )
+                        getRequiredAnswerString(
+                        question.options.subquestionOf,
+                        question.options.requiredAnswerIndex
+                        )
                         }}
-                        <br /></ng-container>
+                        <br />
+                      </ng-container>
                       <!-- size -->
                       <ng-container *ngIf="question.options.size">{{ "REPORTQ.options.size" | translate }}:
                         {{ getSizeString(question.options.size) }} <br /></ng-container>
@@ -83,20 +85,27 @@
                     </div>
                   </div>
                   <div class="question-buttons" *ngIf="showQuestionButtons(question)">
-                    <button mat-raised-button color="primary" (click)="addSubquestion(question, i)"
+                    <button mat-mini-fab color="primary" (click)="addSubquestion(question, i)"
+                      matTooltip="{{ 'REPORTQ.button.add_subquestion' | translate }}"
                       *ngIf="!question.options.subquestionOf">
-                      {{ "REPORTQ.button.add_subquestion" | translate }}
-                    </button>
-                    <button mat-raised-button color="primary" (click)="editQuestion(question)">
-                      {{ "REPORTQ.button.edit_question" | translate }}
+                      <!-- {{ "REPORTQ.button.add_subquestion" | translate }} -->
+                      <mat-icon>add</mat-icon>
                     </button>
 
-                    <button mat-raised-button color="warn" (click)="deleteQuestion(question)">
-                      {{ "REPORTQ.button.delete" | translate }}
+                    <button mat-mini-fab color="primary" (click)="editQuestion(question)"
+                      matTooltip="{{ 'REPORTQ.button.edit_question' | translate }}">
+                      <!-- {{ "REPORTQ.button.edit_question" | translate }} -->
+                      <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <button mat-mini-fab color="warn" (click)="deleteQuestion(question)"
+                      matTooltip="{{ 'REPORTQ.button.delete' | translate }}">
+                      <!-- {{ "REPORTQ.button.delete" | translate }} -->
+                      <mat-icon>delete</mat-icon>
                     </button>
                   </div>
                 </div>
-                <mat-divider></mat-divider>
+                <!-- <mat-divider></mat-divider> -->
               </ng-container>
             </ng-container>
             <mat-action-row style="text-align: center;"><button (click)="addQuestion(colective._id)" mat-raised-button
@@ -108,8 +117,8 @@
       </mat-accordion>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary"
-        (click)="createQuestionnaire()">{{ "REPORTQ.button.save" | translate }}</button>
+      <button mat-raised-button color="primary" (click)="createQuestionnaire()">{{ "REPORTQ.button.save" | translate
+        }}</button>
     </mat-card-actions>
   </mat-card>
 </div>

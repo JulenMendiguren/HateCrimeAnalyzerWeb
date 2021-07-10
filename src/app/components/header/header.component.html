@@ -1,29 +1,30 @@
 <mat-toolbar color="primary">
-  <ul>
+  <ul *ngIf="isLogged()">
     <a mat-button routerLink="incidents">{{
       "HEADER.incidents" | translate
       }}</a>
 
-    <button mat-button [matMenuTriggerFor]="menu">
-      {{ "HEADER.quest" | translate }}
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="questionnaire/user">
-        {{ "HEADER.userq" | translate }}
+    <ng-container *ngIf="getRole() ==='admin' || getRole() ==='researcher'">
+      <button mat-button [matMenuTriggerFor]="menu">
+        {{ "HEADER.quest" | translate }}
       </button>
-      <button mat-menu-item routerLink="questionnaire/report">
-        {{ "HEADER.reportq" | translate }}
-      </button>
-    </mat-menu>
-
-    <a mat-button routerLink="colectives">{{
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="questionnaire/user">
+          {{ "HEADER.userq" | translate }}
+        </button>
+        <button mat-menu-item routerLink="questionnaire/report">
+          {{ "HEADER.reportq" | translate }}
+        </button>
+      </mat-menu>
+    </ng-container>
+    <a *ngIf="(getRole() ==='admin') || (getRole() ==='researcher')" mat-button routerLink="colectives">{{
       "HEADER.colectives" | translate
       }}</a>
 
 
     <!-- <a mat-button routerLink="quest">{{ "HEADER.quest" | translate }}</a> -->
 
-    <a mat-button routerLink="users">{{ "HEADER.users" | translate }}</a>
+    <a *ngIf="getRole() ==='admin'" mat-button routerLink="users">{{ "HEADER.users" | translate }}</a>
   </ul>
 
   <span class="spacer"></span>

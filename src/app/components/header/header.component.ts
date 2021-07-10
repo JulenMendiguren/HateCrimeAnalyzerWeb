@@ -35,4 +35,12 @@ export class HeaderComponent implements OnInit {
   logoutUser() {
     this.authService.logoutUser();
   }
+
+  getRole(): string {
+    return this.authService.getRole();
+  }
+
+  getName(): string {
+    return this.authService.getName();
+  }
 }

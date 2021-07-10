@@ -84,20 +84,27 @@
                     </div>
                   </div>
                   <div class="question-buttons" *ngIf="showQuestionButtons(question)">
-                    <button mat-raised-button color="primary" (click)="addSubquestion(question, i)"
+                    <button mat-mini-fab color="primary" (click)="addSubquestion(question, i)"
+                      matTooltip="{{ 'USERQ.button.add_subquestion' | translate }}"
                       *ngIf="!question.options.subquestionOf">
-                      {{ "USERQ.button.add_subquestion" | translate }}
-                    </button>
-                    <button mat-raised-button color="primary" (click)="editQuestion(question)">
-                      {{ "USERQ.button.edit_question" | translate }}
+                      <!-- {{ "USERQ.button.add_subquestion" | translate }} -->
+                      <mat-icon>add</mat-icon>
                     </button>
 
-                    <button mat-raised-button color="warn" (click)="deleteQuestion(question)">
-                      {{ "USERQ.button.delete" | translate }}
+                    <button mat-mini-fab color="primary" (click)="editQuestion(question)"
+                      matTooltip="{{ 'USERQ.button.edit_question' | translate }}">
+                      <!-- {{ "USERQ.button.edit_question" | translate }} -->
+                      <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <button mat-mini-fab color="warn" (click)="deleteQuestion(question)"
+                      matTooltip="{{ 'USERQ.button.delete' | translate }}">
+                      <!-- {{ "USERQ.button.delete" | translate }} -->
+                      <mat-icon>delete</mat-icon>
                     </button>
                   </div>
                 </div>
-                <mat-divider></mat-divider>
+                <!-- <mat-divider></mat-divider> -->
               </ng-container>
             </ng-container>
             <mat-action-row style="text-align: center;"><button (click)="addQuestion(colective._id)" mat-raised-button
