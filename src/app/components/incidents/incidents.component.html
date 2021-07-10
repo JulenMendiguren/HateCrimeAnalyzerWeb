@@ -5,7 +5,7 @@
     </div>
 
     <div class="filter-container">
-      <mat-card class="card">
+      <mat-card class="card filter-card">
         <mat-card-header>
           <mat-card-title>Filtrar incidentes</mat-card-title>
         </mat-card-header>
@@ -47,12 +47,12 @@
 
   </div>
   <div class="result-container">
-    <mat-card class="card">
-      <mat-card-title>
+    <mat-card class="card results-card" *ngIf="incidents.length > 0">
+      <mat-card-title style="text-align: center;">
         Incidentes reportados
       </mat-card-title>
 
-      <mat-card-content>
+      <mat-card-content class="results-card-content">
         <ng-container *ngIf="incidents.length > 0">
           <h2>Colectivos a los que pertenece el usuario</h2>
           <ul>
@@ -119,10 +119,12 @@
 
         </ng-container>
       </mat-card-content>
-
-      <mat-paginator [pageIndex]="selectedIncident" hidePageSize="true" [length]="incidents.length" pageSize="1"
-        (page)="onPageChange($event)">
-      </mat-paginator>
+      <mat-card-footer class="results-card-footer">
+        <mat-paginator [pageIndex]="selectedIncident" hidePageSize="true" [length]="incidents.length" pageSize="1"
+          (page)="onPageChange($event)">
+        </mat-paginator>
+        <button mat-raised-button color="primary">Descargar .csv</button>
+      </mat-card-footer>
 
     </mat-card>
   </div>

@@ -1,21 +1,22 @@
 @import "~@angular/material/theming";
 .wrap {
-  top: 100px;
-  height: 100%;
-  position: relative;
+  top: 10%;
+  height: 90%;
+  width: 100%;
+  position: absolute;
 }
 .sidebar {
   height: 85%;
-  margin-left: 3%;
+  left: 3%;
   width: 35%;
-  position: fixed;
+  position: absolute;
   // border: royalblue;
   // border-width: medium;
   // border-style: solid;
 }
 .map-container {
   height: 55%;
-  border: blue;
+  border: #795548;
   border-width: medium;
   border-style: solid;
 }
@@ -26,6 +27,15 @@
   @include mat-elevation(10);
 }
 
+.results-card {
+  height: 95%;
+  position: relative;
+  overflow: hidden;
+}
+.filter-card {
+  max-width: 400px;
+  flex-grow: 2;
+}
 .filter-card-content {
   display: flex;
   width: 70%;
@@ -37,15 +47,30 @@
 
 .filter-container {
   padding-top: 3%;
-  padding-left: 5%;
-  padding-right: 5%;
+  display: flex;
+  justify-content: center;
   // border: orangered;
   // border-width: medium;
   // border-style: solid;
 }
 .result-container {
-  top: 100px;
-  margin-left: 40%; /* Same as the width of the sidebar */
-  margin-right: 2%;
-  padding: 0px 10px;
+  position: relative;
+  left: 40%; /* Same as the width of the sidebar */
+  width: 57%;
+  height: 90%;
+  padding: 15px;
+
+  overflow: auto;
+}
+
+.results-card-content {
+  overflow: auto;
+  max-height: 85%;
+}
+
+.results-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
 }

@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginUser = { email: '', password: '' };
+  failedLogin = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -20,7 +21,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('JWT', res.jwt);
         this.router.navigate(['/incidents']);
       },
-      (err) => console.log(err)
+      (err) => {
+        this.failedLogin = true;
+        console.log(err);
+      }
     );
   }
 }

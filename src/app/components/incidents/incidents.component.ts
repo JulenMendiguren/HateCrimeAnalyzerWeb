@@ -32,6 +32,12 @@ export class IncidentsComponent implements OnInit {
   incidents: Incident[] = [];
 
   selectedIncident: number = 0;
+  previousFilter: {
+    version: string;
+    startDate: any;
+    endDate: any;
+    place: { enabled: boolean; location: any; radius: any };
+  };
 
   constructor(
     public datepipe: DatePipe,
@@ -97,12 +103,12 @@ export class IncidentsComponent implements OnInit {
   }
 
   initMap(): void {
-    const myLatlng = { lat: 43.26358058945173, lng: -2.950877062927873 };
+    const defaultLatLng = { lat: 43.263767354229, lng: -2.951101057843435 };
     this.map = new google.maps.Map(
       document.getElementById('map') as HTMLElement,
       {
         zoom: 13,
-        center: myLatlng,
+        center: defaultLatLng,
         styles: [
           {
             featureType: 'poi.business',
@@ -124,6 +130,23 @@ export class IncidentsComponent implements OnInit {
         ],
       }
     );
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position: GeolocationPosition) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          this.map.panTo(pos);
+        },
+        () => {
+          console.log();
+        }
+      );
+    }
   }
 
   addClickListener() {
@@ -230,6 +253,7 @@ export class IncidentsComponent implements OnInit {
   }
 
   getFilteredIncidents() {
+    this.previousFilter = this.filterValues;
     this.incidentsService.getFilteredAnswers(this.filterValues).subscribe(
       (res) => {
         console.log(res);
@@ -257,5 +281,9 @@ export class IncidentsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  downloadCsv() {
+    //this.previousFilter
   }
 }
