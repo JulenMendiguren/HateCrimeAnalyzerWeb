@@ -13,6 +13,7 @@ import { IncidentsComponent } from './components/incidents/incidents.component';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'incidents',
     component: LoginComponent,
     pathMatch: 'full',
   },

@@ -1,0 +1,59 @@
+@startuml añadir pregunta
+!theme materia
+skinparam sequenceMessageAlign center
+actor "Usuario no identificado" as us1
+actor Investigador as us2
+database LocalStorage order 10
+entity "API REST" as api order 11
+
+
+us1 -> LoginComponent: login()
+activate LoginComponent
+LoginComponent -> AuthService: logInUser(userCredentials)
+activate AuthService
+AuthService -> api: POST /api/user/auth
+api --> AuthService: JWT
+AuthService --> LoginComponent: JWT
+deactivate AuthService
+LoginComponent -> LocalStorage: set('JWT', JWT)
+deactivate LoginComponent
+create UserQComponent
+us2-[#green]>>UserQComponent: Navega a la pestaña de Cuestionario de usuario
+
+activate UserQComponent
+UserQComponent-> QuestionnaireService: getLastUserQ
+activate QuestionnaireService
+QuestionnaireService-> api: GET /api/questionnaire/last/user
+api -> QuestionnaireService: Cuestionario JSON
+QuestionnaireService -> UserQComponent: Cuestionario JSON
+deactivate QuestionnaireService
+
+UserQComponent-> ColectivesService: getAllColectives
+activate ColectivesService
+ColectivesService-> api: GET /api/colective/all
+api -> ColectivesService: Colectivos JSON
+ColectivesService -> UserQComponent: Colectivos JSON
+deactivate ColectivesService
+deactivate UserQComponent
+newpage
+us2 -> UserQComponent: addQuestion(String col)
+create QuestionDialogComponent
+us2-[#green]>>QuestionDialogComponent: Rellena la pregunta
+us2 -> QuestionDialogComponent: onSubmit()
+activate QuestionDialogComponent
+QuestionDialogComponent-> QuestionDialogComponent: createQuestion()
+QuestionDialogComponent-> QuestionService: createQuestion(Question q)
+activate QuestionService
+QuestionService -> api: POST /api/question/one/
+api --> QuestionService: Pregunta JSON
+QuestionService --> QuestionDialogComponent: Pregunta JSON
+deactivate QuestionService
+QuestionDialogComponent--> UserQComponent: Pregunta JSON
+deactivate QuestionDialogComponent
+
+us2 -> UserQComponent:createQuestionnaire()
+UserQComponent-> questionnaireService: createNewQ(Questionnaire NewQ)
+questionnaireService-> api: POST /api/questionnaire/one
+
+
+@enduml

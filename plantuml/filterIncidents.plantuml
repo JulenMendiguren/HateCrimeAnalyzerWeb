@@ -1,0 +1,37 @@
+@startuml filtrar incidentes
+!theme materia
+
+skinparam sequenceMessageAlign center
+actor "Usuario no identificado" as us1
+actor Colaborador as us2
+database LocalStorage order 10
+entity "API REST" as api order 11
+
+
+us1 -> LoginComponent: login()
+activate LoginComponent
+LoginComponent -> AuthService: logInUser(userCredentials)
+activate AuthService
+AuthService -> api: POST /api/user/auth
+api --> AuthService: JWT
+AuthService --> LoginComponent: JWT
+deactivate AuthService
+LoginComponent -> LocalStorage: set('JWT', JWT)
+deactivate LoginComponent
+
+create IncidentsComponent
+us2-[#green]>>IncidentsComponent: Navega a la pestaña de incidentes
+us2-[#green]>>IncidentsComponent: Configura el filtro
+
+
+us2 -> IncidentsComponent: getFilteredIncidents(filtro)
+activate IncidentsComponent
+IncidentsComponent -> IncidentsService: getFilteredAnswers(filtro)
+activate IncidentsService
+IncidentsService -> api: POST /api/answer/filter
+api --> IncidentsService: Incidentes JSON
+IncidentsService--> IncidentsComponent: Incidentes JSON
+deactivate IncidentsService
+deactivate IncidentsComponent
+
+@enduml

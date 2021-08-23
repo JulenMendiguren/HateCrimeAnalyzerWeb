@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 
 src/app/services/ip.js
+.vscode/launch.json
+.vscode/settings.json

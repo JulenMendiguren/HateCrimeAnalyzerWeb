@@ -6,6 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { ColectivesService } from 'src/app/services/colectives.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { Incident } from 'src/app/models/Incident';
+import { FalseLiteral } from 'typescript';
+import * as flat from 'flat';
+import { cloneDeep } from 'lodash';
+import * as Papa from 'papaparse';
+
 declare const google: any;
 
 @Component({
@@ -256,7 +261,6 @@ export class IncidentsComponent implements OnInit {
     this.previousFilter = this.filterValues;
     this.incidentsService.getFilteredAnswers(this.filterValues).subscribe(
       (res) => {
-        console.log(res);
         this.incidents = res as Incident[];
         if (this.incidents.length > 0) {
           this.placeIncidentMarkers();
@@ -274,7 +278,6 @@ export class IncidentsComponent implements OnInit {
     this.colectivesService.getAllColectives().subscribe(
       (res) => {
         this.colectives = res;
-        console.log(this.colectives);
       },
       (err) => {
         //this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
@@ -285,5 +288,73 @@ export class IncidentsComponent implements OnInit {
 
   downloadCsv() {
     //this.previousFilter
+    let inc = cloneDeep(this.incidents);
+
+    inc = inc.map((i) => {
+      //  Change colId for text
+      i.userCol.shift();
+      i.userCol = i.userCol.map((colId) => this.getColectiveString(colId));
+      i['colectives'] = i.userCol.join(' - ');
+      delete i.userCol;
+      // Change field name TODO(Incident name?)
+      i['incidentID'] = i._id;
+      delete i._id;
+
+      // Format date
+      i.createdAt = this.getDateString(i.createdAt);
+
+      // Report questions
+      i['reportQ'] = i.answers.map((a) => {
+        let ansString = a.answer;
+        const q = i.questionnaire.questions.find((q) => q._id === a._id);
+        if (
+          ['yesno', 'radio', 'multiselect', 'likert'].includes(a.questionType)
+        ) {
+          ansString =
+            q['possibleAnswers_' + this.languageService.selected][a.answer];
+        }
+        if (a.questionType === 'datetime') {
+          ansString = this.getDateString(a.answer);
+        }
+
+        return { [q['text_' + this.languageService.selected]]: ansString };
+      });
+
+      // User questions
+      i['userQ'] = i.userAnswers.map((a) => {
+        let ansString = a.answer;
+        const q = i.userQuestionnaire.questions.find((q) => q._id === a._id);
+        if (
+          ['yesno', 'radio', 'multiselect', 'likert'].includes(a.questionType)
+        ) {
+          ansString =
+            q['possibleAnswers_' + this.languageService.selected][a.answer];
+        }
+        if (a.questionType === 'datetime') {
+          ansString = this.getDateString(a.answer);
+        }
+
+        return { [q['text_' + this.languageService.selected]]: ansString };
+      });
+
+      delete i.questionnaire;
+      delete i.userQuestionnaire;
+      delete i.answers;
+      delete i.userAnswers;
+
+      return i;
+    });
+
+    const flattened = inc.map((i) => flat(i));
+
+    const csvString = 'data:text/csv;charset=utf-8,' + Papa.unparse(flattened);
+
+    var encodedUri = encodeURI(csvString);
+    var link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'incidents.csv');
+    document.body.appendChild(link);
+
+    link.click();
   }
 }
