@@ -41,7 +41,6 @@ export class QuestionDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.initializeFormGroup();
   }
 
@@ -163,16 +162,12 @@ export class QuestionDialogComponent implements OnInit {
 
     this.parentPossibleAnswers = [];
 
-    this.parentPossibleAnswers = this.data.parentQuestion[
-      'possibleAnswers_' + this.languageService.selected
-    ];
+    this.parentPossibleAnswers =
+      this.data.parentQuestion[
+        'possibleAnswers_' + this.languageService.selected
+      ];
 
     return options;
-  }
-
-  logQuestion() {
-    console.log('full question', this.qForm.getRawValue());
-    console.log('possibleAnswers', this.qForm.controls.possibleAnswers.value);
   }
 
   // A bit messy... Sets the default possibleAnswers for certain types
@@ -308,7 +303,6 @@ export class QuestionDialogComponent implements OnInit {
   onSubmit() {
     this.qForm.controls.possibleAnswers.updateValueAndValidity();
     const q: Question = this.createQuestion();
-    console.log('Sending question... ', q);
 
     if (
       this.data.mode === 'edit_question' ||
@@ -318,7 +312,6 @@ export class QuestionDialogComponent implements OnInit {
         .editQuestion(q, this.data.editingQuestion._id)
         .subscribe(
           (res) => {
-            console.log('Edited question ', res);
             this.snackBar.open(
               this.translateService.instant('QUESTION_DIALOG.snackbar.edited')
             );
@@ -334,7 +327,6 @@ export class QuestionDialogComponent implements OnInit {
     } else {
       this.questionService.createQuestion(q).subscribe(
         (res) => {
-          console.log('Created question ', res);
           this.snackBar.open(
             this.translateService.instant('QUESTION_DIALOG.snackbar.created')
           );
@@ -352,7 +344,6 @@ export class QuestionDialogComponent implements OnInit {
 
   createQuestion(): Question {
     const q: Question = this.qForm.getRawValue();
-    console.log('qForm Value: ', this.qForm.getRawValue());
     q.tag = this.data.tag;
 
     let possibleAnswers_eu = [];

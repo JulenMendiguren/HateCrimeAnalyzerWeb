@@ -41,14 +41,22 @@
         <mat-form-field>
           <mat-label>{{ "QUESTION_DIALOG.type" | translate }}</mat-label>
           <mat-select formControlName="type" (selectionChange)="initializeOptionsGroup()">
-            <mat-option value="textbox" matTooltip="asdasd">Textbox</mat-option>
-            <mat-option value="number" matTooltip="asdasd">Number</mat-option>
-            <mat-option value="likert" matTooltip="asdasd">Likert</mat-option>
-            <mat-option value="datetime" matTooltip="asdasd">DateTime</mat-option>
-            <mat-option value="yesno" matTooltip="asdasd">Yes/no</mat-option>
-            <mat-option value="radio" matTooltip="asdasd">Radio</mat-option>
-            <mat-option value="multiselect" matTooltip="asdasd">Multiselect</mat-option>
-            <mat-option value="geolocation" matTooltip="asdasd">Geolocation</mat-option>
+            <mat-option value="textbox" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.textbox' | translate }}">Textbox
+            </mat-option>
+            <mat-option value="number" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.number' | translate }}">Number
+            </mat-option>
+            <mat-option value="likert" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.likert' | translate }}">Likert
+            </mat-option>
+            <mat-option value="datetime" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.datetime' | translate }}">
+              DateTime</mat-option>
+            <mat-option value="yesno" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.yesno' | translate }}">Yes/no
+            </mat-option>
+            <mat-option value="radio" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.radio' | translate }}">Radio
+            </mat-option>
+            <mat-option value="multiselect" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.multiselect' | translate }}">
+              Multiselect</mat-option>
+            <mat-option value="geolocation" matTooltip="{{ 'QUESTION_DIALOG.select_tooltip.geolocation' | translate }}">
+              Geolocation</mat-option>
           </mat-select>
         </mat-form-field>
         <br>
@@ -140,9 +148,10 @@
       </div>
     </div>
   </div>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions class="bottom-actions">
     <button mat-button type="button" (click)="cancelDialog()">{{ "QUESTION_DIALOG.button.cancel" | translate }}</button>
     <!-- <button mat-button type="button" color="primary" (click)="logQuestion()">Log Question</button> -->
-    <button [disabled]="checkIfInvalid()" color="primary" mat-button type="submit">Save Question</button>
+    <button [disabled]="checkIfInvalid()" color="primary" mat-button style="margin: left 10px;"
+      type="submit">{{'QUESTION_DIALOG.button.save_question' | translate }}</button>
   </div>
 </form>

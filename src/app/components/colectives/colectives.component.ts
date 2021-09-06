@@ -47,10 +47,8 @@ export class ColectivesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Delete colective: ' + _id);
         this.colectivesService.deteleColectiveById(_id).subscribe(
           (res) => {
-            console.log(res);
             this.snackBar.open(
               this.translate.instant('COLECTIVES.snackbar.deleted')
             );
@@ -78,18 +76,15 @@ export class ColectivesComponent implements OnInit {
     this.colectivesService.getAllColectives().subscribe(
       (res) => {
         this.colectives = res;
-        console.log(this.colectives);
       },
       (err) => {
         this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
-        console.log(err);
       }
     );
   }
 
   // Updates a colective and reloads the list
   updateColective() {
-    console.log('updateColective: ', this.editingColective);
     this.colectivesService.updateColective(this.editingColective).subscribe(
       (res) => {
         console.log(res);
@@ -112,7 +107,6 @@ export class ColectivesComponent implements OnInit {
   createColective() {
     this.colectivesService.createColective(this.newColective).subscribe(
       (res) => {
-        console.log(res);
         this.newColective = {
           text_eu: '',
           text_es: '',

@@ -28,6 +28,7 @@ export class ReportQComponent implements OnInit {
 
   questionnaire: Questionnaire;
   colectives: Colective[];
+  versionName: string;
 
   ngOnInit(): void {
     this.loadColectives();
@@ -51,7 +52,6 @@ export class ReportQComponent implements OnInit {
     this.questionnaireService.getLastReportQ().subscribe(
       (res) => {
         this.questionnaire = res;
-        console.log(this.questionnaire);
       },
       (err) => {
         console.log(err);
@@ -69,7 +69,6 @@ export class ReportQComponent implements OnInit {
           text_en: 'All',
           text_fr: 'All FR',
         });
-        console.log(this.colectives);
       },
       (err) => {
         //this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
@@ -79,7 +78,6 @@ export class ReportQComponent implements OnInit {
   }
 
   addSubquestion(question, pos) {
-    console.log(question, pos);
     pos = pos + 1;
 
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
@@ -185,11 +183,11 @@ export class ReportQComponent implements OnInit {
     const newQ: Questionnaire = {
       category: 'report',
       questions: this.questionnaire.questions,
+      versionName: this.versionName,
     };
-    console.log('Save questionnaire clicked');
+    this.versionName = '';
     this.questionnaireService.createNewQ(newQ).subscribe(
       (res) => {
-        console.log('Correcto!', res);
         this.snackBar.open(
           this.translateService.instant('REPORTQ.snackbar.saved')
         );

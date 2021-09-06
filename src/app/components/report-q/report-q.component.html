@@ -34,7 +34,7 @@
                         <strong>{{ "REPORTQ.question_options" | translate }}:</strong>
                       </p>
                       <!-- Required -->
-                      <ng-container *ngIf="question.options.required == true">
+                      <ng-container *ngIf="question.options.required === true">
                         {{ "REPORTQ.options.required" | translate }}
                         <br />
                       </ng-container>
@@ -117,7 +117,12 @@
       </mat-accordion>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="createQuestionnaire()">{{ "REPORTQ.button.save" | translate
+      <mat-form-field>
+        <mat-label>{{'REPORTQ.version_name' | translate }}</mat-label><input matInput type="text" required
+          [(ngModel)]="versionName">
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!versionName" (click)="createQuestionnaire()">{{
+        "REPORTQ.button.save" | translate
         }}</button>
     </mat-card-actions>
   </mat-card>

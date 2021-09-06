@@ -6,55 +6,66 @@
 
     <div class="filter-container">
       <mat-card class="card filter-card">
-        <mat-card-header>
-          <mat-card-title>Filtrar incidentes</mat-card-title>
+        <mat-card-header style="width: 50%; margin: auto;">
+          <mat-card-title>{{'INCIDENTS.filter.title' | translate }}</mat-card-title>
         </mat-card-header>
         <mat-card-content class="filter-card-content">
 
           <mat-form-field appearance="fill">
-            <mat-label>Versión del cuestionario</mat-label>
+            <mat-label>{{'INCIDENTS.filter.version' | translate }}</mat-label>
             <mat-select [(ngModel)]="filterValues.version" value="all">
-              <mat-option value="all">Todas las versiones</mat-option>
-              <mat-option *ngFor="let version of reportVersions" value="{{version._id}}">{{version.createdAt}}
+              <mat-option value="all">{{'INCIDENTS.filter.all_versions' | translate }}</mat-option>
+              <mat-option *ngFor="let version of reportVersions" value="{{version._id}}">{{version.versionName + '
+                ('+version.createdAt+')'}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>{{'INCIDENTS.filter.user_col' | translate }}</mat-label>
+            <mat-select [(ngModel)]="filterValues.userCol" value="">
+              <mat-option value="">{{'INCIDENTS.filter.all_colectives' | translate }}</mat-option>
+              <mat-option *ngFor="let col of colectives" value="{{col._id}}">{{col['text_'+getSelectedLanguage()]}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
-            <mat-label>Fecha inicio</mat-label>
+            <mat-label>{{'INCIDENTS.filter.start_date' | translate }}</mat-label>
             <input [(ngModel)]="filterValues.startDate" matInput [matDatepicker]="pickerStart">
             <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
             <mat-datepicker #pickerStart></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
-            <mat-label>Fecha fin</mat-label>
+            <mat-label>{{'INCIDENTS.filter.end_date' | translate }}</mat-label>
             <input [(ngModel)]="filterValues.endDate" matInput [matDatepicker]="pickerEnd">
             <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
             <mat-datepicker #pickerEnd></mat-datepicker>
           </mat-form-field>
 
 
-          <mat-slide-toggle [(ngModel)]="filterValues.place.enabled" (change)="placeToggleChanged($event)">Lugar
-            de incidencia</mat-slide-toggle>
+          <mat-slide-toggle [(ngModel)]="filterValues.place.enabled" (change)="placeToggleChanged($event)">
+            {{'INCIDENTS.filter.place' | translate }}</mat-slide-toggle>
           <p *ngIf="filterValues.place.enabled && filterValues.place.radius">
-            Radio de {{filterValues.place.radius}}m.
+            {{'INCIDENTS.filter.radius' | translate:{'n': filterValues.place.radius} }}
           </p>
           <button mat-raised-button color="primary" (click)="getFilteredIncidents()">Ok!</button>
         </mat-card-content>
       </mat-card>
     </div>
-
   </div>
+
   <div class="result-container">
     <mat-card class="card results-card" *ngIf="incidents.length > 0">
       <mat-card-title style="text-align: center;">
-        Incidentes reportados
+        {{'INCIDENTS.results.title' | translate }}
       </mat-card-title>
 
       <mat-card-content class="results-card-content">
         <ng-container *ngIf="incidents.length > 0">
-          <h2>Colectivos a los que pertenece el usuario</h2>
+          <h2>{{'INCIDENTS.results.user_col' | translate }}</h2>
           <ul>
             <ng-container *ngFor="let col of incidents[selectedIncident].userCol">
               <ng-container *ngIf="col !== 'all'">
@@ -63,10 +74,10 @@
             </ng-container>
           </ul>
 
-          <h2>Momento en el que fue registrado el incidente</h2>
+          <h2>{{'INCIDENTS.results.createdAt' | translate }}</h2>
           <p>{{getDateString(incidents[selectedIncident].createdAt)}}</p>
 
-          <h2>Cuestionario del incidente</h2>
+          <h2>{{'INCIDENTS.results.reportQ' | translate }}</h2>
           <div class="questionnaire">
             <ng-container *ngFor="let ans of incidents[selectedIncident].answers">
               <ng-container *ngIf="ans.answer">
@@ -91,7 +102,7 @@
               </ng-container>
             </ng-container>
 
-            <h2>Cuestionario del usuario</h2>
+            <h2>{{'INCIDENTS.results.reportU' | translate }}</h2>
             <ng-container *ngFor="let ans of incidents[selectedIncident].userAnswers">
               <ng-container *ngIf="ans.answer">
                 <p><strong>{{getQuestionString(ans._id, false)}}</strong></p>
@@ -123,7 +134,7 @@
         <mat-paginator [pageIndex]="selectedIncident" hidePageSize="true" [length]="incidents.length" pageSize="1"
           (page)="onPageChange($event)">
         </mat-paginator>
-        <button mat-raised-button color="primary" (click)="downloadCsv()">Descargar .csv</button>
+        <button mat-raised-button color="primary" (click)="downloadCsv()">{{'INCIDENTS.csv' | translate }}</button>
       </mat-card-footer>
 
     </mat-card>

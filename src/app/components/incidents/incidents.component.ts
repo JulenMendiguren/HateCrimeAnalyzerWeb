@@ -24,6 +24,7 @@ export class IncidentsComponent implements OnInit {
   filterValues = {
     version: 'all',
     startDate: null,
+    userCol: '',
     endDate: null,
     place: {
       enabled: false,
@@ -40,6 +41,7 @@ export class IncidentsComponent implements OnInit {
   previousFilter: {
     version: string;
     startDate: any;
+    userCol: string;
     endDate: any;
     place: { enabled: boolean; location: any; radius: any };
   };
@@ -56,11 +58,10 @@ export class IncidentsComponent implements OnInit {
     this.addClickListener();
     this.loadReportVersions();
     this.loadColectives();
-    console.log(this.colectives);
   }
 
-  logFilterValues() {
-    console.log(this.filterValues);
+  getSelectedLanguage(): string {
+    return this.languageService.selected;
   }
 
   getColectiveString(_id): string {
@@ -69,7 +70,7 @@ export class IncidentsComponent implements OnInit {
   }
 
   getDateString(date): string {
-    return this.datepipe.transform(date, 'yyyy/MM/dd, HH:mm');
+    return this.datepipe.transform(date, 'yyyy/MM/dd - HH:mm');
   }
 
   getQuestionString(_id, isReport: boolean): string {
@@ -237,6 +238,106 @@ export class IncidentsComponent implements OnInit {
     });
   }
 
+  downloadCsv() {
+    //this.previousFilter
+    let inc = cloneDeep(this.incidents);
+
+    inc = inc.map((i) => {
+      //  Change colId for text
+      i.userCol.shift();
+      i.userCol = i.userCol.map((colId) => this.getColectiveString(colId));
+      i['colectives'] = i.userCol.join(' - ');
+      delete i.userCol;
+      // Change field name TODO(Incident name?)
+      i['incidentID'] = i._id;
+      delete i._id;
+
+      // Format date
+      i.createdAt = this.getDateString(i.createdAt);
+
+      // Report questions
+      i['reportQ'] = i.answers.map((a) => {
+        let ansString = a.answer;
+        const q = i.questionnaire.questions.find((q) => q._id === a._id);
+
+        if (['yesno', 'radio', 'likert'].includes(a.questionType)) {
+          ansString =
+            q['possibleAnswers_' + this.languageService.selected][a.answer];
+        }
+
+        if (a.questionType === 'multiselect') {
+          let aux = [];
+          a.answer.forEach((i) => {
+            aux.push(q['possibleAnswers_' + this.languageService.selected][i]);
+          });
+          ansString = aux.join(', ');
+        }
+
+        if (a.questionType === 'datetime') {
+          ansString = this.getDateString(a.answer);
+        }
+
+        return { [q['text_' + this.languageService.selected]]: ansString };
+      });
+
+      // User questions
+      i['userQ'] = i.userAnswers.map((a) => {
+        let ansString = a.answer;
+        const q = i.userQuestionnaire.questions.find((q) => q._id === a._id);
+        if (['yesno', 'radio', 'likert'].includes(a.questionType)) {
+          ansString =
+            q['possibleAnswers_' + this.languageService.selected][a.answer];
+        }
+        if (a.questionType === 'datetime') {
+          ansString = this.getDateString(a.answer);
+        }
+
+        if (a.questionType === 'multiselect') {
+          let aux = [];
+          a.answer.forEach((i) => {
+            aux.push(q['possibleAnswers_' + this.languageService.selected][i]);
+          });
+          ansString = aux.join(', ');
+        }
+
+        if (a.questionType === 'colective') {
+          ansString = '';
+          a.answer.forEach((col, index) => {
+            if (col !== 'all') {
+              ansString += this.getColectiveString(col);
+              if (index + 1 < a.answer.length) {
+                ansString += ' | ';
+              }
+            }
+          });
+        }
+
+        return { [q['text_' + this.languageService.selected]]: ansString };
+      });
+
+      delete i.questionnaire;
+      delete i.userQuestionnaire;
+      delete i.answers;
+      delete i.userAnswers;
+
+      return i;
+    });
+
+    const flattened = inc.map((i) => flat(i));
+
+    const csvString =
+      'data:text/csv;charset=utf-8,' +
+      Papa.unparse(flattened, { quotes: true });
+
+    var encodedUri = encodeURI(csvString);
+    var link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'incidents.csv');
+    document.body.appendChild(link);
+
+    link.click();
+  }
+
   // ---------------
   // API stuff
   // ---------------
@@ -248,7 +349,6 @@ export class IncidentsComponent implements OnInit {
         this.reportVersions.forEach((v) => {
           v.createdAt = this.getDateString(v.createdAt);
         });
-        console.log(this.reportVersions);
       },
       (err) => {
         // this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
@@ -262,6 +362,7 @@ export class IncidentsComponent implements OnInit {
     this.incidentsService.getFilteredAnswers(this.filterValues).subscribe(
       (res) => {
         this.incidents = res as Incident[];
+        this.incidents = this.incidents.reverse();
         if (this.incidents.length > 0) {
           this.placeIncidentMarkers();
           this.setMarkerColors();
@@ -284,77 +385,5 @@ export class IncidentsComponent implements OnInit {
         console.log(err);
       }
     );
-  }
-
-  downloadCsv() {
-    //this.previousFilter
-    let inc = cloneDeep(this.incidents);
-
-    inc = inc.map((i) => {
-      //  Change colId for text
-      i.userCol.shift();
-      i.userCol = i.userCol.map((colId) => this.getColectiveString(colId));
-      i['colectives'] = i.userCol.join(' - ');
-      delete i.userCol;
-      // Change field name TODO(Incident name?)
-      i['incidentID'] = i._id;
-      delete i._id;
-
-      // Format date
-      i.createdAt = this.getDateString(i.createdAt);
-
-      // Report questions
-      i['reportQ'] = i.answers.map((a) => {
-        let ansString = a.answer;
-        const q = i.questionnaire.questions.find((q) => q._id === a._id);
-        if (
-          ['yesno', 'radio', 'multiselect', 'likert'].includes(a.questionType)
-        ) {
-          ansString =
-            q['possibleAnswers_' + this.languageService.selected][a.answer];
-        }
-        if (a.questionType === 'datetime') {
-          ansString = this.getDateString(a.answer);
-        }
-
-        return { [q['text_' + this.languageService.selected]]: ansString };
-      });
-
-      // User questions
-      i['userQ'] = i.userAnswers.map((a) => {
-        let ansString = a.answer;
-        const q = i.userQuestionnaire.questions.find((q) => q._id === a._id);
-        if (
-          ['yesno', 'radio', 'multiselect', 'likert'].includes(a.questionType)
-        ) {
-          ansString =
-            q['possibleAnswers_' + this.languageService.selected][a.answer];
-        }
-        if (a.questionType === 'datetime') {
-          ansString = this.getDateString(a.answer);
-        }
-
-        return { [q['text_' + this.languageService.selected]]: ansString };
-      });
-
-      delete i.questionnaire;
-      delete i.userQuestionnaire;
-      delete i.answers;
-      delete i.userAnswers;
-
-      return i;
-    });
-
-    const flattened = inc.map((i) => flat(i));
-
-    const csvString = 'data:text/csv;charset=utf-8,' + Papa.unparse(flattened);
-
-    var encodedUri = encodeURI(csvString);
-    var link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'incidents.csv');
-    document.body.appendChild(link);
-
-    link.click();
   }
 }

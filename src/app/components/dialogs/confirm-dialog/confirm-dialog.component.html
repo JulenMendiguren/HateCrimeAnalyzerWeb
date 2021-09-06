@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>
   {{ data.title }}
 </h1>
-<div mat-dialog-content>
-  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onConfirm()">OK</button>
+<div mat-dialog-content style="display: flex; justify-content: space-around;">
+  <button mat-raised-button color="warn" (click)="onCancel()">{{ 'CONFIRM_DIALOG.button.cancel' | translate}}</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()">{{ 'CONFIRM_DIALOG.button.ok' | translate}}</button>
 </div>

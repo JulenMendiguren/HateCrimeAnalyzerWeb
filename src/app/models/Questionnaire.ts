@@ -4,4 +4,5 @@ export interface Questionnaire {
   _id?: string;
   questions: Question[];
   category: string;
+  versionName?: string;
 }

@@ -17,7 +17,8 @@
     },
     "button": {
       "login": "Iniciar sesión"
-    }
+    },
+    "error": "ERROR: Usuario o contraseña incorrecta"
   },
   "USERS": {
     "title": {
@@ -143,7 +144,8 @@
       "error": "ERROR: Ha ocurrido un error inesperado.",
       "saved": "El cuestionario se ha guardado en la base de datos."
     },
-    "confirm_title": "¿Quieres borrar esta pregunta?"
+    "confirm_title": "¿Quieres borrar esta pregunta?",
+    "version_name": "Nombre de versión"
   },
   "QUESTION_DIALOG": {
     "title": {
@@ -155,6 +157,16 @@
     "question_text": "Texto de la pregunta",
     "question_type": "Tipo de la pregunta",
     "type": "Tipo",
+    "select_tooltip": {
+      "textbox": "Campo para escribir la respuesta",
+      "Number": "La respuesta será un número",
+      "Likert": "Una pregunta en la escala Likert",
+      "datetime": "La respuesta es una fecha y hora específica",
+      "yesno": "Respuesta de Sí o No",
+      "radio": "Seleccionar uno de una lista",
+      "multiselection": "Seleccionar uno o varios de una lista",
+      "geolocation": "Seleccionar un punto en el mapa"
+    },
     "options": "Opciones",
     "required_answer": "Respuesta requerida de la pregunta padre",
     "none": "Ninguna",
@@ -170,12 +182,40 @@
     "possible_answers": "Posibles respuestas",
     "button": {
       "add": "add",
-      "cancel": "Cancelar"
+      "cancel": "Cancelar",
+      "save_question": "Guardar pregunta"
     },
     "snackbar": {
       "edited": "La pregunta ha sido editada.",
       "created": "Se ha creado una nueva pregunta.",
       "error": "ERROR: Ha ocurrido un error inesperado."
     }
+  },
+  "CONFIRM_DIALOG": {
+    "button": {
+      "ok": "OK",
+      "cancel": "Cancelar"
+    }
+  },
+  "INCIDENTS": {
+    "filter": {
+      "title": "Filtrar incidentes",
+      "version": "Versiones del cuestionario",
+      "all_versions": "Todas las versiones",
+      "user_col": "Colectivo del usuario",
+      "all_colectives": "Todos los colectivos",
+      "start_date": "fecha inicio",
+      "end_date": "Fecha fin",
+      "place": "Lugar del incidente",
+      "radius": "Radio de {{n}}m."
+    },
+    "results": {
+      "title": "Incidentes Reportados",
+      "user_col": "Colectivos a los que pertenece el usuario",
+      "createdAt": "Momento en el que fue registrado el incidente",
+      "reportQ": "Cuestionario del incidente",
+      "reportU": "Cuestionario del usuario"
+    },
+    "csv": "Descargar .csv"
   }
 }

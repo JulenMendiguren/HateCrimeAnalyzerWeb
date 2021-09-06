@@ -51,7 +51,6 @@ export class UserQComponent implements OnInit {
     this.questionnaireService.getLastUserQ().subscribe(
       (res) => {
         this.questionnaire = res;
-        console.log(this.questionnaire);
       },
       (err) => {
         console.log(err);
@@ -69,7 +68,6 @@ export class UserQComponent implements OnInit {
           text_en: 'All',
           text_fr: 'All FR',
         });
-        console.log(this.colectives);
       },
       (err) => {
         //this.snackBar.open(this.translate.instant('COLECTIVES.snackbar.error'));
@@ -79,7 +77,6 @@ export class UserQComponent implements OnInit {
   }
 
   addSubquestion(question, pos) {
-    console.log(question, pos);
     pos = pos + 1;
 
     const dialogRef = this.dialog.open(QuestionDialogComponent, {
@@ -186,10 +183,8 @@ export class UserQComponent implements OnInit {
       category: 'user',
       questions: this.questionnaire.questions,
     };
-    console.log('Save questionnaire clicked');
     this.questionnaireService.createNewQ(newQ).subscribe(
       (res) => {
-        console.log('Correcto!', res);
         this.snackBar.open(
           this.translateService.instant('USERQ.snackbar.saved')
         );

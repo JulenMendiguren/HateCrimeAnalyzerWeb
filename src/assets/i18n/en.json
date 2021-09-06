@@ -17,7 +17,8 @@
     },
     "button": {
       "login": "Log in"
-    }
+    },
+    "error": "ERROR: Incorrect user or password"
   },
   "USERS": {
     "title": {
@@ -143,7 +144,8 @@
       "error": "ERROR: An unexpected error has occurred.",
       "saved": "The questionnaire has been saved in the database."
     },
-    "confirm_title": "Do you want to delete this question?"
+    "confirm_title": "Do you want to delete this question?",
+    "version_name": "Nombre de versión"
   },
   "QUESTION_DIALOG": {
     "title": {
@@ -155,6 +157,16 @@
     "question_text": "Question text",
     "question_type": "Question type",
     "type": "Type",
+    "select_tooltip": {
+      "textbox": "Field for writing the response",
+      "Number": "The answer must be number",
+      "Likert": "A likert scale question",
+      "datetime": "The answer is a specific time and date",
+      "yesno": "Yes or no answer",
+      "radio": "Select one from a list",
+      "multiselection": "Select one or multiple from a list",
+      "geolocation": "Place a marker on a map"
+    },
     "options": "Options",
     "required_answer": "Required answer of parent question",
     "none": "None",
@@ -170,12 +182,40 @@
     "possible_answers": "Possible answers",
     "button": {
       "add": "add",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "save_question": "Save Question"
     },
     "snackbar": {
       "edited": "The question has been edited.",
       "created": "A new question has been created.",
       "error": "ERROR: An unexpected error has occurred."
     }
+  },
+  "CONFIRM_DIALOG": {
+    "button": {
+      "ok": "OK",
+      "cancel": "Cancel"
+    }
+  },
+  "INCIDENTS": {
+    "filter": {
+      "title": "Filter incidents",
+      "version": "Questionnaire version",
+      "all_versions": "All versions",
+      "user_col": "Colective of the user",
+      "all_colectives": "All colectives",
+      "start_date": "Start date",
+      "end_date": "End date",
+      "place": "Place of the incident",
+      "radius": "Radius of {{n}}m."
+    },
+    "results": {
+      "title": "Reported Incidents",
+      "user_col": "Colectives of the user",
+      "createdAt": "Moment when the incident was registered",
+      "reportQ": "Questionnaire of the incident",
+      "reportU": "Questionnaire of the user"
+    },
+    "csv": "Download .csv"
   }
 }

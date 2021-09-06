@@ -44,10 +44,8 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Delete user: ' + _id);
         this.usersService.deteleUserById(_id).subscribe(
           (res) => {
-            console.log(res);
             this.snackBar.open(
               this.translate.instant('USERS.snackbar.deleted')
             );
@@ -71,10 +69,8 @@ export class UsersComponent implements OnInit {
 
   // Updates a user and reloads the list
   updateUser() {
-    console.log('updateUser: ', this.editingUser);
     this.usersService.updateUser(this.editingUser).subscribe(
       (res) => {
-        console.log(res);
         this.editingUser = null;
         this.snackBar.open(this.translate.instant('USERS.snackbar.updated'));
         this.loadUsers();

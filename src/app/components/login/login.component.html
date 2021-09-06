@@ -16,6 +16,6 @@
         {{ "LOGIN.button.login" | translate }}
       </button>
     </mat-card-actions>
-    <div *ngIf="failedLogin" style="color: red;">ERROR: Usuario o contraseña incorrecta</div>
+    <div *ngIf="failedLogin" style="color: red;">{{'LOGIN.error'}}</div>
   </mat-card>
 </div>
