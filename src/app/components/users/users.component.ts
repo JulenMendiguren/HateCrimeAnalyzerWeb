@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30%',
       data: {
-        title: this.translate.instant('COLECTIVES.confirm_title'),
+        title: this.translate.instant('USERS.confirm_title'),
       },
     });
 

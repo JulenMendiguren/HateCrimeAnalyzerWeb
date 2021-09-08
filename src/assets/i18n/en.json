@@ -159,12 +159,12 @@
     "type": "Type",
     "select_tooltip": {
       "textbox": "Field for writing the response",
-      "Number": "The answer must be number",
-      "Likert": "A likert scale question",
+      "number": "The answer must be number",
+      "likert": "A likert scale question",
       "datetime": "The answer is a specific time and date",
       "yesno": "Yes or no answer",
       "radio": "Select one from a list",
-      "multiselection": "Select one or multiple from a list",
+      "multiselect": "Select one or multiple from a list",
       "geolocation": "Place a marker on a map"
     },
     "options": "Options",

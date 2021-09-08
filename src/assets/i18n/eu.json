@@ -1,0 +1,221 @@
+{
+  "HEADER": {
+    "colectives": "Colectivos EU",
+    "users": "Gestionar Usuarios EU",
+    "login": "Iniciar Sesión EU",
+    "logout": "Cerrar Sesión EU",
+    "quest": "Cuestionarios EU",
+    "userq": "Usuario EU",
+    "reportq": "Reporte EU",
+    "incidents": "Incidentes Reportados EU"
+  },
+  "LOGIN": {
+    "title": "Iniciar Sesión EU",
+    "input": {
+      "email": "Correo electrónico EU",
+      "password": "Contraseña EU"
+    },
+    "button": {
+      "login": "Iniciar sesión EU"
+    },
+    "error": "ERROR: Usuario o contraseña incorrecta EU"
+  },
+  "USERS": {
+    "title": {
+      "manage": "Gestionar Usuarios EU",
+      "create": "Crear un nuevo usuario EU"
+    },
+    "roles": {
+      "colaborator": "Colaborador EU",
+      "researcher": "Investigador EU",
+      "admin": "Administrador EU"
+    },
+    "column": {
+      "name": "Nombre EU",
+      "email": "Correo electrónico EU",
+      "role": "Rol EU"
+    },
+    "tooltip": {
+      "edit": "Editar usuario EU",
+      "delete": "Borrar usuario EU"
+    },
+    "button": {
+      "cancel": "Cancelar EU",
+      "update": "Actualizar usuario EU",
+      "create": "Crear usuario EU"
+    },
+    "input": {
+      "name": "Nombre EU",
+      "email": "Correo electrónico EU",
+      "role": "Rol EU",
+      "password": "Contraseña EU"
+    },
+    "snackbar": {
+      "deleted": "El usuario ha sido eliminado. EU",
+      "created": "Se ha creado un nuevo usuario. EU",
+      "updated": "Se ha modificado el usuario satisfactoriamente. EU",
+      "error": "ERROR: Ha ocurrido un error inesperado. EU"
+    },
+    "confirm_title": "¿Quieres borrar este usuario? EU"
+  },
+  "COLECTIVES": {
+    "title": {
+      "manage": "Colectivos EU",
+      "create": "Crear un nuevo colectivo EU"
+    },
+    "tooltip": {
+      "edit": "Editar colectivo EU",
+      "delete": "Borrar colectivo EU"
+    },
+    "button": {
+      "cancel": "Cancelar EU",
+      "update": "Actualizar colectivo EU",
+      "create": "Crear colectivo EU"
+    },
+    "snackbar": {
+      "deleted": "El colectivo ha sido eliminado. EU",
+      "created": "Se ha creado un nuevo colectivo. EU",
+      "updated": "Se ha modificado el colectivo satisfactoriamente. EU",
+      "error": "ERROR: Ha ocurrido un error inesperado. EU"
+    },
+    "confirm_title": "¿Quieres borrar este colectivo? EU"
+  },
+  "USERQ": {
+    "title": "Cuestionario de usuario EU",
+    "subquestion": "Subpregunta EU",
+    "question_text": "Texto de la pregunta EU",
+    "question_type": "Tipo de pregunta EU",
+    "question_options": "Opciones EU",
+    "possible_answers": "Possible answers EU",
+    "options": {
+      "required": "Pregunta requerida EU",
+      "required_answer": "Respuesta requerida EU",
+      "size": "Tamaño del texto EU",
+      "size_small": "Pequeño EU",
+      "size_big": "Grande EU",
+      "min_value": "Valor mínimo permitido EU",
+      "max_value": "Valor máximo permitido EU",
+      "min_length": "Longitud mínimo permitida EU",
+      "max_length": "Longitud máxima permitida EU",
+      "slider": "Slider EU",
+      "date_time_format": "Formato de fecha y hora EU"
+    },
+    "button": {
+      "add_subquestion": "Añadir Subpregunta EU",
+      "edit_question": "Editar Pregunta EU",
+      "delete": "Borrar EU",
+      "add": "Añadir Nueva Pregunta EU",
+      "save": "Guardar Cuestionario EU"
+    },
+    "snackbar": {
+      "error": "ERROR: Ha ocurrido un error inesperado. EU",
+      "saved": "El cuestionario se ha guardado en la base de datos. EU"
+    },
+    "confirm_title": "¿Quieres borrar esta pregunta? EU"
+  },
+  "REPORTQ": {
+    "title": "Cuestionario de reporte de incidente EU",
+    "subquestion": "Subpregunta EU",
+    "question_text": "Texto de la pregunta EU",
+    "question_type": "Tipo de pregunta EU",
+    "question_options": "Opciones EU",
+    "possible_answers": "Possible answers EU",
+    "options": {
+      "required": "Pregunta requerida EU",
+      "required_answer": "Respuesta requerida EU",
+      "size": "Tamaño del texto EU",
+      "size_small": "Pequeño EU",
+      "size_big": "Grande EU",
+      "min_value": "Valor mínimo permitido EU",
+      "max_value": "Valor máximo permitido EU",
+      "min_length": "Longitud mínimo permitida EU",
+      "max_length": "Longitud máxima permitida EU",
+      "slider": "Slider EU",
+      "date_time_format": "Formato de fecha y hora EU"
+    },
+    "button": {
+      "add_subquestion": "Añadir Subpregunta EU",
+      "edit_question": "Editar Pregunta EU",
+      "delete": "Borrar EU",
+      "add": "Añadir Nueva Pregunta EU",
+      "save": "Guardar Cuestionario EU"
+    },
+    "snackbar": {
+      "error": "ERROR: Ha ocurrido un error inesperado. EU",
+      "saved": "El cuestionario se ha guardado en la base de datos. EU"
+    },
+    "confirm_title": "¿Quieres borrar esta pregunta? EU",
+    "version_name": "Nombre de versión EU"
+  },
+  "QUESTION_DIALOG": {
+    "title": {
+      "new_question": "Crear Nueva Pregunta EU",
+      "new_subquestion": "Crear Nueva Subpregunta EU",
+      "edit_question": "Editar Pregunta EU",
+      "edit_subquestion": "Editar Subpregunta EU"
+    },
+    "question_text": "Texto de la pregunta EU",
+    "question_type": "Tipo de la pregunta EU",
+    "type": "Tipo EU",
+    "select_tooltip": {
+      "textbox": "Campo para escribir la respuesta EU",
+      "number": "La respuesta será un número EU",
+      "likert": "Una pregunta en la escala Likert EU",
+      "datetime": "La respuesta es una fecha y hora específica EU",
+      "yesno": "Respuesta de Sí o No EU",
+      "radio": "Seleccionar uno de una lista EU",
+      "multiselect": "Seleccionar uno o varios de una lista EU",
+      "geolocation": "Seleccionar un punto en el mapa EU"
+    },
+    "options": "Opciones EU",
+    "required_answer": "Respuesta requerida de la pregunta padre EU",
+    "none": "Ninguna EU",
+    "required": "Pregunta requerida EU",
+    "size": "Tamaño del texto EU",
+    "size_small": "Pequeño EU",
+    "size_big": "Grande EU",
+    "min_value": "Valor mínimo permitido EU",
+    "max_value": "Valor máximo permitido EU",
+    "min_length": "Longitud mínima permitida EU",
+    "max_length": "Longitud máxima permitida EU",
+    "slider": "Slider EU",
+    "possible_answers": "Posibles respuestas EU",
+    "button": {
+      "add": "add EU",
+      "cancel": "Cancelar EU",
+      "save_question": "Guardar pregunta EU"
+    },
+    "snackbar": {
+      "edited": "La pregunta ha sido editada. EU",
+      "created": "Se ha creado una nueva pregunta. EU",
+      "error": "ERROR: Ha ocurrido un error inesperado. EU"
+    }
+  },
+  "CONFIRM_DIALOG": {
+    "button": {
+      "ok": "OK EU",
+      "cancel": "Cancelar EU"
+    }
+  },
+  "INCIDENTS": {
+    "filter": {
+      "title": "Filtrar incidentes EU",
+      "version": "Versiones del cuestionario EU",
+      "all_versions": "Todas las versiones EU",
+      "user_col": "Colectivo del usuario EU",
+      "all_colectives": "Todos los colectivos EU",
+      "start_date": "fecha inicio EU",
+      "end_date": "Fecha fin EU",
+      "place": "Lugar del incidente EU",
+      "radius": "Radio de {{n}}m. EU"
+    },
+    "results": {
+      "title": "Incidentes Reportados EU",
+      "user_col": "Colectivos a los que pertenece el usuario EU",
+      "createdAt": "Momento en el que fue registrado el incidente EU",
+      "reportQ": "Cuestionario del incidente EU",
+      "reportU": "Cuestionario del usuario EU"
+    },
+    "csv": "Descargar .csv EU"
+  }
+}

@@ -159,12 +159,12 @@
     "type": "Tipo",
     "select_tooltip": {
       "textbox": "Campo para escribir la respuesta",
-      "Number": "La respuesta será un número",
-      "Likert": "Una pregunta en la escala Likert",
+      "number": "La respuesta será un número",
+      "likert": "Una pregunta en la escala Likert",
       "datetime": "La respuesta es una fecha y hora específica",
       "yesno": "Respuesta de Sí o No",
       "radio": "Seleccionar uno de una lista",
-      "multiselection": "Seleccionar uno o varios de una lista",
+      "multiselect": "Seleccionar uno o varios de una lista",
       "geolocation": "Seleccionar un punto en el mapa"
     },
     "options": "Opciones",

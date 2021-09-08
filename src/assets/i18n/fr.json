@@ -1,0 +1,221 @@
+{
+  "HEADER": {
+    "colectives": "Colectivos FR",
+    "users": "Gestionar Usuarios FR",
+    "login": "Iniciar Sesión FR",
+    "logout": "Cerrar Sesión FR",
+    "quest": "Cuestionarios FR",
+    "userq": "Usuario FR",
+    "reportq": "Reporte FR",
+    "incidents": "Incidentes Reportados FR"
+  },
+  "LOGIN": {
+    "title": "Iniciar Sesión FR",
+    "input": {
+      "email": "Correo electrónico FR",
+      "password": "Contraseña FR"
+    },
+    "button": {
+      "login": "Iniciar sesión FR"
+    },
+    "error": "ERROR: Usuario o contraseña incorrecta FR"
+  },
+  "USERS": {
+    "title": {
+      "manage": "Gestionar Usuarios FR",
+      "create": "Crear un nuevo usuario FR"
+    },
+    "roles": {
+      "colaborator": "Colaborador FR",
+      "researcher": "Investigador FR",
+      "admin": "Administrador FR"
+    },
+    "column": {
+      "name": "Nombre FR",
+      "email": "Correo electrónico FR",
+      "role": "Rol FR"
+    },
+    "tooltip": {
+      "edit": "Editar usuario FR",
+      "delete": "Borrar usuario FR"
+    },
+    "button": {
+      "cancel": "Cancelar FR",
+      "update": "Actualizar usuario FR",
+      "create": "Crear usuario FR"
+    },
+    "input": {
+      "name": "Nombre FR",
+      "email": "Correo electrónico FR",
+      "role": "Rol FR",
+      "password": "Contraseña FR"
+    },
+    "snackbar": {
+      "deleted": "El usuario ha sido eliminado. FR",
+      "created": "Se ha creado un nuevo usuario. FR",
+      "updated": "Se ha modificado el usuario satisfactoriamente. FR",
+      "error": "ERROR: Ha ocurrido un error inesperado. FR"
+    },
+    "confirm_title": "¿Quieres borrar este usuario? FR"
+  },
+  "COLECTIVES": {
+    "title": {
+      "manage": "Colectivos FR",
+      "create": "Crear un nuevo colectivo FR"
+    },
+    "tooltip": {
+      "edit": "Editar colectivo FR",
+      "delete": "Borrar colectivo FR"
+    },
+    "button": {
+      "cancel": "Cancelar FR",
+      "update": "Actualizar colectivo FR",
+      "create": "Crear colectivo FR"
+    },
+    "snackbar": {
+      "deleted": "El colectivo ha sido eliminado. FR",
+      "created": "Se ha creado un nuevo colectivo. FR",
+      "updated": "Se ha modificado el colectivo satisfactoriamente. FR",
+      "error": "ERROR: Ha ocurrido un error inesperado. FR"
+    },
+    "confirm_title": "¿Quieres borrar este colectivo? FR"
+  },
+  "USERQ": {
+    "title": "Cuestionario de usuario FR",
+    "subquestion": "Subpregunta FR",
+    "question_text": "Texto de la pregunta FR",
+    "question_type": "Tipo de pregunta FR",
+    "question_options": "Opciones FR",
+    "possible_answers": "Possible answers FR",
+    "options": {
+      "required": "Pregunta requerida FR",
+      "required_answer": "Respuesta requerida FR",
+      "size": "Tamaño del texto FR",
+      "size_small": "Pequeño FR",
+      "size_big": "Grande FR",
+      "min_value": "Valor mínimo permitido FR",
+      "max_value": "Valor máximo permitido FR",
+      "min_length": "Longitud mínimo permitida FR",
+      "max_length": "Longitud máxima permitida FR",
+      "slider": "Slider FR",
+      "date_time_format": "Formato de fecha y hora FR"
+    },
+    "button": {
+      "add_subquestion": "Añadir Subpregunta FR",
+      "edit_question": "Editar Pregunta FR",
+      "delete": "Borrar FR",
+      "add": "Añadir Nueva Pregunta FR",
+      "save": "Guardar Cuestionario FR"
+    },
+    "snackbar": {
+      "error": "ERROR: Ha ocurrido un error inesperado. FR",
+      "saved": "El cuestionario se ha guardado en la base de datos. FR"
+    },
+    "confirm_title": "¿Quieres borrar esta pregunta? FR"
+  },
+  "REPORTQ": {
+    "title": "Cuestionario de reporte de incidente FR",
+    "subquestion": "Subpregunta FR",
+    "question_text": "Texto de la pregunta FR",
+    "question_type": "Tipo de pregunta FR",
+    "question_options": "Opciones FR",
+    "possible_answers": "Possible answers FR",
+    "options": {
+      "required": "Pregunta requerida FR",
+      "required_answer": "Respuesta requerida FR",
+      "size": "Tamaño del texto FR",
+      "size_small": "Pequeño FR",
+      "size_big": "Grande FR",
+      "min_value": "Valor mínimo permitido FR",
+      "max_value": "Valor máximo permitido FR",
+      "min_length": "Longitud mínimo permitida FR",
+      "max_length": "Longitud máxima permitida FR",
+      "slider": "Slider FR",
+      "date_time_format": "Formato de fecha y hora FR"
+    },
+    "button": {
+      "add_subquestion": "Añadir Subpregunta FR",
+      "edit_question": "Editar Pregunta FR",
+      "delete": "Borrar FR",
+      "add": "Añadir Nueva Pregunta FR",
+      "save": "Guardar Cuestionario FR"
+    },
+    "snackbar": {
+      "error": "ERROR: Ha ocurrido un error inesperado. FR",
+      "saved": "El cuestionario se ha guardado en la base de datos. FR"
+    },
+    "confirm_title": "¿Quieres borrar esta pregunta? FR",
+    "version_name": "Nombre de versión FR"
+  },
+  "QUESTION_DIALOG": {
+    "title": {
+      "new_question": "Crear Nueva Pregunta FR",
+      "new_subquestion": "Crear Nueva Subpregunta FR",
+      "edit_question": "Editar Pregunta FR",
+      "edit_subquestion": "Editar Subpregunta FR"
+    },
+    "question_text": "Texto de la pregunta FR",
+    "question_type": "Tipo de la pregunta FR",
+    "type": "Tipo FR",
+    "select_tooltip": {
+      "textbox": "Campo para escribir la respuesta FR",
+      "number": "La respuesta será un número FR",
+      "likert": "Una pregunta en la escala Likert FR",
+      "datetime": "La respuesta es una fecha y hora específica FR",
+      "yesno": "Respuesta de Sí o No FR",
+      "radio": "Seleccionar uno de una lista FR",
+      "multiselect": "Seleccionar uno o varios de una lista FR",
+      "geolocation": "Seleccionar un punto en el mapa FR"
+    },
+    "options": "Opciones FR",
+    "required_answer": "Respuesta requerida de la pregunta padre FR",
+    "none": "Ninguna FR",
+    "required": "Pregunta requerida FR",
+    "size": "Tamaño del texto FR",
+    "size_small": "Pequeño FR",
+    "size_big": "Grande FR",
+    "min_value": "Valor mínimo permitido FR",
+    "max_value": "Valor máximo permitido FR",
+    "min_length": "Longitud mínima permitida FR",
+    "max_length": "Longitud máxima permitida FR",
+    "slider": "Slider FR",
+    "possible_answers": "Posibles respuestas FR",
+    "button": {
+      "add": "add FR",
+      "cancel": "Cancelar FR",
+      "save_question": "Guardar pregunta FR"
+    },
+    "snackbar": {
+      "edited": "La pregunta ha sido editada. FR",
+      "created": "Se ha creado una nueva pregunta. FR",
+      "error": "ERROR: Ha ocurrido un error inesperado. FR"
+    }
+  },
+  "CONFIRM_DIALOG": {
+    "button": {
+      "ok": "OK FR",
+      "cancel": "Cancelar FR"
+    }
+  },
+  "INCIDENTS": {
+    "filter": {
+      "title": "Filtrar incidentes FR",
+      "version": "Versiones del cuestionario FR",
+      "all_versions": "Todas las versiones FR",
+      "user_col": "Colectivo del usuario FR",
+      "all_colectives": "Todos los colectivos FR",
+      "start_date": "fecha inicio FR",
+      "end_date": "Fecha fin FR",
+      "place": "Lugar del incidente FR",
+      "radius": "Radio de {{n}}m. FR"
+    },
+    "results": {
+      "title": "Incidentes Reportados FR",
+      "user_col": "Colectivos a los que pertenece el usuario FR",
+      "createdAt": "Momento en el que fue registrado el incidente FR",
+      "reportQ": "Cuestionario del incidente FR",
+      "reportU": "Cuestionario del usuario FR"
+    },
+    "csv": "Descargar .csv FR"
+  }
+}
