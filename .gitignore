@@ -45,6 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-src/app/services/ip.js
+
 .vscode/launch.json
 .vscode/settings.json
